@@ -45,12 +45,10 @@ public class Main {
 
         public static void main(String[] args) {
             Scanner in = new Scanner(System.in);
-            System.out.println("Enter number of numbers");
-            int count = in.nextInt();
-            in.nextLine();
             System.out.println("Enter numbers which you want to sort");
             String input = in.nextLine();
             String[] splitNumbers = input.split(" ");
+            int count = splitNumbers.length;
             int[] numbers = new int[count];
             for (int i = 0; i<count; i++) {
                 numbers[i] = Integer.parseInt(splitNumbers[i]);
