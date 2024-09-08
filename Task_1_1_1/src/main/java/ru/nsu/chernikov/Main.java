@@ -25,7 +25,9 @@ public class Main {
 
         }
 
-        public static void heapsort (int[] arr, int n){
+        public static int[] heapsort (int[] arr){
+            int n = arr.length;
+
             for (int i = (n / 2 - 1); i >= 0; i--){
                 heapify(arr,n,i);
             }
@@ -36,10 +38,12 @@ public class Main {
                 heapify(arr,i,0);
             }
 
+            return (arr);
+
         }
         public  static void printArray (int[] arr, int n){
             for (int i = 0; i < n; i++){
-                System.out.print(arr[i] + " ");
+                System.out.print(arr[i] + ",");
             }
         }
 
@@ -47,13 +51,13 @@ public class Main {
             Scanner in = new Scanner(System.in);
             System.out.println("Enter numbers which you want to sort");
             String input = in.nextLine();
-            String[] splitNumbers = input.split(" ");
+            String[] splitNumbers = input.split(",");
             int count = splitNumbers.length;
             int[] numbers = new int[count];
             for (int i = 0; i<count; i++) {
                 numbers[i] = Integer.parseInt(splitNumbers[i]);
             }
-            heapsort(numbers, count);
+            heapsort(numbers);
             printArray(numbers,count);
     }
 }
