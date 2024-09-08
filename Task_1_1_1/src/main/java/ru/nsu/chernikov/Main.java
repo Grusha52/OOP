@@ -2,13 +2,14 @@ package ru.nsu.chernikov;
 
 import java.util.Scanner;
 
-/** THE Main
+/** THE Main.
  *
  */
 public class Main {
 
     /**
      * heapify helps keep max-heap in array.
+     *
      * @param arr the array whose elements are to be sorted
      * @param n number of elements in array
      * @param i index of element you need to heapify
@@ -56,7 +57,7 @@ public class Main {
     }
 
     /**
-     * metod that prints our sorted array
+     * metod that prints our sorted array.
      *
      * @param arr sorted array
      * @param n number of elements in array
@@ -67,7 +68,7 @@ public class Main {
         }
     }
 
-    /** communication with user
+    /** communication with user.
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
