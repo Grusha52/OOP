@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class test {
+class HeapsortTests {
     @Test
-    void heaptest() {
+    void testHeapsort() {
         assertArrayEquals(new int[]{1, 2, 3, 4, 5}, Main.heapsort(new int[]{5, 4, 3, 2, 1}));
         assertArrayEquals(new int[]{-5, 3, 3, 4, 5, 5, 6, 6, 6, 7, 8, 9, 9, 34}, Main.heapsort(new int[]{6, 5, 6, 3, 3, 4, 5, 7, 8, 6, 9, 9, 34, -5}));
         assertArrayEquals(
@@ -18,7 +18,7 @@ class test {
         assertArrayEquals(new int[]{0}, Main.heapsort(new int[]{0}));
         assertArrayEquals(new int[]{0}, Main.heapsort(new int[]{0}));
         assertArrayEquals(new int[]{-1000}, Main.heapsort(new int[]{-1000}));
-        assertArrayEquals(new int[]{10000}, Main.heapsort(new int[]{100000}));
+        assertArrayEquals(new int[]{100000}, Main.heapsort(new int[]{100000}));
         assertArrayEquals(new int[]{0}, Main.heapsort(new int[]{0}));
 
 

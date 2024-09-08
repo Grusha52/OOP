@@ -4,26 +4,36 @@ import java.util.Scanner;
 
 public class Main {
 
-
+    /**
+     * heapify helps keep max-heap in array
+     *
+     * @param arr the array whose elements are to be sorted
+     * @param n number of elements in array
+     * @param i index of element you need to heapify
+     */
     public static void heapify(int[] arr, int n, int i) {
-        int Big = i;
-        int L = 2 * i + 1;
-        int R = 2 * i + 2;
-        if (L < n && arr[L] > arr[Big]) {
-            Big = L;
+        int big = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        if (l < n && arr[l] > arr[big]) {
+            big = l;
         }
-        if (R < n && arr[R] > arr[Big]) {
-            Big = R;
+        if (r < n && arr[r] > arr[big]) {
+            big = r;
         }
-        if (Big != i) {
+        if (big != i) {
             int tmp = arr[i];
-            arr[i] = arr[Big];
-            arr[Big] = tmp;
-            heapify(arr, n, Big);
+            arr[i] = arr[big];
+            arr[big] = tmp;
+            heapify(arr, n, big);
         }
 
     }
-
+    /**
+     * sorts the elements of the array with heapsort.
+     *
+     * @param arr the array whose elements are sorting
+     */
     public static int[] heapsort(int[] arr) {
         int n = arr.length;
 
@@ -41,11 +51,20 @@ public class Main {
 
     }
 
+    /**
+     * metod that prints our sorted array
+     *
+     * @param arr sorted array
+     * @param n number of elements in array
+     */
     public static void printArray(int[] arr, int n) {
         for (int i = 0; i < n; i++) {
             System.out.print(arr[i] + ",");
         }
     }
+
+    /** communication with user
+     */
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
