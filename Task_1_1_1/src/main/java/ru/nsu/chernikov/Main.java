@@ -2,11 +2,13 @@ package ru.nsu.chernikov;
 
 import java.util.Scanner;
 
+/** THE Main
+ *
+ */
 public class Main {
 
     /**
-     * heapify helps keep max-heap in array
-     *
+     * heapify helps keep max-heap in array.
      * @param arr the array whose elements are to be sorted
      * @param n number of elements in array
      * @param i index of element you need to heapify
@@ -29,12 +31,14 @@ public class Main {
         }
 
     }
+
     /**
      * sorts the elements of the array with heapsort.
      *
      * @param arr the array whose elements are sorting
      */
     public static int[] heapsort(int[] arr) {
+
         int n = arr.length;
 
         for (int i = (n / 2 - 1); i >= 0; i--) {
@@ -65,7 +69,6 @@ public class Main {
 
     /** communication with user
      */
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter numbers which you want to sort");
