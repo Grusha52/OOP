@@ -57,18 +57,6 @@ public class Main {
     }
 
     /**
-     * metod that prints our sorted array.
-     *
-     * @param arr sorted array
-     * @param n   number of elements in array
-     */
-    public static void printArray(int[] arr, int n) {
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr[i] + ",");
-        }
-    }
-
-    /**
      * communication with user.
      */
     public static void main(String[] args) {
