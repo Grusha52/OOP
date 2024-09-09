@@ -11,8 +11,8 @@ public class Main {
      * heapify helps keep max-heap in array.
      *
      * @param arr the array whose elements are to be sorted
-     * @param n number of elements in array
-     * @param i index of element you need to heapify
+     * @param n   number of elements in array
+     * @param i   index of element you need to heapify
      */
     public static void heapify(int[] arr, int n, int i) {
         int big = i;
@@ -60,7 +60,7 @@ public class Main {
      * metod that prints our sorted array.
      *
      * @param arr sorted array
-     * @param n number of elements in array
+     * @param n   number of elements in array
      */
     public static void printArray(int[] arr, int n) {
         for (int i = 0; i < n; i++) {
@@ -68,9 +68,12 @@ public class Main {
         }
     }
 
-    /** communication with user.
+    /**
+     * communication with user.
      */
     public static void main(String[] args) {
+
+        /*
         Scanner in = new Scanner(System.in);
         System.out.println("Enter numbers which you want to sort");
         String input = in.nextLine();
@@ -82,5 +85,7 @@ public class Main {
         }
         heapsort(numbers);
         printArray(numbers, count);
+    }
+    */
     }
 }
