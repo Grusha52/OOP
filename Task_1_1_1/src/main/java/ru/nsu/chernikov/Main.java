@@ -3,8 +3,8 @@ package ru.nsu.chernikov;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
-/** THE Main.
- *
+/**
+ * THE Main.
  */
 public class Main {
 
@@ -63,13 +63,13 @@ public class Main {
     public static void main(String[] args) {
         int[] arr;
         arr = new int[1000];
-        for (int i = 999; i>=0;i--){
+        for (int i = 999; i >= 0; i--) {
             arr[i] = i;
         }
-        long sTime = System.nanoTime();
+        long startTime = System.nanoTime();
         heapsort(arr);
         long endTime = System.nanoTime();
-        long duration = endTime - sTime;
+        long duration = endTime - startTime;
         System.out.println(duration + " time");
     }
 }

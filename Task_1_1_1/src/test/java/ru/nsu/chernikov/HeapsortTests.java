@@ -62,9 +62,10 @@ class HeapsortTests {
         );
 
     }
+
     @Test
     void mainTest() {
-        Main.main(new String[] {});
+        Main.main(new String[]{});
         assertTrue(true);
     }
 
