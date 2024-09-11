@@ -1,5 +1,6 @@
 package ru.nsu.chernikov;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /** THE Main.
@@ -60,20 +61,15 @@ public class Main {
      * communication with user.
      */
     public static void main(String[] args) {
-
-        /*
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter numbers which you want to sort");
-        String input = in.nextLine();
-        String[] splitNumbers = input.split(",");
-        int count = splitNumbers.length;
-        int[] numbers = new int[count];
-        for (int i = 0; i < count; i++) {
-            numbers[i] = Integer.parseInt(splitNumbers[i]);
+        int[] arr;
+        arr = new int[1000];
+        for (int i = 999; i>=0;i--){
+            arr[i] = i;
         }
-        heapsort(numbers);
-        printArray(numbers, count);
-    }
-    */
+        long sTime = System.nanoTime();
+        heapsort(arr);
+        long endTime = System.nanoTime();
+        long duration = endTime - sTime;
+        System.out.println(duration + " time");
     }
 }

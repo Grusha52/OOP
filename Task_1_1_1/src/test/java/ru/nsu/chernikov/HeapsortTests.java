@@ -2,7 +2,9 @@ package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HeapsortTests {
     @Test
@@ -16,8 +18,8 @@ class HeapsortTests {
         );
 
         assertArrayEquals(
-                new int[]{-6543, -234, -21, -12, 0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 12, 12, 12, 12, 21, 23, 23, 32, 34, 35, 37, 123, 234, 452, 534, 646, 4543, 8680},
-                Main.heapsort(new int[]{5, 4, 5, 6, 5, 34, 23, 452, 534, 6, 37, -234, 234, 12, 32, 35, 646, 8680, 4543, 23, 123, -12, -6543, 5, 5, 5, 5, 5, 5, 12, 12, 12, 21, -21, 0})
+                new int[]{-6543, -234, -21, -12, 0, 4, 5, 5, 5, 5, 5, 5, 6, 6, 12, 12, 12, 12, 21, 23, 23, 32, 34, 35, 37, 123, 234, 452, 534, 646, 4543, 8680},
+                Main.heapsort(new int[]{5, 4, 5, 6, 5, 34, 23, 452, 534, 6, 37, -234, 234, 12, 32, 35, 646, 8680, 4543, 23, 123, -12, -6543, 5, 5, 5, 12, 12, 12, 21, -21, 0})
         );
 
         assertArrayEquals(new int[]{}, Main.heapsort(new int[]{}));
@@ -58,6 +60,12 @@ class HeapsortTests {
                 new int[]{-9, -8, -7, -6, -5, -4, -3, -2, -1, 0},
                 Main.heapsort(new int[]{-9, -8, -7, -6, -5, -4, -3, -2, -1, 0})
         );
+
+    }
+    @Test
+    void mainTest() {
+        Main.main(new String[] {});
+        assertTrue(true);
     }
 
 }
