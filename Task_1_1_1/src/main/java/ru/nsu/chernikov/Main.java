@@ -38,6 +38,7 @@ public class Main {
      * sorts the elements of the array with heapsort.
      *
      * @param arr the array whose elements are sorting
+     * @return arr sorted array returned
      */
     public static int[] heapsort(int[] arr) {
 
@@ -59,6 +60,8 @@ public class Main {
 
     /**
      * communication with user.
+     *
+     * @param args not used
      */
     public static void main(String[] args) {
         int[] arr;
