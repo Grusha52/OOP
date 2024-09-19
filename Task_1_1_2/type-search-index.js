@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.chernikov","l":"Blackjack"},{"p":"ru.nsu.chernikov","l":"Cards"},{"p":"ru.nsu.chernikov","l":"Dealer"},{"p":"ru.nsu.chernikov","l":"Deck"},{"p":"ru.nsu.chernikov","l":"Game"},{"p":"ru.nsu.chernikov","l":"Player"},{"p":"ru.nsu.chernikov","l":"Rank"},{"p":"ru.nsu.chernikov","l":"Suit"}]
