@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+main-class: ru.nsu.chernikov.Main
+class-path: bin/ru/nsu/chernikov
