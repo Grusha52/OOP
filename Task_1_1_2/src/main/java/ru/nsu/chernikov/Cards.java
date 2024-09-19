@@ -15,30 +15,30 @@ public class Cards {
 
 
     String getSuit(){
-        return switch (cardSuit) {
-            case DIAMONDS -> "Буби";
-            case HEARTS -> "Черви";
-            case SPADES -> "Пики";
-            case CLUBS -> "Крести";
+        switch (cardSuit) {
+            case DIAMONDS: return "Буби";
+            case HEARTS: return "Черви";
+            case SPADES: return "Пики";
+            case CLUBS: return "Крести";
 
         };
     }
 
     String getRank(){
-        return switch (cardRank){
-            case ACE -> "Туз";
-            case JACK -> "Валет";
-            case QUEEN -> "Дама";
-            case KING -> "Король";
-            case TWO -> "Два";
-            case THREE -> "Три";
-            case FOUR -> "Четыре";
-            case FIVE -> "Пять";
-            case SIX -> "Шесть";
-            case SEVEN -> "Семь";
-            case EIGHT -> "Восемь";
-            case NINE -> "Девять";
-            case TEN -> "Десять";
+        switch (cardRank){
+            case ACE: return  "Туз";
+            case JACK: return "Валет";
+            case QUEEN: return "Дама";
+            case KING: return "Король";
+            case TWO: return "Два";
+            case THREE: return "Три";
+            case FOUR: return "Четыре";
+            case FIVE: return "Пять";
+            case SIX: return "Шесть";
+            case SEVEN: return "Семь";
+            case EIGHT: return "Восемь";
+            case NINE: return "Девять";
+            case TEN: return "Десять";
 
         };
     }
