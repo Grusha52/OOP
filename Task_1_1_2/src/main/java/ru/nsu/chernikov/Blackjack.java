@@ -16,7 +16,7 @@ public class Blackjack {
             player.showHand();
             System.out.printf(" => %d\n", player.score);
             System.out.print("Карты дилера: ");
-            System.out.printf("[%s, <закрытая карта>]\n", dealer.deck.getFirst());
+            System.out.printf("[%s, <закрытая карта>]\n", dealer.deck.get(0));
         } else {
 
             System.out.print("Ваши карты: ");

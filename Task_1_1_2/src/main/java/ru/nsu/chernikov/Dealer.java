@@ -36,7 +36,7 @@ public class Dealer {
         while (dealer.score < 17) {
             dealer.giveCard(Deck.getCard());
             Dealer.aceCheck(dealer);
-            System.out.printf("\nДилер открывает карту %s\n", dealer.deck.getLast());
+            System.out.printf("\nДилер открывает карту %s\n", dealer.deck.get(dealer.deck.size() - 1));
             Blackjack.showCards(player, dealer, 1);
             if (dealer.score == 21) {
                 return 1;

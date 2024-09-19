@@ -20,8 +20,9 @@ public class Cards {
             case HEARTS: return "Черви";
             case SPADES: return "Пики";
             case CLUBS: return "Крести";
+            default: return "Just nothing";
 
-        };
+        }
     }
 
     String getRank(){
@@ -39,8 +40,8 @@ public class Cards {
             case EIGHT: return "Восемь";
             case NINE: return "Девять";
             case TEN: return "Десять";
-
-        };
+            default: return "Just nothing";
+        }
     }
     @Override
     public String toString() {
