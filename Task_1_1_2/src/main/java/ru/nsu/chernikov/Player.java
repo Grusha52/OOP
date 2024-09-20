@@ -1,9 +1,10 @@
 package ru.nsu.chernikov;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class Player {
-    ArrayList<Cards> deck;
+    List<Cards> deck;
     int score = 0;
 
     public Player(){

@@ -1,10 +1,10 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Dealer {
-    ArrayList<Cards> deck;
+    List<Cards> deck;
     int score = 0;
 
     public Dealer(){

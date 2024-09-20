@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    static ArrayList<Cards> deck;
+    static List<Cards> deck;
 
     public Deck(){
         createDeck();
@@ -21,7 +21,7 @@ public class Deck {
             Collections.shuffle(deck);
 
     }
-    public ArrayList<Cards> getDeck(){
+    public List<Cards> getDeck(){
         return deck;
     }
 
