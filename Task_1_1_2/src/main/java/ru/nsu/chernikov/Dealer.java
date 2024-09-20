@@ -1,10 +1,10 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Dealer {
-    List<Cards> deck;
+    ArrayList<Cards> deck;
     int score = 0;
 
     public Dealer(){
@@ -21,7 +21,7 @@ public class Dealer {
         System.out.println(deck);
     }
 
-    public static void aceCheck(Dealer cards) {
+    public void aceCheck(Dealer cards) {
         if(cards.score <= 21){
             return;
         }
@@ -32,10 +32,10 @@ public class Dealer {
             }
         }
     }
-    public static int dealerGameplay(Player player, Dealer dealer) {
+    public int dealerGameplay(Player player, Dealer dealer) {
         while (dealer.score < 17) {
             dealer.giveCard(Deck.getCard());
-            Dealer.aceCheck(dealer);
+            dealer.aceCheck(dealer);
             System.out.printf("\nДилер открывает карту %s\n", dealer.deck.get(dealer.deck.size() - 1));
             Blackjack.showCards(player, dealer, 1);
             if (dealer.score == 21) {

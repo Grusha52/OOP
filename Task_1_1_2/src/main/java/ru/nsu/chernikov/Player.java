@@ -1,10 +1,9 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player {
-    List<Cards> deck;
+    ArrayList<Cards> deck;
     int score = 0;
 
     public Player(){
@@ -20,7 +19,7 @@ public class Player {
         System.out.print(deck);
     }
 
-    public static void aceCheck(Player cards) {
+    public void aceCheck(Player cards) {
         if(cards.score <= 21){
             return;
         }

@@ -5,23 +5,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    static List<Cards> deck;
+    static ArrayList<Cards> deck;
 
     public Deck(){
         createDeck();
     }
 
     public static void createDeck(){
-        deck = new ArrayList<>();
-        for (Suit suit : Suit.values()){
-            for (Rank rank : Rank.values()){
-                deck.add(new Cards(rank, suit));
+            deck = new ArrayList<>();
+            for (Suit suit : Suit.values()) {
+                for (Rank rank : Rank.values()) {
+                    deck.add(new Cards(rank, suit));
+                }
             }
-        }
-        Collections.shuffle(deck);
+            Collections.shuffle(deck);
 
     }
-    public static List<Cards> getDeck(){
+    public ArrayList<Cards> getDeck(){
         return deck;
     }
 
@@ -31,11 +31,11 @@ public class Deck {
 
     static Cards getCard(){
         if (deck.isEmpty()){
+            System.out.println("\nНовая колода!\n");
             createDeck();
             return getCard();
         } else {
             return deck.remove(0);
         }
     }
-
 }
