@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardsTest {
     @Test
     void cardTests(){
-        String input = "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n";
+        String input = "0\n".repeat(200);;
         ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
         System.setIn(inContent);
-        Game.game(20);
+        Game.game(100);
 
 
     }
