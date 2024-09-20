@@ -5,19 +5,18 @@ import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args){
-        game();
+        game(-1);
     }
-    public static void game(){
-
-        Scanner in = new Scanner(System.in);
+    public static void game(int limiter){
         int round = 0;
+        Scanner in = new Scanner(System.in);
         int dealer_score = 0;
         int player_score = 0;
         Deck playdeck = new Deck();
 
         System.out.println("Добро пожаловать в Блэкджек!");
 
-        while (round < 20) {
+        while (round != limiter) {
 
             boolean endFlag = false;
             round++;
