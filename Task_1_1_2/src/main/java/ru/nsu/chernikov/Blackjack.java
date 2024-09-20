@@ -1,13 +1,6 @@
 package ru.nsu.chernikov;
 
 public class Blackjack {
-    public static boolean playerCheck(Player player) {
-        if (player.score > 21) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public static void showCards(Player player, Dealer dealer, int flag){
         if(flag == 0) {

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardsTest {
     @Test
     void cardTests(){
-        String input = "0\n0\n0\n0\n";
+        String input = "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n";
         ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
         System.setIn(inContent);  // Перенаправляем стандартный ввод
 
