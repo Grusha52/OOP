@@ -14,7 +14,7 @@ public class Game {
 
         System.out.println("Добро пожаловать в Блэкджек!");
 
-        while (flag != 1) {
+        while (round < 2) {
 
             String mark;
             boolean endFlag = false;

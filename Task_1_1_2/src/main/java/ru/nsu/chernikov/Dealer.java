@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dealer {
-    List<Cards> deck;
+    ArrayList<Cards> deck;
     int score = 0;
 
     public Dealer(){
