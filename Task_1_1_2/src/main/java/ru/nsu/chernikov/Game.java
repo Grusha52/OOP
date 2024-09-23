@@ -63,7 +63,7 @@ public class Game {
             int choose = 1;
 
             while(choose != 0){
-                System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
+                System.out.println("\nВведите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
                 choose = in.nextInt();
                 if(choose == 1){
                     player_hand.giveCard(playdeck.getCard());
@@ -75,7 +75,7 @@ public class Game {
                         System.out.printf("КУДАААААА Счет %d:%d\n", player_score, dealer_score);
                         break;
                     }else{
-                        System.out.printf("Вы открыли карту %s\n", player_hand.deck.get(dealer_hand.deck.size() - 1));
+                        System.out.printf("Вы открыли карту %s\n", player_hand.hand.get(dealer_hand.hand.size() - 1));
                         Blackjack.showCards(player_hand, dealer_hand,0);
                     }
                 }
@@ -85,7 +85,7 @@ public class Game {
             }
             System.out.println("\nХод дилера");
             System.out.println("--------");
-            System.out.printf("Дилер открывает закрытую карту %s\n", dealer_hand.deck.get(dealer_hand.deck.size() - 1));
+            System.out.printf("Дилер открывает закрытую карту %s\n", dealer_hand.hand.get(dealer_hand.hand.size() - 1));
             Blackjack.showCards(player_hand, dealer_hand, 1);
 
             if(dealer_hand.score == 21){
