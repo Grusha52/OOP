@@ -1,5 +1,8 @@
 package ru.nsu.chernikov;
 
+/** Rank of the card.
+ *
+ */
 public enum Rank{
     ACE(11),
     JACK(10),
@@ -17,6 +20,10 @@ public enum Rank{
 
     final int score;
 
+    /** SCORE.
+     *
+     * @param score the value of the card
+     */
     Rank(int score) {
         this.score = score;
     }

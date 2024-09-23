@@ -1,19 +1,29 @@
 package ru.nsu.chernikov;
 
-
+/** Cards class.
+ *
+ */
 public class Cards {
 
     Rank cardRank;
     Suit cardSuit;
     int value;
 
+    /** Cards constructor.
+     *
+     * @param rank the value of card
+     * @param suit the suit of card
+     */
     public Cards(Rank rank, Suit suit){
         this.cardRank = rank;
         this.cardSuit = suit;
         this.value = cardRank.score;
     }
 
-
+    /** returns suit of card.
+     *
+     * @return suit
+     */
     String getSuit(){
         switch (cardSuit) {
             case DIAMONDS: return "Буби";
@@ -25,6 +35,10 @@ public class Cards {
         }
     }
 
+    /** returns rank of card.
+     *
+     * @return rank
+     */
     String getRank(){
         switch (cardRank){
             case ACE: return  "Туз";
@@ -43,6 +57,11 @@ public class Cards {
             default: return "Just nothing";
         }
     }
+
+    /** Override for printing.
+     *
+     * @return string format of card with the value
+     */
     @Override
     public String toString() {
         return getRank() + " " + getSuit() + " " + "(" + value + ")";

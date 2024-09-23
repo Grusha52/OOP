@@ -3,8 +3,9 @@ package ru.nsu.chernikov;
 import org.junit.jupiter.api.Test;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**Testing player class.
+ *
+ */
 class PlayerTest {
 
     @Test
