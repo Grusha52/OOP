@@ -1,14 +1,13 @@
 package ru.nsu.chernikov;
 
-import org.junit.jupiter.api.Test;
-
-
 import java.io.ByteArrayInputStream;
+import org.junit.jupiter.api.Test;
 
 /** Testing game
  *
  */
 class MainTest {
+
     @Test
     void cardTests(){
         String input = "0\n".repeat(200);;

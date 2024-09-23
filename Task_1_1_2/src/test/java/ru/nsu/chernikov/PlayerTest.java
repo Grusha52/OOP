@@ -2,7 +2,6 @@ package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
 
-
 /**Testing player class.
  *
  */
