@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * player plays
+ * player plays.
  */
 public class Player {
     List<Cards> hand;
     int score = 0;
 
-    /**
-     * konstruktor
+    /** konstruktor.
+     *
      */
     public Player() {
         hand = new ArrayList<>();
     }
 
     /**
-     * giving card to smb
+     * giving card to smb.
      *
      * @param card which we are about to give
      */
@@ -27,8 +27,8 @@ public class Player {
         score += card.cardRank.score;
     }
 
-    /**
-     * show a player hand
+    /** show a player hand.
+     *
      */
     public void showHand() {
         System.out.print(hand);
