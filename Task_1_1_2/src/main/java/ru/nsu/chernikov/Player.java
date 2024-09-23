@@ -35,7 +35,7 @@ public class Player {
     }
 
     /**
-     * checking is there any aces?
+     * checking is there any aces?.
      *
      * @param cards player cards
      */

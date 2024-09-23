@@ -1,7 +1,6 @@
 package ru.nsu.chernikov;
 
 import java.io.ByteArrayInputStream;
-
 import org.junit.jupiter.api.Test;
 
 /**

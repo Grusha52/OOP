@@ -16,8 +16,8 @@ public class Blackjack {
     public static void game(int limiter) {
         int round = 0;
         Scanner in = new Scanner(System.in);
-        int dealer_score = 0;
-        int player_score = 0;
+        int dealerScore = 0;
+        int playerScore = 0;
         Deck playdeck = new Deck();
 
         System.out.println("Добро пожаловать в Блэкджек!");
@@ -27,61 +27,63 @@ public class Blackjack {
             boolean endFlag = false;
             round++;
 
-            Player player_hand = new Player();
-            Dealer dealer_hand = new Dealer();
-
             System.out.println("\nВведите WW чтобы продолжить");
             in.next();
 
             System.out.printf("\nРаунд %d\n", round);
 
-            player_hand.giveCard(Deck.getCard());
-            player_hand.giveCard(Deck.getCard());
-            player_hand.aceCheck(player_hand);
+            Player playerHand = new Player();
+            Dealer dealerHand = new Dealer();
 
-            dealer_hand.giveCard(Deck.getCard());
-            dealer_hand.giveCard(Deck.getCard());
-            dealer_hand.aceCheck(dealer_hand);
+            playerHand.giveCard(Deck.getCard());
+            playerHand.giveCard(Deck.getCard());
+            playerHand.aceCheck(playerHand);
+
+            dealerHand.giveCard(Deck.getCard());
+            dealerHand.giveCard(Deck.getCard());
+            dealerHand.aceCheck(dealerHand);
 
             System.out.println("Дилер раздал карты");
 
-            if ((player_hand.score == dealer_hand.score) && (player_hand.score == 21)) {
-                player_score++;
-                dealer_score++;
-                showCards(player_hand, dealer_hand, 0);
-                System.out.printf("АХАХААХАХАХАХАХ НИЧЬЯ! Счет %d:%d\n", player_score, dealer_score);
+            if ((playerHand.score == dealerHand.score) && (playerHand.score == 21)) {
+                playerScore++;
+                dealerScore++;
+                showCards(playerHand, dealerHand, 0);
+                System.out.printf("АХАХААХАХАХАХАХ НИЧЬЯ! Счет %d:%d\n", playerScore, dealerScore);
                 continue;
-            } else if (player_hand.score == 21) {
-                player_score++;
+            } else if (playerHand.score == 21) {
+                playerScore++;
 
-                showCards(player_hand, dealer_hand, 0);
+                showCards(playerHand, dealerHand, 0);
 
                 System.out.println("Ты кто такой чтоб это сделать?");
-                System.out.printf("Вы выиграли раунд! Счет %d:%d\n", player_score, dealer_score);
+                System.out.printf("Вы выиграли раунд! Счет %d:%d\n", playerScore, dealerScore);
                 continue;
             }
 
-            Blackjack.showCards(player_hand, dealer_hand, 0);
+            Blackjack.showCards(playerHand, dealerHand, 0);
 
             System.out.println("\nВаш ход");
             System.out.println("--------");
             int choose = 1;
 
             while (choose != 0) {
-                System.out.println("\nВведите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
+                System.out.println("\nВведите “1”, чтобы взять карту, и “0”, чтобы остановиться..");
                 choose = in.nextInt();
                 if (choose == 1) {
-                    player_hand.giveCard(playdeck.getCard());
-                    player_hand.aceCheck(player_hand);
-                    if (player_hand.score > 21) {
+                    playerHand.giveCard(playdeck.getCard());
+                    playerHand.aceCheck(playerHand);
+                    if (playerHand.score > 21) {
                         endFlag = true;
-                        Blackjack.showCards(player_hand, dealer_hand, 1);
-                        dealer_score++;
-                        System.out.printf("КУДАААААА Счет %d:%d\n", player_score, dealer_score);
+                        Blackjack.showCards(playerHand, dealerHand, 1);
+                        dealerScore++;
+                        System.out.printf("КУДАААААА Счет %d:%d\n",
+                                playerScore, dealerScore);
                         break;
                     } else {
-                        System.out.printf("Вы открыли карту %s\n", player_hand.hand.get(dealer_hand.hand.size() - 1));
-                        showCards(player_hand, dealer_hand, 0);
+                        System.out.printf("Вы открыли карту %s\n",
+                                playerHand.hand.get(dealerHand.hand.size() - 1));
+                        showCards(playerHand, dealerHand, 0);
                     }
                 }
             }
@@ -90,40 +92,43 @@ public class Blackjack {
             }
             System.out.println("\nХод дилера");
             System.out.println("--------");
-            System.out.printf("Дилер открывает закрытую карту %s\n", dealer_hand.hand.get(dealer_hand.hand.size() - 1));
-            showCards(player_hand, dealer_hand, 1);
+            System.out.printf("Дилер открывает закрытую карту %s\n",
+                    dealerHand.hand.get(dealerHand.hand.size() - 1));
+            showCards(playerHand, dealerHand, 1);
 
-            if (dealer_hand.score == 21) {
-                dealer_score++;
-                System.out.printf("ПРОИГРАЛ Счет %d:%d\n", player_score, dealer_score);
+            if (dealerHand.score == 21) {
+                dealerScore++;
+                System.out.printf("ПРОИГРАЛ Счет %d:%d\n", playerScore, dealerScore);
                 continue;
             }
 
-            if (dealer_hand.dealerGameplay(player_hand, dealer_hand) == 0) {
-                if (player_hand.score > dealer_hand.score) {
-                    player_score++;
-                    System.out.printf("\nУРАААААА ПОБЕДА ПОБЕДА!!!!!! Счет %d:%d\n", player_score, dealer_score);
-                } else if (player_hand.score == dealer_hand.score) {
-                    player_score++;
-                    dealer_score++;
-                    System.out.printf("АХАХААХАХАХАХАХ НИЧЬЯ! Счет %d:%d\n", player_score, dealer_score);
+            if (dealerHand.dealerGameplay(playerHand, dealerHand) == 0) {
+                if (playerHand.score > dealerHand.score) {
+                    playerScore++;
+                    System.out.printf("\nУРАААААА ПОБЕДА ПОБЕДА!!!!!! Счет %d:%d\n",
+                            playerScore, dealerScore);
+                } else if (playerHand.score == dealerHand.score) {
+                    playerScore++;
+                    dealerScore++;
+                    System.out.printf("АХАХААХАХАХАХАХ НИЧЬЯ! Счет %d:%d\n", playerScore, dealerScore);
                 } else {
-                    dealer_score++;
-                    System.out.printf("ПРОИГРАЛ Счет %d:%d\n", player_score, dealer_score);
+                    dealerScore++;
+                    System.out.printf("ПРОИГРАЛ Счет %d:%d\n", playerScore, dealerScore);
                 }
-            } else if (dealer_hand.dealerGameplay(player_hand, dealer_hand) == 1) {
-                dealer_score++;
-                System.out.printf("ПРОИГРАЛ Счет %d:%d\n", player_score, dealer_score);
+            } else if (dealerHand.dealerGameplay(playerHand, dealerHand) == 1) {
+                dealerScore++;
+                System.out.printf("ПРОИГРАЛ Счет %d:%d\n", playerScore, dealerScore);
             } else {
-                player_score++;
-                System.out.printf("\nУРАААААА ПОБЕДА ПОБЕДА!!!!!! Счет %d:%d\n", player_score, dealer_score);
+                playerScore++;
+                System.out.printf("\nУРАААААА ПОБЕДА ПОБЕДА!!!!!! Счет %d:%d\n",
+                        playerScore, dealerScore);
             }
         }
 
     }
 
     /**
-     * It shows cards and score of each player
+     * It shows cards and score of each player.
      *
      * @param player player's hand
      * @param dealer dealer's hand
