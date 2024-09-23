@@ -1,12 +1,13 @@
 package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardTest {
 
     @Test
-    void cardTests(){
+    void cardTests() {
         Cards card = new Cards(Rank.JACK, Suit.SPADES);
         assertEquals("Валет Пики (10)", card.toString());
     }

@@ -1,19 +1,20 @@
 package ru.nsu.chernikov;
 
-/** THE DEALER.
- *
+/**
+ * THE DEALER.
  */
-public class Dealer extends Player{
+public class Dealer extends Player {
 
-    /** just subclass of player.
-     *
+    /**
+     * just subclass of player.
      */
-    public Dealer(){
+    public Dealer() {
         super();
 
     }
 
-    /** DEALER BOT.
+    /**
+     * DEALER BOT.
      *
      * @param player just player's hand
      * @param dealer just dealer's hand

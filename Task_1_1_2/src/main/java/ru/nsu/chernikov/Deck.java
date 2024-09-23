@@ -25,7 +25,7 @@ public class Deck {
         return deck;
     }
 
-    public void showDeck(){
+    public void showDeck() {
         System.out.println(deck);
     }
 

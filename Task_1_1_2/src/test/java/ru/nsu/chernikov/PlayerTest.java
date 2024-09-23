@@ -2,20 +2,17 @@ package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
 
-/**Testing player class.
- *
+/**
+ * Testing player class.
  */
 class PlayerTest {
 
     @Test
-    void playerTests(){
+    void playerTests() {
         Player player = new Player();
 
 
     }
-
-
-
 
 
 }

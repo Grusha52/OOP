@@ -1,12 +1,13 @@
 package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeckTest {
 
     @Test
-    void deckTests(){
+    void deckTests() {
 
         Deck deck = new Deck();
         assertEquals(52, Deck.deck.size());
