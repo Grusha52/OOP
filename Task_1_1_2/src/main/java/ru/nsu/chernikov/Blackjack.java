@@ -35,12 +35,12 @@ public class Blackjack {
             Player playerHand = new Player();
             Dealer dealerHand = new Dealer();
 
-            playerHand.giveCard(Deck.getCard());
-            playerHand.giveCard(Deck.getCard());
+            playerHand.giveCard(playdeck.getCard());
+            playerHand.giveCard(playdeck.getCard());
             playerHand.aceCheck(playerHand);
 
-            dealerHand.giveCard(Deck.getCard());
-            dealerHand.giveCard(Deck.getCard());
+            dealerHand.giveCard(playdeck.getCard());
+            dealerHand.giveCard(playdeck.getCard());
             dealerHand.aceCheck(dealerHand);
 
             System.out.println("Дилер раздал карты");
@@ -102,7 +102,7 @@ public class Blackjack {
                 continue;
             }
 
-            if (dealerHand.dealerGameplay(playerHand, dealerHand) == 0) {
+            if (dealerHand.dealerGameplay(playerHand, dealerHand, playdeck) == 0) {
                 if (playerHand.score > dealerHand.score) {
                     playerScore++;
                     System.out.printf("\nУРАААААА ПОБЕДА ПОБЕДА!!!!!! Счет %d:%d\n",
@@ -115,7 +115,7 @@ public class Blackjack {
                     dealerScore++;
                     System.out.printf("ПРОИГРАЛ Счет %d:%d\n", playerScore, dealerScore);
                 }
-            } else if (dealerHand.dealerGameplay(playerHand, dealerHand) == 1) {
+            } else if (dealerHand.dealerGameplay(playerHand, dealerHand, playdeck) == 1) {
                 dealerScore++;
                 System.out.printf("ПРОИГРАЛ Счет %d:%d\n", playerScore, dealerScore);
             } else {

@@ -10,7 +10,7 @@ class DeckTest {
     void deckTests() {
 
         Deck deck = new Deck();
-        assertEquals(52, Deck.deck.size());
-        assertEquals(Deck.deck.get(0), Deck.getCard());
+        assertEquals(52, deck.deck.size());
+        assertEquals(deck.deck.get(0), deck.getCard());
     }
 }

@@ -20,9 +20,9 @@ public class Dealer extends Player {
      * @param dealer just dealer's hand
      * @return result of dealer's turn
      */
-    public int dealerGameplay(Player player, Dealer dealer) {
+    public int dealerGameplay(Player player, Dealer dealer, Deck deck) {
         while (dealer.score < 17) {
-            dealer.giveCard(Deck.getCard());
+            dealer.giveCard(deck.getCard());
             dealer.aceCheck(dealer);
             System.out.printf("\nДилер открывает карту %s\n", dealer.hand.get(dealer.hand.size() - 1));
             Blackjack.showCards(player, dealer, 1);
