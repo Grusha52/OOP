@@ -10,7 +10,7 @@ class MainTest {
 
     @Test
     void cardTests() {
-        String input = "0\n".repeat(200);
+        String input = "0\n0\n".repeat(100);
         ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
         System.setIn(inContent);
         Blackjack.game(100);

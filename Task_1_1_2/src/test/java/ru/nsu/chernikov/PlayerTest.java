@@ -16,9 +16,10 @@ class PlayerTest {
         player.giveCard(deck.getCard());
         player.showHand();
         player.aceCheck(player);
+        player.score = 22;
         player.hand.add(new Cards(Rank.ACE, Suit.DIAMONDS));
         player.aceCheck(player);
-        player.score = 12;
+
     }
 
     @Test

@@ -27,7 +27,7 @@ public class Blackjack {
             boolean endFlag = false;
             round++;
 
-            System.out.println("\nВведите WW чтобы продолжить");
+            System.out.println("\nВведите любой символ чтобы продолжить");
             in.next();
 
             System.out.printf("\nРаунд %d\n", round);
