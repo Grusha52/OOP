@@ -66,12 +66,12 @@ public class Blackjack {
 
             System.out.println("\nВаш ход");
             System.out.println("--------");
-            int choose = 1;
+            String choose = "1";
 
-            while (choose != 0) {
+            while (!choose.equals("0")) {
                 System.out.println("\nВведите “1”, чтобы взять карту, и “0”, чтобы остановиться..");
-                choose = in.nextInt();
-                if (choose == 1) {
+                choose = in.next();
+                if (choose.equals("1")) {
                     playerHand.giveCard(playdeck.getCard());
                     playerHand.aceCheck(playerHand);
                     if (playerHand.score > 21) {
