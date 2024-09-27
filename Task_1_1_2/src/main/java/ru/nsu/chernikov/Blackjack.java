@@ -33,11 +33,12 @@ public class Blackjack {
             System.out.printf("\nРаунд %d\n", round);
 
             Player playerHand = new Player();
-            Dealer dealerHand = new Dealer();
 
             playerHand.giveCard(playdeck.getCard());
             playerHand.giveCard(playdeck.getCard());
             playerHand.aceCheck(playerHand);
+
+            Dealer dealerHand = new Dealer();
 
             dealerHand.giveCard(playdeck.getCard());
             dealerHand.giveCard(playdeck.getCard());

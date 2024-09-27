@@ -16,6 +16,12 @@ public class Deck {
     public Deck() {
         createDeck();
     }
+
+    /** HELPER FOR TESTS, u can init deck with 2 cards.
+     *
+     * @param card1 first card
+     * @param card2 second card
+     */
     public Deck(Cards card1, Cards card2) {
         deck = new ArrayList<>();
         deck.add(card1);
