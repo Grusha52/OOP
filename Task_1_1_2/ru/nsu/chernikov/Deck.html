@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -158,6 +158,11 @@ extends java.lang.Object</pre>
 <div class="block">constructor of the deck.</div>
 </td>
 </tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(ru.nsu.chernikov.Cards,ru.nsu.chernikov.Cards)">Deck</a></span>&#8203;(<a href="Cards.html" title="class in ru.nsu.chernikov">Cards</a>&nbsp;card1,
+    <a href="Cards.html" title="class in ru.nsu.chernikov">Cards</a>&nbsp;card2)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -170,14 +175,14 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static void</code></td>
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDeck()">createDeck</a></span>()</code></th>
 <td class="colLast">
 <div class="block">creating shuffled deck.</div>
@@ -210,11 +215,21 @@ extends java.lang.Object</pre>
 <a id="&lt;init&gt;()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>Deck</h4>
 <pre>public&nbsp;Deck()</pre>
 <div class="block">constructor of the deck.</div>
+</li>
+</ul>
+<a id="&lt;init&gt;(ru.nsu.chernikov.Cards,ru.nsu.chernikov.Cards)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Deck</h4>
+<pre>public&nbsp;Deck&#8203;(<a href="Cards.html" title="class in ru.nsu.chernikov">Cards</a>&nbsp;card1,
+            <a href="Cards.html" title="class in ru.nsu.chernikov">Cards</a>&nbsp;card2)</pre>
 </li>
 </ul>
 </li>
@@ -233,7 +248,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createDeck</h4>
-<pre class="methodSignature">public static&nbsp;void&nbsp;createDeck()</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;createDeck()</pre>
 <div class="block">creating shuffled deck.</div>
 </li>
 </ul>
