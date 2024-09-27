@@ -37,7 +37,22 @@ class CardTest {
         assertEquals(card.getRank(), "Семь");
         card = new Cards(Rank.QUEEN, Suit.DIAMONDS);
         assertEquals(card.getRank(), "Дама");
-
+        card = new Cards(Rank.SIX, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Шесть");
+        card = new Cards(Rank.FOUR, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Четыре");
+        card = new Cards(Rank.THREE, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Три");
+        card = new Cards(Rank.TEN, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Десять");
+        card = new Cards(Rank.KING, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Король");
+        card = new Cards(Rank.TWO, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Два");
+        card = new Cards(Rank.EIGHT, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Восемь");
+        card = new Cards(Rank.NINE, Suit.DIAMONDS);
+        assertEquals(card.getRank(), "Девять");
     }
 
     @Test
