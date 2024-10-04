@@ -20,7 +20,7 @@ public class Main {
         int result = e.eval("x = 10; y = 13");
         System.out.println(result);
 
-        Expression f = new Add(new Variable("y"), new Mul(new Number(2),
+        Expression f = new Add(new Variable("y"), new Div(new Number(2),
                 new Variable("x")));
 
         f.print();
