@@ -1,19 +1,36 @@
 package ru.nsu.chernikov;
 
-
+/**
+ * Variable class.
+ */
 class Variable extends Expression {
 
     private String varname;
 
+    /**
+     * Variable konstructor.
+     *
+     * @param var variable in String format.
+     */
     public Variable(String var) {
         this.varname = var;
     }
 
+    /**
+     * printing our variable.
+     */
     @Override
     public void print() {
-        System.out.print(varname);;
+        System.out.print(varname);
+        ;
     }
 
+    /**
+     * Derivative of our variable.
+     *
+     * @param var our variable in String type
+     * @return a derivative of expression
+     */
     @Override
     public Expression derivative(String var) {
         if (this.varname.equals(var)) {
@@ -23,6 +40,12 @@ class Variable extends Expression {
         }
     }
 
+    /**
+     * Evaluation.
+     *
+     * @param vars variables for our equation
+     * @return evaluates the expression
+     */
     @Override
     public int eval(String vars) {
         String[] var;
@@ -31,11 +54,11 @@ class Variable extends Expression {
         vars = vars.replaceAll(" ", "");
         var = vars.split(";");
 
-        for (String a : var){
+        for (String a : var) {
             variab = a.split("=");
-             if (variab[0].equals(varname)){
-                 return Integer.parseInt(variab[1]);
-             }
+            if (variab[0].equals(varname)) {
+                return Integer.parseInt(variab[1]);
+            }
         }
         System.out.println("Error, there's no matchable variables");
         return 0;

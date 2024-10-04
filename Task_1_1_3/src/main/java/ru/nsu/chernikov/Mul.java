@@ -1,15 +1,24 @@
 package ru.nsu.chernikov;
 
-class Mul extends Expression{
+class Mul extends Expression {
     private Expression left, right;
 
-    public Mul(Expression left, Expression right){
+    /**
+     * Multiplication of two expr.
+     *
+     * @param left  expr
+     * @param right expr
+     */
+    public Mul(Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
 
+    /**
+     * printing expr.
+     */
     @Override
-    public void print(){
+    public void print() {
         System.out.print("(");
         left.print();
         System.out.print("*");
@@ -18,14 +27,26 @@ class Mul extends Expression{
 
     }
 
+    /**
+     * Derivative of multiplication.
+     *
+     * @param var our variable in String type
+     * @return Derivative of expr
+     */
     @Override
-    public Expression derivative(String var){
+    public Expression derivative(String var) {
         return new Add(new Mul(left.derivative(var), right),
                 new Mul(left, right.derivative(var)));
     }
 
+    /**
+     * Evaluation a multiplication.
+     *
+     * @param vars variables for our equation
+     * @return Integer of left * return
+     */
     @Override
-    public int eval(String vars){
+    public int eval(String vars) {
         return left.eval(vars) * right.eval(vars);
     }
 }
