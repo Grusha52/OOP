@@ -1,5 +1,8 @@
 package ru.nsu.chernikov;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * Expression abstract class.
  */
@@ -7,8 +10,9 @@ abstract class Expression {
 
     /**
      * abstract print for printing expressions.
+     * сделать с Output stream
      */
-    public abstract void print();
+    public abstract void print(OutputStream stream) throws IOException;
 
     /**
      * Derivative of expr.
@@ -24,5 +28,5 @@ abstract class Expression {
      * @param vars variables for our equation
      * @return integer type result
      */
-    public abstract int eval(String vars);
+    public abstract double eval(String vars);
 }

@@ -1,5 +1,9 @@
 package ru.nsu.chernikov;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Div class.
  */
@@ -21,12 +25,12 @@ class Div extends Expression {
      * printing.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("/");
-        right.print();
-        System.out.print(")");
+    public void print(OutputStream stream) throws IOException {
+        stream.write("(".getBytes(StandardCharsets.UTF_8));
+        left.print(stream);
+        stream.write("/".getBytes(StandardCharsets.UTF_8));
+        right.print(stream);
+        stream.write(")".getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -50,7 +54,10 @@ class Div extends Expression {
      * @return left / right in (Integer)
      */
     @Override
-    public int eval(String vars) {
+    public double eval(String vars) throws ArithmeticException {
+        if (Double.isInfinite(left.eval(vars) / right.eval(vars))){
+            throw new ArithmeticException();
+        }
         return left.eval(vars) / right.eval(vars);
     }
 }

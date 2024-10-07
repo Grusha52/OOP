@@ -1,5 +1,9 @@
 package ru.nsu.chernikov;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Sub class.
  */
@@ -21,12 +25,12 @@ class Sub extends Expression {
      * printing expr.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("-");
-        right.print();
-        System.out.print(")");
+    public void print(OutputStream stream) throws IOException {
+        stream.write("(".getBytes(StandardCharsets.UTF_8));
+        left.print(stream);
+        stream.write("-".getBytes(StandardCharsets.UTF_8));
+        right.print(stream);
+        stream.write(")".getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -47,7 +51,7 @@ class Sub extends Expression {
      * @return left - right.
      */
     @Override
-    public int eval(String vars) {
+    public double eval(String vars) {
         return left.eval(vars) - right.eval(vars);
     }
 }

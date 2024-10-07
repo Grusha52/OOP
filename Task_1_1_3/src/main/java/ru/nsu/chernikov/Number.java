@@ -1,11 +1,15 @@
 package ru.nsu.chernikov;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Number expr.
  */
 class Number extends Expression {
 
-    private final int value;
+    private int value;
 
     public Number(int value) {
         this.value = value;
@@ -13,10 +17,11 @@ class Number extends Expression {
 
     /**
      * printing constant.
+     * сделать с Output stream
      */
     @Override
-    public void print() {
-        System.out.print(value);
+    public void print(OutputStream stream) throws IOException {
+        stream.write(Integer.toString(this.value).getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -37,8 +42,7 @@ class Number extends Expression {
      * @return value of given number
      */
     @Override
-    public int eval(String vars) {
+    public double eval(String vars) {
         return value;
     }
-
 }

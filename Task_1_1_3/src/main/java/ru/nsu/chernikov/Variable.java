@@ -1,5 +1,9 @@
 package ru.nsu.chernikov;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Variable class.
  */
@@ -20,9 +24,8 @@ class Variable extends Expression {
      * printing our variable.
      */
     @Override
-    public void print() {
-        System.out.print(varname);
-        ;
+    public void print(OutputStream stream) throws IOException {
+        stream.write(varname.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -47,7 +50,7 @@ class Variable extends Expression {
      * @return evaluates the expression
      */
     @Override
-    public int eval(String vars) {
+    public double eval(String vars) {
         String[] var;
         String[] variab;
 
