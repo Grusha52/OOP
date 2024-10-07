@@ -41,10 +41,7 @@ class Div extends Expression {
      */
     @Override
     public Expression derivative(String var) {
-        return new Div(
-                new Sub(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var))),
-                new Mul(right, right)
-        );
+        return new Div(new Sub(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var))), new Mul(right, right));
     }
 
     /**
@@ -55,7 +52,7 @@ class Div extends Expression {
      */
     @Override
     public double eval(String vars) throws ArithmeticException {
-        if (Double.isInfinite(left.eval(vars) / right.eval(vars))){
+        if (Double.isInfinite(left.eval(vars) / right.eval(vars))) {
             throw new ArithmeticException();
         }
         return left.eval(vars) / right.eval(vars);

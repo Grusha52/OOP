@@ -16,15 +16,15 @@ public class Main {
         OutputStream out = System.out;
         try {
             exp.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
 
         }
         System.out.println();
         Expression de = exp.derivative("x");
-        try{
+        try {
             de.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println();
@@ -32,7 +32,7 @@ public class Main {
         try {
             double result = exp.eval("y = 13; z = 2351");
             System.out.println(result);
-        } catch(ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
         }
 
@@ -41,7 +41,7 @@ public class Main {
 
         try {
             f.print(out);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -50,7 +50,7 @@ public class Main {
         de = f.derivative("y");
         try {
             de.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -59,7 +59,7 @@ public class Main {
         try {
             double result = f.eval("x = 25; y = 30");
             System.out.println(result);
-        } catch(ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
         }
 

@@ -38,8 +38,7 @@ class Mul extends Expression {
      */
     @Override
     public Expression derivative(String var) {
-        return new Add(new Mul(left.derivative(var), right),
-                new Mul(left, right.derivative(var)));
+        return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
     }
 
     /**

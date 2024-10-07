@@ -6,45 +6,39 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
     @Test
-    void mainTest(){
+    void mainTest() {
         Main.main(null);
     }
 
     @Test
-    void printTest(){
+    void printTest() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Expression a = new Number(5);
-        try{
+        try {
             a.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         assertEquals("5", out.toString());
         out.reset();
-        Expression exp2 = new Sub(
-                new Variable("y"),
-                new Number(5)
-        );
+        Expression exp2 = new Sub(new Variable("y"), new Number(5));
 
-        try{
+        try {
             exp2.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         assertEquals("(y-5)", out.toString());
         out.reset();
-        Expression exp3 = new Div(
-                new Add(new Number(10), new Variable("z")),
-                new Number(2)
-        );
+        Expression exp3 = new Div(new Add(new Number(10), new Variable("z")), new Number(2));
 
-        try{
+        try {
             exp3.print(out);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         assertEquals("((10+z)/2)", out.toString());
@@ -52,41 +46,32 @@ public class MainTest {
     }
 
     @Test
-    void evalTest(){
+    void evalTest() {
         Expression a = new Number(5);
-        try{
+        try {
             assertEquals(5, a.eval("x = 23"));
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Division by zero");
         }
 
-        Expression exp1 = new Div(
-                new Variable("y"),
-                new Number(0)
-        );
-        try{
+        Expression exp1 = new Div(new Variable("y"), new Number(0));
+        try {
             assertEquals(5, exp1.eval("y = 5; x = 1243"));
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Division by zero");
         }
 
-        Expression exp2 = new Sub(
-                new Variable("y"),
-                new Number(5)
-        );
-        try{
+        Expression exp2 = new Sub(new Variable("y"), new Number(5));
+        try {
             assertEquals(0, exp2.eval("y = 5; x = 1243"));
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Division by zero");
         }
 
-        Expression exp3 = new Div(
-                new Add(new Number(10), new Variable("z")),
-                new Number(2)
-        );
-        try{
+        Expression exp3 = new Div(new Add(new Number(10), new Variable("z")), new Number(2));
+        try {
             assertEquals(15, exp3.eval("y = 5; x = 1243; z = 20"));
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("Division by zero");
         }
 
