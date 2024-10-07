@@ -8,7 +8,10 @@ import java.io.OutputStream;
  */
 public class Main {
 
-
+    /** main metod.
+     *
+     * @param argc argc)
+     */
     public static void main(String[] argc) {
         Expression exp = new Add(new Number(3), new Mul(new Number(2),
                 new Variable("x"))); // (3+(2*x))

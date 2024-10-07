@@ -1,13 +1,16 @@
 package ru.nsu.chernikov;
 
-
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import org.junit.jupiter.api.Test;
+import java.io.IOException;
+
+
+
+/**
+ * testing main and etc.
+ */
 public class MainTest {
     @Test
     void mainTest() {

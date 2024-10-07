@@ -5,7 +5,8 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 class Mul extends Expression {
-    private Expression left, right;
+    private Expression left;
+    private Expression right;
 
     /**
      * Multiplication of two expr.

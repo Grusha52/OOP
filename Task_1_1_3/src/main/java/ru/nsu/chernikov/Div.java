@@ -8,7 +8,8 @@ import java.nio.charset.StandardCharsets;
  * Div class.
  */
 class Div extends Expression {
-    private Expression left, right;
+    private Expression left;
+    private Expression right;
 
     /**
      * Division.
@@ -41,7 +42,8 @@ class Div extends Expression {
      */
     @Override
     public Expression derivative(String var) {
-        return new Div(new Sub(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var))), new Mul(right, right));
+        return new Div(new Sub(new Mul(left.derivative(var), right),
+                new Mul(left, right.derivative(var))), new Mul(right, right));
     }
 
     /**
