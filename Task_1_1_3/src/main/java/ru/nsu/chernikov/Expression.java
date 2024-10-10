@@ -11,6 +11,16 @@ abstract class Expression {
     /**
      * abstract print for printing expressions.
      * сделать с Output stream
+     * можно короче вернуть принт и просто перехватить вывод с консоли:
+     * PrintStream oldOutput = System.out;
+     * ByteArrayOutputStream stream = new ByteArrayOutputStream;
+     * System.setOut(new PrintStream(stream, false, "UTF-8");
+     * try{
+     *     e.print();
+     * } finally {
+     *     System.setOut(oldOutput);
+     * }
+     * string output = stream.toString("UTF-8");
      */
     public abstract void print(OutputStream stream) throws IOException;
 
