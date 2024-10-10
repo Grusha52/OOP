@@ -1,0 +1,10 @@
+
+(3+(2*x))
+(0+((0*x)+(2*1)))
+&Error, there's no matchable variables
+3.0
+
+(y-(2/x))
+(1-(((0*x)-(2*0))/(x*x)))
+29.92
+Division by zero
