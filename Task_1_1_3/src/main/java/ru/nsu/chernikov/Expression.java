@@ -22,7 +22,7 @@ abstract class Expression {
      * }
      * string output = stream.toString("UTF-8");
      */
-    public abstract void print() throws IOException;
+    public abstract void print();
 
     /**
      * Derivative of expr.

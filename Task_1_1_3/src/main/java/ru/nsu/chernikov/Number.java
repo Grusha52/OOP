@@ -20,7 +20,7 @@ class Number extends Expression {
      * сделать с Output stream
      */
     @Override
-    public void print() throws IOException {
+    public void print() {
         System.out.print(this.value);
     }
 

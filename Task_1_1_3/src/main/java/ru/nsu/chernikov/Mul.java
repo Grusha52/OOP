@@ -23,7 +23,7 @@ class Mul extends Expression {
      * printing expr.
      */
     @Override
-    public void print() throws IOException {
+    public void print() {
         System.out.print("(");
         left.print();
         System.out.print("*");

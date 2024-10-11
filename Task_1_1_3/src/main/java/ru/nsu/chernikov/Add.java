@@ -26,7 +26,7 @@ class Add extends Expression {
      * printing expression.
      */
     @Override
-    public void print() throws IOException {
+    public void print() {
         System.out.print("(");
         left.print();
         System.out.print("+");

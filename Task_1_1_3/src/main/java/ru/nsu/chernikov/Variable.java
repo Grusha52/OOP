@@ -24,7 +24,7 @@ class Variable extends Expression {
      * printing our variable.
      */
     @Override
-    public void print() throws IOException {
+    public void print() {
         System.out.print(varname);
     }
 

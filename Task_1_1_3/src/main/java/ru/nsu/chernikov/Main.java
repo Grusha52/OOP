@@ -17,19 +17,11 @@ public class Main {
         Expression exp = new Add(new Number(3), new Mul(new Number(2),
                 new Variable("x"))); // (3+(2*x))
 
-        try {
-            exp.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
+        exp.print();
         System.out.println();
+
         Expression de = exp.derivative("x");
-        try {
-            de.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        de.print();
         System.out.println();
 
         try {
@@ -42,21 +34,11 @@ public class Main {
         Expression f = new Sub(new Variable("y"), new Div(new Number(2),
                 new Variable("x")));
 
-        try {
-            f.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        f.print();
         System.out.println();
 
         de = f.derivative("y");
-        try {
-            de.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        de.print();
         System.out.println();
 
         try {
@@ -65,6 +47,5 @@ public class Main {
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
         }
-
     }
 }
