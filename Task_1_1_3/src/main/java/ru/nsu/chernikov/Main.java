@@ -17,7 +17,6 @@ public class Main {
         Expression exp = new Add(new Number(3), new Mul(new Number(2),
                 new Variable("x"))); // (3+(2*x))
 
-        OutputStream out = System.out;
         try {
             exp.print();
         } catch (IOException e) {
@@ -61,7 +60,7 @@ public class Main {
         System.out.println();
 
         try {
-            double result = f.eval("x = 25; y = 30");
+            double result = f.eval("x = 0; y = 30");
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
