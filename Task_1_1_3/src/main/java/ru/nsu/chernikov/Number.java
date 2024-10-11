@@ -20,8 +20,8 @@ class Number extends Expression {
      * сделать с Output stream
      */
     @Override
-    public void print(OutputStream stream) throws IOException {
-        stream.write(Integer.toString(this.value).getBytes(StandardCharsets.UTF_8));
+    public void print() throws IOException {
+        System.out.print(this.value);
     }
 
     /**
@@ -45,4 +45,5 @@ class Number extends Expression {
     public double eval(String vars) {
         return value;
     }
+
 }

@@ -8,7 +8,8 @@ import java.io.OutputStream;
  */
 public class Main {
 
-    /** main metod.
+    /**
+     * main metod.
      *
      * @param argc argc)
      */
@@ -18,7 +19,7 @@ public class Main {
 
         OutputStream out = System.out;
         try {
-            exp.print(out);
+            exp.print();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -26,7 +27,7 @@ public class Main {
         System.out.println();
         Expression de = exp.derivative("x");
         try {
-            de.print(out);
+            de.print();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +44,7 @@ public class Main {
                 new Variable("x")));
 
         try {
-            f.print(out);
+            f.print();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +53,7 @@ public class Main {
 
         de = f.derivative("y");
         try {
-            de.print(out);
+            de.print();
         } catch (IOException e) {
             e.printStackTrace();
         }

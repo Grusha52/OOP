@@ -24,8 +24,8 @@ class Variable extends Expression {
      * printing our variable.
      */
     @Override
-    public void print(OutputStream stream) throws IOException {
-        stream.write(varname.getBytes(StandardCharsets.UTF_8));
+    public void print() throws IOException {
+        System.out.print(varname);
     }
 
     /**

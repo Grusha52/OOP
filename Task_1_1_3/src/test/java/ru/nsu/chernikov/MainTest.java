@@ -3,9 +3,11 @@ package ru.nsu.chernikov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
-import org.junit.jupiter.api.Test;
-import java.io.IOException;
 
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.io.PrintStream;
 
 
 /**
@@ -18,11 +20,14 @@ public class MainTest {
     }
 
     @Test
-    void printTest() {
+    void printTest() throws IOException {
+
+        PrintStream oldOutput = System.out;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out, false, "UTF-8"));
         Expression a = new Number(5);
         try {
-            a.print(out);
+            a.print();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,7 +36,7 @@ public class MainTest {
         Expression exp2 = new Sub(new Variable("y"), new Number(5));
 
         try {
-            exp2.print(out);
+            exp2.print();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,12 +45,13 @@ public class MainTest {
         Expression exp3 = new Div(new Add(new Number(10), new Variable("z")), new Number(2));
 
         try {
-            exp3.print(out);
+            exp3.print();
         } catch (IOException e) {
             e.printStackTrace();
         }
         assertEquals("((10+z)/2)", out.toString());
         out.reset();
+        System.setOut(oldOutput);
     }
 
     @Test

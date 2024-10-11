@@ -26,12 +26,12 @@ class Add extends Expression {
      * printing expression.
      */
     @Override
-    public void print(OutputStream stream) throws IOException {
-        stream.write("(".getBytes(StandardCharsets.UTF_8));
-        left.print(stream);
-        stream.write("+".getBytes(StandardCharsets.UTF_8));
-        right.print(stream);
-        stream.write(")".getBytes(StandardCharsets.UTF_8));
+    public void print() throws IOException {
+        System.out.print("(");
+        left.print();
+        System.out.print("+");
+        right.print();
+        System.out.print(")");
     }
 
     /**
