@@ -26,29 +26,18 @@ public class MainTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out, false, "UTF-8"));
         Expression a = new Number(5);
-        try {
-            a.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        a.print();
         assertEquals("5", out.toString());
         out.reset();
         Expression exp2 = new Sub(new Variable("y"), new Number(5));
 
-        try {
-            exp2.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        exp2.print();
+
         assertEquals("(y-5)", out.toString());
         out.reset();
         Expression exp3 = new Div(new Add(new Number(10), new Variable("z")), new Number(2));
 
-        try {
-            exp3.print();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        exp3.print();
         assertEquals("((10+z)/2)", out.toString());
         out.reset();
         System.setOut(oldOutput);
