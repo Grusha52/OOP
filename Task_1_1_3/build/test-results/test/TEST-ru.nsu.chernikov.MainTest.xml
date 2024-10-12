@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.nsu.chernikov.MainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-10-11T07:00:11" hostname="MacBook-Air-Anatolij.local" time="0.018">
+<testsuite name="ru.nsu.chernikov.MainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-10-12T07:20:40" hostname="MacBook-Air-Anatolij.local" time="0.019">
   <properties/>
-  <testcase name="printTest()" classname="ru.nsu.chernikov.MainTest" time="0.011"/>
-  <testcase name="mainTest()" classname="ru.nsu.chernikov.MainTest" time="0.005"/>
-  <testcase name="evalTest()" classname="ru.nsu.chernikov.MainTest" time="0.0"/>
+  <testcase name="printTest()" classname="ru.nsu.chernikov.MainTest" time="0.012"/>
+  <testcase name="mainTest()" classname="ru.nsu.chernikov.MainTest" time="0.004"/>
+  <testcase name="evalTest()" classname="ru.nsu.chernikov.MainTest" time="0.001"/>
   <system-out><![CDATA[(3+(2*x))
 (0+((0*x)+(2*1)))
 Error, there's no matchable variables
-3.0
+Illegal argument
 (y-(2/x))
 (1-(((0*x)-(2*0))/(x*x)))
 Arithmetic exception

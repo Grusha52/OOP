@@ -50,6 +50,8 @@ public class MainTest {
             assertEquals(5, a.eval("x = 23"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
+        }catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
 
         Expression exp1 = new Div(new Variable("y"), new Number(0));
@@ -57,6 +59,8 @@ public class MainTest {
             assertEquals(5, exp1.eval("y = 5; x = 1243"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
+        }catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
 
         Expression exp2 = new Sub(new Variable("y"), new Number(5));
@@ -64,6 +68,8 @@ public class MainTest {
             assertEquals(0, exp2.eval("y = 5; x = 1243"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
+        }catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
 
         Expression exp3 = new Div(new Add(new Number(10), new Variable("z")), new Number(2));
@@ -71,6 +77,8 @@ public class MainTest {
             assertEquals(15, exp3.eval("y = 5; x = 1243; z = 20"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
+        }catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
 
     }

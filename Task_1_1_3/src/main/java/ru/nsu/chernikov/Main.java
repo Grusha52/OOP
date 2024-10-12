@@ -29,6 +29,8 @@ public class Main {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
+        }catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
 
         Expression f = new Sub(new Variable("y"), new Div(new Number(2),
@@ -46,6 +48,8 @@ public class Main {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
+        } catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
     }
 }

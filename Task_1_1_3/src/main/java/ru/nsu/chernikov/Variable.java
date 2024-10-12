@@ -50,7 +50,7 @@ class Variable extends Expression {
      * @return evaluates the expression
      */
     @Override
-    public double eval(String vars) {
+    public double eval(String vars) throws IllegalArgumentException{
         String[] var;
         String[] variab;
 
@@ -64,7 +64,7 @@ class Variable extends Expression {
             }
         }
         System.out.println("Error, there's no matchable variables");
-        return 0;
+        throw new IllegalArgumentException();
     }
 
 }
