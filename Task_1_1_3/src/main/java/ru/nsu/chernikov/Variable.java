@@ -50,7 +50,7 @@ class Variable extends Expression {
      * @return evaluates the expression
      */
     @Override
-    public double eval(String vars) throws IllegalArgumentException{
+    public double eval(String vars) throws IllegalArgumentException {
         String[] var;
         String[] variab;
 

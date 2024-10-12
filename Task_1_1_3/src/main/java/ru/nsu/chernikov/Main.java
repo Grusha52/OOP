@@ -29,7 +29,7 @@ public class Main {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
 
@@ -48,7 +48,7 @@ public class Main {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Arithmetic exception");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
     }

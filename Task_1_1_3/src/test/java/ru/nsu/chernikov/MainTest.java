@@ -50,7 +50,7 @@ public class MainTest {
             assertEquals(5, a.eval("x = 23"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
 
@@ -59,7 +59,7 @@ public class MainTest {
             assertEquals(5, exp1.eval("y = 5; x = 1243"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
 
@@ -68,7 +68,7 @@ public class MainTest {
             assertEquals(0, exp2.eval("y = 5; x = 1243"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
 
@@ -77,7 +77,7 @@ public class MainTest {
             assertEquals(15, exp3.eval("y = 5; x = 1243; z = 20"));
         } catch (ArithmeticException e) {
             System.out.println("Division by zero");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
 
