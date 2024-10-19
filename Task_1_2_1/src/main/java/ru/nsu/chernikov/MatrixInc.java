@@ -2,6 +2,8 @@ package ru.nsu.chernikov;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class MatrixInc<T,F extends Number> implements Graph<T,F>{
     ArrayList<ArrayList<Integer>> matrix;
@@ -49,6 +51,11 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
 
         for (ArrayList<Integer> vertex : matrix) {
             vertex.add(0);
+        }
+
+        if (Objects.equals(start,end)){
+            matrix.get(stid).set(edgeid, 2);
+            return;
         }
 
         matrix.get(stid).set(edgeid, 1);
@@ -117,6 +124,19 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
 
     @Override
     public void read() {
+        Scanner scanner = new Scanner("file.txt");
+
+        String curr = scanner.nextLine();
+        curr = curr.replace("\n","");
+        String[] cur = curr.split(" ");
+
+
+        while(scanner.hasNext()) {
+            String curr1 = scanner.nextLine();
+            curr1 = curr1.replace("\n","");
+            String[] curr2 = curr.split(" ");
+
+        }
 
     }
 
