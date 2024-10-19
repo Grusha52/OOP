@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"ru.nsu.chernikov","l":"AdjList"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.chernikov","l":"Edge"},{"p":"ru.nsu.chernikov","l":"Graph"},{"p":"ru.nsu.chernikov","l":"Main"},{"p":"ru.nsu.chernikov","l":"Matrix"},{"p":"ru.nsu.chernikov","l":"MatrixInc"},{"p":"ru.nsu.chernikov","l":"Vertex"}]
