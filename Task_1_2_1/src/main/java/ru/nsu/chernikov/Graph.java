@@ -1,5 +1,6 @@
 package ru.nsu.chernikov;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,6 +15,5 @@ public interface Graph<T,F extends Number> {
 
     void delVertice(Vertex<T> vertice) throws IllegalArgumentException;
 
-    void read();
-
+    void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException;
 }

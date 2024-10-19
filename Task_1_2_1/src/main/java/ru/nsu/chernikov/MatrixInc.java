@@ -1,5 +1,7 @@
 package ru.nsu.chernikov;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -24,7 +26,7 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
             throw new IllegalArgumentException("Vertex already exists");
         }
         vertices.add(vertice);
-        int size = matrix.size();
+
         ArrayList<Integer> vertex = new ArrayList<>();
         for (int i = 0; i < edges.size(); i++) {
             vertex.add(0);
@@ -123,22 +125,32 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
     }
 
     @Override
-    public void read() {
-        Scanner scanner = new Scanner("file.txt");
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("file.txt"));
 
-        String curr = scanner.nextLine();
+        String curr = scanner.nextLine().trim();
         curr = curr.replace("\n","");
         String[] cur = curr.split(" ");
 
-
-        while(scanner.hasNext()) {
-            String curr1 = scanner.nextLine();
-            curr1 = curr1.replace("\n","");
-            String[] curr2 = curr.split(" ");
-
+        for (String i : cur){
+            Vertex<T> vertex = new Vertex<>(vertexTransformer.transform(i));
+            addVertice(vertex);
         }
 
+        while(scanner.hasNext()) {
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty()) continue;
+
+            String[] edgeData = line.split(" ");
+            if (edgeData.length != 3) {
+                throw new IllegalArgumentException("Неверный формат строки: " + line);
+            }
+
+            Vertex<T> start = new Vertex<>(vertexTransformer.transform(edgeData[0]));
+            Vertex<T> end = new Vertex<>(vertexTransformer.transform(edgeData[1]));
+            Edge<F> edge = new Edge<>(edgeTransformer.transform(edgeData[2]));
+
+            addEdge(start, end, edge);
+        }
     }
-
-
 }

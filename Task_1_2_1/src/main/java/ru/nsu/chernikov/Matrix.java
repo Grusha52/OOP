@@ -1,19 +1,30 @@
 package ru.nsu.chernikov;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Matrix<T,F extends Number> implements Graph<T,F> {
 
     private ArrayList<ArrayList<Edge<F>>> matrix;
     private ArrayList<Vertex<T>> vertices;
+    private Transformer<T> vertexTransformer;
+    private Transformer<F> weightTransformer;
 
-    public Matrix()
-
-    {
+    public Matrix() {
         this.matrix = new ArrayList<>();
         this.vertices = new ArrayList<>();
     }
+
+    public Matrix(Transformer<T> vertexTransformer, Transformer<F> weightTransformer) {
+        this.matrix = new ArrayList<>();
+        this.vertices = new ArrayList<>();
+        this.vertexTransformer = vertexTransformer;
+        this.weightTransformer = weightTransformer;
+    }
+
 
     @Override
     public void addVertice(Vertex<T> vertice) {
@@ -101,25 +112,32 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
     }
 
     @Override
-    public void read() {
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("file.txt"));
 
-    }
+        String curr = scanner.nextLine().trim();
+        curr = curr.replace("\n", "");
+        String[] cur = curr.split(" ");
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("   ");
-        for (Vertex<T> vertex : vertices){
-            stringBuilder.append(vertex.toString()).append(" ");
+        for (String i : cur) {
+            Vertex<T> vertex = new Vertex<>(vertexTransformer.transform(i));
+            addVertice(vertex);
         }
-        stringBuilder.append("\n");
-        for (int i = 0; i < matrix.size(); i++){
-            stringBuilder.append(vertices.get(i).toString()).append(": ");
-            for (int j = 0; j < matrix.size(); j++) {
-                stringBuilder.append(matrix.get(i).get(j)).append(" ");
+
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty()) continue;
+
+            String[] edgeData = line.split(" ");
+            if (edgeData.length != 3) {
+                throw new IllegalArgumentException("Неверный формат строки: " + line);
             }
-            stringBuilder.append("\n");
+
+            Vertex<T> start = new Vertex<>(vertexTransformer.transform(edgeData[0]));
+            Vertex<T> end = new Vertex<>(vertexTransformer.transform(edgeData[1]));
+            Edge<F> edge = new Edge<>(edgeTransformer.transform(edgeData[2]));
+
+            addEdge(start, end, edge);
         }
-        return stringBuilder.toString();
     }
 }

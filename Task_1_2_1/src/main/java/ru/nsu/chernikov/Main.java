@@ -1,25 +1,37 @@
 package ru.nsu.chernikov;
+import java.io.FileNotFoundException;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello");
-
         // Создаем граф
-        MatrixInc<String,Integer> graph = new MatrixInc<>();
+        MatrixInc<String, Integer> graph = new MatrixInc<>();
 
-        // Создаем вершины и сохраняем ссылки на них
-        Vertex<String> v1 = new Vertex<>("first");
-        Vertex<String> v2 = new Vertex<>("second");
-        Vertex<String> v3 = new Vertex<>("third");
+        try {
+            // Чтение графа из файла
+            graph.read(new Transformer<String>() {
+                @Override
+                public String transform(String str) {
+                    return str;
+                }
+            }, new Transformer<Integer>() {
+                @Override
+                public Integer transform(String str) {
+                    return Integer.parseInt(str);
+                }
+            });
+        } catch (FileNotFoundException e) {
+            System.err.println("Файл не найден: " + e.getMessage());
+        }
 
-        // Добавляем вершины в граф
-        graph.addVertice(v1);
-        graph.addVertice(v2);
-        graph.addVertice(v3);
+        // Дополнительные операции с графом
+        System.out.println("Вершины графа:");
+        for (Vertex<String> vertex : graph.vertices) {
+            System.out.println(vertex);
+        }
 
-        // Добавляем ребро между существующими вершинами
-        graph.addEdge(v1, v2, new Edge<Integer>(25));
-
-        // Получаем и выводим соседей для первой вершины
-        System.out.println("Neighbors of 'first': " + graph.getAdj(v1));
+        System.out.println("\nРёбра графа:");
+        for (Edge<Integer> edge : graph.edges) {
+            System.out.println(edge);
+        }
     }
-}
+    }
