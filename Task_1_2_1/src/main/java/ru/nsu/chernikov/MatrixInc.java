@@ -89,12 +89,17 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
     public HashMap<Vertex<T>, Edge<F>> getAdj(Vertex<T> vertice){
         HashMap<Vertex<T>, Edge<F>> adj = new HashMap<>();
         int vertex = vertices.indexOf(vertice);
+
+        if(vertex == -1){
+            throw new IllegalArgumentException("Vertex not found");
+        }
+
         for (int j = 0; j < edges.size(); j++){
             if(matrix.get(vertex).get(j) == 1){
-                for (ArrayList<Integer> row : matrix){
-                    if (row.get(j) == -1){
+                for (int k = 0; k < matrix.size(); k++){
+                    if (matrix.get(k).get(j) == -1){
 
-                        adj.put(vertices.get(row.indexOf(j)), edges.get(j));
+                        adj.put(vertices.get(k), edges.get(j));
 
                     }
                 }
@@ -105,12 +110,14 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
 
     @Override
     public void delVertice(Vertex<T> vertice) throws IllegalArgumentException {
+
         if (!vertices.contains(vertice)){
             throw new IllegalArgumentException("Vertex does not exists");
         }
 
         int vertex = vertices.indexOf(vertice);
         vertices.remove(vertice);
+
 
         for (int j = edges.size() - 1; j >= 0; j--){
             if (matrix.get(vertex).get(j) == 1 || matrix.get(vertex).get(j) == -1){
@@ -152,5 +159,14 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
 
             addEdge(start, end, edge);
         }
+    }
+    @Override
+    public ArrayList<Vertex<T>> getVertices(){
+        return vertices;
+    }
+
+    @Override
+    public ArrayList<Edge<F>> getEdges() {
+        return edges;
     }
 }

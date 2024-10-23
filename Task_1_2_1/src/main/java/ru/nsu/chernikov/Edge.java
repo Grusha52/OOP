@@ -24,9 +24,4 @@ public class Edge<T extends Number> {
         if (!(o instanceof Edge<?> edge)) return false;
         return Objects.equals(value, edge.value);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(value);
-    }
 }

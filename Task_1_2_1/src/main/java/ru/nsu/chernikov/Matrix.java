@@ -6,25 +6,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Matrix<T,F extends Number> implements Graph<T,F> {
+public class Matrix<T, F extends Number> implements Graph<T, F> {
 
     private ArrayList<ArrayList<Edge<F>>> matrix;
     private ArrayList<Vertex<T>> vertices;
-    private Transformer<T> vertexTransformer;
-    private Transformer<F> weightTransformer;
+    private ArrayList<Edge<F>> edges;
 
     public Matrix() {
         this.matrix = new ArrayList<>();
         this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
     }
-
-    public Matrix(Transformer<T> vertexTransformer, Transformer<F> weightTransformer) {
-        this.matrix = new ArrayList<>();
-        this.vertices = new ArrayList<>();
-        this.vertexTransformer = vertexTransformer;
-        this.weightTransformer = weightTransformer;
-    }
-
 
     @Override
     public void addVertice(Vertex<T> vertice) {
@@ -52,17 +44,28 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
     @Override
     public void delVertice(Vertex<T> vertice) throws IllegalArgumentException {
         int index = vertices.indexOf(vertice);
+        vertices.remove(vertice);
 
         if (index == -1) {
             throw new IllegalArgumentException();
         }
 
         if (index < matrix.size()) {
+
+            for (Edge<F> edge: matrix.get(index)){
+                if(edge != null){
+                    edges.remove(edge);
+                }
+            }
             matrix.remove(index);
+
         } else {
             throw new IllegalArgumentException();
         }
+
         for (ArrayList<Edge<F>> row : matrix) {
+
+            edges.remove(row.get(index));
             row.remove(index);
         }
 
@@ -70,11 +73,12 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
 
     @Override
     public void addEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
+
+        edges.add(edge);
         int startIndx = vertices.indexOf(start);
         int endIndx = vertices.indexOf(end);
         if (startIndx < matrix.size() && endIndx < matrix.size()) {
             matrix.get(startIndx).set(endIndx, edge);
-            matrix.get(endIndx).set(startIndx, edge);
         } else {
             System.out.println("One of vertices does not exist");
             throw new IllegalArgumentException();
@@ -83,6 +87,8 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
 
     @Override
     public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
+
+        edges.remove(edge);
         int startIndx = vertices.indexOf(start);
         int endIndx = vertices.indexOf(end);
         if (startIndx < matrix.size() && endIndx < matrix.size()) {
@@ -92,10 +98,12 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
             System.out.println("One of vertices does not exist");
             throw new IllegalArgumentException();
         }
+
     }
 
     @Override
     public HashMap<Vertex<T>, Edge<F>> getAdj(Vertex<T> vertice) {
+
         int index = vertices.indexOf(vertice);
 
         if (index == -1) {
@@ -120,8 +128,10 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
         String[] cur = curr.split(" ");
 
         for (String i : cur) {
+
             Vertex<T> vertex = new Vertex<>(vertexTransformer.transform(i));
             addVertice(vertex);
+
         }
 
         while (scanner.hasNext()) {
@@ -140,4 +150,16 @@ public class Matrix<T,F extends Number> implements Graph<T,F> {
             addEdge(start, end, edge);
         }
     }
+
+    @Override
+    public ArrayList<Vertex<T>> getVertices() {
+        return vertices;
+    }
+
+    @Override
+    public ArrayList<Edge<F>> getEdges() {
+        return edges;
+    }
+
+
 }

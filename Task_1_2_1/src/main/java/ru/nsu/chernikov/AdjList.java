@@ -9,53 +9,79 @@ import java.util.Scanner;
 public class AdjList<T,F extends Number> implements Graph<T,F>{
 
     private HashMap<Vertex<T>, HashMap<Vertex<T>,Edge<F>>> adjList;
+    private ArrayList<Vertex<T>> vertices;
+    private ArrayList<Edge<F>> edges;
 
     public AdjList() {
-        adjList = new HashMap<>();
+        this.adjList = new HashMap<>();
+        this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
     }
 
     @Override
     public void addVertice(Vertex<T> vertice) {
-        adjList.putIfAbsent(vertice,new HashMap<>());
-
+        vertices.add(vertice);
     }
 
     @Override
     public void addEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) {
-        if (!adjList.containsKey(start) || !adjList.get(start).containsKey(end)){
+
+        edges.add(edge);
+
+        if (!vertices.contains(start) || !vertices.contains(end)) {
             throw new IllegalArgumentException("One of vertices does not exist");
         }
-        adjList.putIfAbsent(start, new HashMap<>());
-        adjList.putIfAbsent(end, new HashMap<>());
-        adjList.get(start).put(end, edge);
+        HashMap<Vertex<T>, Edge<F>> neighbor = new HashMap<>();
+        neighbor.put(end, edge);
+        adjList.putIfAbsent(start, neighbor);
     }
 
     @Override
     public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
 
         if (adjList.get(start).isEmpty()){
-            throw new IllegalArgumentException("Vertice hasnt edges");
+            throw new IllegalArgumentException("Vertex haven't edges");
         }
-        if (!adjList.containsKey(start) || !adjList.get(start).containsKey(end)){
+        if (!vertices.contains(start) || !vertices.contains(end)) {
             throw new IllegalArgumentException("One of vertices does not exist");
         }
 
         adjList.get(start).remove(end);
+        edges.remove(edge);
 
     }
 
     @Override
     public HashMap<Vertex<T>, Edge<F>> getAdj(Vertex<T> vertice) {
-        if (!adjList.containsKey(vertice)){
-            throw new IllegalArgumentException("Vertice does not exist");
+        if (!vertices.contains(vertice)) {
+            throw new IllegalArgumentException("One of vertices does not exist");
         }
-        return new HashMap<>(adjList.get(vertice));
+        if(adjList.get(vertice) == null){
+            return new HashMap<>();
+        } else {
+            return new HashMap<>(adjList.get(vertice));
+        }
     }
 
     @Override
     public void delVertice(Vertex<T> vertice) throws IllegalArgumentException {
+        if (!adjList.containsKey(vertice)) {
+            throw new IllegalArgumentException("Vertex does not exist");
+        }
 
-
+        // Удаление рёбер, которые связаны с удаленной вершиной
+        for (Edge<F> edge : adjList.get(vertice).values()) {
+            edges.remove(edge);
+        }
+        for (Vertex<T> vertex : adjList.keySet()){
+            if (adjList.get(vertex).containsKey(vertice)) {
+                F edge = adjList.get(vertex).get(vertice).getValue();
+                edges.remove(new Edge<>(edge));
+            }
+            adjList.get(vertex).remove(vertice);
+        }
+        adjList.remove(vertice);
+        vertices.remove(vertice);
     }
 
     @Override
@@ -87,4 +113,17 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
             addEdge(start, end, edge);
         }
     }
+    @Override
+    public ArrayList<Vertex<T>> getVertices(){
+        return vertices;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public ArrayList<Edge<F>> getEdges() {
+       return edges;
+    }
+
 }

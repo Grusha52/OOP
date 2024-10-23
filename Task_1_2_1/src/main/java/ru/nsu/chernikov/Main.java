@@ -1,10 +1,12 @@
 package ru.nsu.chernikov;
+
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // Создаем граф
-        MatrixInc<String, Integer> graph = new MatrixInc<>();
+        Matrix<String, Integer> graph = new Matrix<>();
 
         try {
             // Чтение графа из файла
@@ -25,13 +27,16 @@ public class Main {
 
         // Дополнительные операции с графом
         System.out.println("Вершины графа:");
-        for (Vertex<String> vertex : graph.vertices) {
+        for (Vertex<String> vertex : graph.getVertices()) {
             System.out.println(vertex);
         }
 
         System.out.println("\nРёбра графа:");
-        for (Edge<Integer> edge : graph.edges) {
+        for (Edge<Integer> edge : graph.getEdges()) {
             System.out.println(edge);
         }
+
+        List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
+        System.out.println(result);
     }
-    }
+}

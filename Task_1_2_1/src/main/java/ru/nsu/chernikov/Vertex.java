@@ -9,10 +9,6 @@ public class Vertex<T> {
         this.name = name;
     }
 
-    public T getName(){
-        return name;
-    }
-
     @Override
     public String toString() {
         return name.toString();
@@ -23,5 +19,10 @@ public class Vertex<T> {
         if (this == o) return true;
         if (!(o instanceof Vertex<?> vertex)) return false;
         return Objects.equals(name, vertex.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 }
