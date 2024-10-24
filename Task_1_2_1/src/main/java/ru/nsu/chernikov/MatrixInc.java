@@ -18,6 +18,9 @@ public class MatrixInc<T, F extends Number> implements Graph<T, F> {
     ArrayList<Vertex<T>> vertices;
     ArrayList<Edge<F>> edges;
 
+    /**
+     * MatrixInc costr.
+     */
     public MatrixInc() {
         this.matrix = new ArrayList<>();
         this.vertices = new ArrayList<>();

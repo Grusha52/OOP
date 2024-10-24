@@ -15,7 +15,8 @@ public class Toposort {
 
     // Вспомогательный метод для выполнения DFS с покраской вершин
     private static <T, F extends Number> boolean dfs(
-            Vertex<T> vertex, Map<Vertex<T>, String> colors, Deque<Vertex<T>> stack, Graph<T, F> graph) {
+            Vertex<T> vertex, Map<Vertex<T>, String> colors,
+            Deque<Vertex<T>> stack, Graph<T, F> graph) {
 
         colors.put(vertex, "GRAY"); // Вершина начинает обрабатываться (становится серой)
 
@@ -54,8 +55,9 @@ public class Toposort {
         for (Vertex<T> vertex : graph.getVertices()) {
             if (colors.get(vertex).equals("WHITE")) {
                 if (!dfs(vertex, colors, stack, graph)) {
-                    throw new IllegalArgumentException
-                            ("Graph has a cycle, topological sort not possible");
+                    throw new IllegalArgumentException(
+                            "Graph has a cycle, topological sort not possible"
+                    );
                 }
             }
         }
