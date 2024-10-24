@@ -4,7 +4,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public interface Graph<T,F extends Number> {
+/**
+ * Graph interface.
+ *
+ * @param <T> parameter of Vertex
+ * @param <F> parameter of Edge
+ */
+public interface Graph<T, F extends Number> {
 
     void addVertice(Vertex<T> vertice);
 
@@ -16,7 +22,8 @@ public interface Graph<T,F extends Number> {
 
     void delVertice(Vertex<T> vertice) throws IllegalArgumentException;
 
-    void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException;
+    void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer)
+            throws FileNotFoundException;
 
     ArrayList<Vertex<T>> getVertices();
 

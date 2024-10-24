@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class MatrixInc<T,F extends Number> implements Graph<T,F>{
+public class MatrixInc<T, F extends Number> implements Graph<T, F> {
     ArrayList<ArrayList<Integer>> matrix;
     ArrayList<Vertex<T>> vertices;
     ArrayList<Edge<F>> edges;
 
-    public MatrixInc(){
+    public MatrixInc() {
         this.matrix = new ArrayList<>();
         this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
@@ -49,13 +49,14 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
 
         int edgeid = edges.indexOf(edge);
         int stid = vertices.indexOf(start);
-        int endid = vertices.indexOf(end);
 
         for (ArrayList<Integer> vertex : matrix) {
             vertex.add(0);
         }
 
-        if (Objects.equals(start,end)){
+        int endid = vertices.indexOf(end);
+
+        if (Objects.equals(start, end)) {
             matrix.get(stid).set(edgeid, 2);
             return;
         }
@@ -66,38 +67,40 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
     }
 
     @Override
-    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
-        if (matrix.isEmpty()){
+    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge)
+            throws IllegalArgumentException {
+
+        if (matrix.isEmpty()) {
             throw new IllegalArgumentException("Empty matrix");
         }
         if (!vertices.contains(start) || !vertices.contains(end)) {
             throw new IllegalArgumentException("One of vertices does not exist");
         }
-        if (!edges.contains(edge)){
+        if (!edges.contains(edge)) {
             throw new IllegalArgumentException("Edge does not exist");
         }
 
         int edgeid = edges.indexOf(edge);
         edges.remove(edge);
 
-        for (ArrayList<Integer> vertex : matrix){
+        for (ArrayList<Integer> vertex : matrix) {
             vertex.remove(edgeid);
         }
     }
 
     @Override
-    public HashMap<Vertex<T>, Edge<F>> getAdj(Vertex<T> vertice){
+    public HashMap<Vertex<T>, Edge<F>> getAdj(Vertex<T> vertice) {
         HashMap<Vertex<T>, Edge<F>> adj = new HashMap<>();
         int vertex = vertices.indexOf(vertice);
 
-        if(vertex == -1){
+        if (vertex == -1) {
             throw new IllegalArgumentException("Vertex not found");
         }
 
-        for (int j = 0; j < edges.size(); j++){
-            if(matrix.get(vertex).get(j) == 1){
-                for (int k = 0; k < matrix.size(); k++){
-                    if (matrix.get(k).get(j) == -1){
+        for (int j = 0; j < edges.size(); j++) {
+            if (matrix.get(vertex).get(j) == 1) {
+                for (int k = 0; k < matrix.size(); k++) {
+                    if (matrix.get(k).get(j) == -1) {
 
                         adj.put(vertices.get(k), edges.get(j));
 
@@ -111,7 +114,7 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
     @Override
     public void delVertice(Vertex<T> vertice) throws IllegalArgumentException {
 
-        if (!vertices.contains(vertice)){
+        if (!vertices.contains(vertice)) {
             throw new IllegalArgumentException("Vertex does not exists");
         }
 
@@ -119,10 +122,10 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
         vertices.remove(vertice);
 
 
-        for (int j = edges.size() - 1; j >= 0; j--){
-            if (matrix.get(vertex).get(j) == 1 || matrix.get(vertex).get(j) == -1){
+        for (int j = edges.size() - 1; j >= 0; j--) {
+            if (matrix.get(vertex).get(j) == 1 || matrix.get(vertex).get(j) == -1) {
                 edges.remove(j);
-                for (ArrayList<Integer> row : matrix){
+                for (ArrayList<Integer> row : matrix) {
                     row.remove(j);
                 }
             }
@@ -136,15 +139,15 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
         Scanner scanner = new Scanner(new File("file.txt"));
 
         String curr = scanner.nextLine().trim();
-        curr = curr.replace("\n","");
+        curr = curr.replace("\n", "");
         String[] cur = curr.split(" ");
 
-        for (String i : cur){
+        for (String i : cur) {
             Vertex<T> vertex = new Vertex<>(vertexTransformer.transform(i));
             addVertice(vertex);
         }
 
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             String line = scanner.nextLine().trim();
             if (line.isEmpty()) continue;
 
@@ -160,8 +163,9 @@ public class MatrixInc<T,F extends Number> implements Graph<T,F>{
             addEdge(start, end, edge);
         }
     }
+
     @Override
-    public ArrayList<Vertex<T>> getVertices(){
+    public ArrayList<Vertex<T>> getVertices() {
         return vertices;
     }
 

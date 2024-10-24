@@ -2,6 +2,10 @@ package ru.nsu.chernikov;
 
 import java.util.Objects;
 
+/** Vertex class.
+ *
+ * @param <T> parameter of Vertex (extends Number)
+ */
 public class Vertex<T> {
     private T name;
 

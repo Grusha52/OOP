@@ -6,11 +6,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class AdjList<T,F extends Number> implements Graph<T,F>{
+/**
+ * Adjacency List.
+ *
+ * @param <T> parameter of Vertex
+ * @param <F> parameter of Edge
+ */
+public class AdjList<T, F extends Number> implements Graph<T, F> {
 
-    private HashMap<Vertex<T>, HashMap<Vertex<T>,Edge<F>>> adjList;
+    private HashMap<Vertex<T>, HashMap<Vertex<T>, Edge<F>>> adjList;
     private ArrayList<Vertex<T>> vertices;
     private ArrayList<Edge<F>> edges;
+
 
     public AdjList() {
         this.adjList = new HashMap<>();
@@ -37,9 +44,10 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
     }
 
     @Override
-    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
+    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge)
+            throws IllegalArgumentException {
 
-        if (adjList.get(start).isEmpty()){
+        if (adjList.get(start).isEmpty()) {
             throw new IllegalArgumentException("Vertex haven't edges");
         }
         if (!vertices.contains(start) || !vertices.contains(end)) {
@@ -56,7 +64,7 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
         if (!vertices.contains(vertice)) {
             throw new IllegalArgumentException("One of vertices does not exist");
         }
-        if(adjList.get(vertice) == null){
+        if (adjList.get(vertice) == null) {
             return new HashMap<>();
         } else {
             return new HashMap<>(adjList.get(vertice));
@@ -73,7 +81,7 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
         for (Edge<F> edge : adjList.get(vertice).values()) {
             edges.remove(edge);
         }
-        for (Vertex<T> vertex : adjList.keySet()){
+        for (Vertex<T> vertex : adjList.keySet()) {
             if (adjList.get(vertex).containsKey(vertice)) {
                 F edge = adjList.get(vertex).get(vertice).getValue();
                 edges.remove(new Edge<>(edge));
@@ -85,19 +93,20 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
     }
 
     @Override
-    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException {
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer)
+            throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("file.txt"));
 
         String curr = scanner.nextLine().trim();
-        curr = curr.replace("\n","");
+        curr = curr.replace("\n", "");
         String[] cur = curr.split(" ");
 
-        for (String i : cur){
+        for (String i : cur) {
             Vertex<T> vertex = new Vertex<>(vertexTransformer.transform(i));
             addVertice(vertex);
         }
 
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             String line = scanner.nextLine().trim();
             if (line.isEmpty()) continue;
 
@@ -113,17 +122,16 @@ public class AdjList<T,F extends Number> implements Graph<T,F>{
             addEdge(start, end, edge);
         }
     }
+
     @Override
-    public ArrayList<Vertex<T>> getVertices(){
-        return vertices;
+    public ArrayList<Vertex<T>> getVertices() {
+         return vertices;
     }
 
-    /**
-     * @return
-     */
+
     @Override
     public ArrayList<Edge<F>> getEdges() {
-       return edges;
+         return edges;
     }
 
 }

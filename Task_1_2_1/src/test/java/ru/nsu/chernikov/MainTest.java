@@ -1,18 +1,18 @@
 package ru.nsu.chernikov;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+
+
+/**
+ * Testing.
+ */
 public class MainTest {
-    @Test
-    void mainTest() {
-        Main.main(null);
-    }
 
     @Test
     void adjListTest() {

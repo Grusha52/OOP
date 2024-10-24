@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Adjacency Matrix.
+ *
+ * @param <T> parameter of Vertex (extends Number)
+ * @param <F> parameter of Edge
+ */
 public class Matrix<T, F extends Number> implements Graph<T, F> {
 
     private ArrayList<ArrayList<Edge<F>>> matrix;
@@ -52,8 +58,8 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
 
         if (index < matrix.size()) {
 
-            for (Edge<F> edge: matrix.get(index)){
-                if(edge != null){
+            for (Edge<F> edge : matrix.get(index)) {
+                if (edge != null) {
                     edges.remove(edge);
                 }
             }
@@ -72,7 +78,8 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
     }
 
     @Override
-    public void addEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
+    public void addEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge)
+            throws IllegalArgumentException {
 
         edges.add(edge);
         int startIndx = vertices.indexOf(start);
@@ -86,7 +93,8 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
     }
 
     @Override
-    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge) throws IllegalArgumentException {
+    public void delEdge(Vertex<T> start, Vertex<T> end, Edge<F> edge)
+            throws IllegalArgumentException {
 
         edges.remove(edge);
         int startIndx = vertices.indexOf(start);
@@ -120,7 +128,9 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
     }
 
     @Override
-    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException {
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer)
+            throws FileNotFoundException {
+
         Scanner scanner = new Scanner(new File("file.txt"));
 
         String curr = scanner.nextLine().trim();
@@ -136,7 +146,9 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine().trim();
-            if (line.isEmpty()) continue;
+            if (line.isEmpty()) {
+                continue;
+            }
 
             String[] edgeData = line.split(" ");
             if (edgeData.length != 3) {
