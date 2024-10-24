@@ -3,6 +3,12 @@ plugins {
     id 'jacoco'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // или другой номер версии
+    }
+}
+
 group = 'ru.nsu.chernikov'
 version = '1.0-SNAPSHOT'
 
@@ -14,6 +20,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
+
 
 test {
     useJUnitPlatform()
