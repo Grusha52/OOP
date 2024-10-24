@@ -18,7 +18,10 @@ public class AdjList<T, F extends Number> implements Graph<T, F> {
     private ArrayList<Vertex<T>> vertices;
     private ArrayList<Edge<F>> edges;
 
-
+    /**
+     * Constructor.
+     *
+     */
     public AdjList() {
         this.adjList = new HashMap<>();
         this.vertices = new ArrayList<>();
@@ -108,7 +111,9 @@ public class AdjList<T, F extends Number> implements Graph<T, F> {
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine().trim();
-            if (line.isEmpty()) continue;
+            if (line.isEmpty()) {
+                continue;
+            }
 
             String[] edgeData = line.split(" ");
             if (edgeData.length != 3) {

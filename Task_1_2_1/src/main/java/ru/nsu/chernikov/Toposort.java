@@ -1,7 +1,7 @@
 package ru.nsu.chernikov;
 
-import java.util.ArrayList;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +14,9 @@ public class Toposort {
 
 
     // Вспомогательный метод для выполнения DFS с покраской вершин
-    private static <T, F extends Number> boolean
-    dfs(Vertex<T> vertex, Map<Vertex<T>, String> colors, Deque<Vertex<T>> stack, Graph<T, F> graph
-    ) {
+    private static <T, F extends Number> boolean dfs(
+            Vertex<T> vertex, Map<Vertex<T>, String> colors, Deque<Vertex<T>> stack, Graph<T, F> graph) {
+
         colors.put(vertex, "GRAY"); // Вершина начинает обрабатываться (становится серой)
 
         // Обрабатываем всех соседей вершины
@@ -40,8 +40,8 @@ public class Toposort {
     }
 
     // Основной метод для топологической сортировки через DFS с покраской вершин
-    public static <T, F extends Number> List<Vertex<T>>
-    topologicalSortWithColoring(Graph<T, F> graph) {
+    public static <T, F extends Number> List<Vertex<T>> topologicalSortWithColoring(
+            Graph<T, F> graph) {
         // Карта для хранения цветов вершин (по умолчанию все белые)
         Map<Vertex<T>, String> colors = new HashMap<>();
         for (Vertex<T> vertex : graph.getVertices()) {
@@ -54,7 +54,8 @@ public class Toposort {
         for (Vertex<T> vertex : graph.getVertices()) {
             if (colors.get(vertex).equals("WHITE")) {
                 if (!dfs(vertex, colors, stack, graph)) {
-                    throw new IllegalArgumentException("Graph has a cycle, topological sort not possible");
+                    throw new IllegalArgumentException
+                            ("Graph has a cycle, topological sort not possible");
                 }
             }
         }

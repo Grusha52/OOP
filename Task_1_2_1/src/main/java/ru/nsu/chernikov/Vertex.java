@@ -20,8 +20,12 @@ public class Vertex<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vertex<?> vertex)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Vertex<?> vertex)) {
+            return false;
+        }
         return Objects.equals(name, vertex.name);
     }
 

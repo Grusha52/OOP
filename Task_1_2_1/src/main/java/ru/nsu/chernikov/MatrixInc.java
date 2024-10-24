@@ -7,6 +7,12 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Incidence Matrix.
+ *
+ * @param <T> parameter of Vertex (extends Number)
+ * @param <F> parameter of Edge
+ */
 public class MatrixInc<T, F extends Number> implements Graph<T, F> {
     ArrayList<ArrayList<Integer>> matrix;
     ArrayList<Vertex<T>> vertices;
@@ -149,7 +155,9 @@ public class MatrixInc<T, F extends Number> implements Graph<T, F> {
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine().trim();
-            if (line.isEmpty()) continue;
+            if (line.isEmpty()) {
+                continue;
+            }
 
             String[] edgeData = line.split(" ");
             if (edgeData.length != 3) {

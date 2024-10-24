@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Graph interface.
  *
- * @param <T> parameter of Vertex
+ * @param <T> parameter of Vertex (extends Number)
  * @param <F> parameter of Edge
  */
 public interface Graph<T, F extends Number> {
