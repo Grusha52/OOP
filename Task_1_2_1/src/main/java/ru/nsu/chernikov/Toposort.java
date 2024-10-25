@@ -22,7 +22,6 @@ public class Toposort {
 
         // Обрабатываем всех соседей вершины
         for (Vertex<T> neighbor : graph.getAdj(vertex).keySet()) {
-            //System.out.printf("\n[%s]", neighbor);
             String neighborColor = colors.get(neighbor);
             if (neighborColor.equals("WHITE")) {
                 // Если сосед белый, продолжаем DFS для него
@@ -42,7 +41,7 @@ public class Toposort {
 
     // Основной метод для топологической сортировки через DFS с покраской вершин
     public static <T, F extends Number> List<Vertex<T>> topologicalSortWithColoring(
-            Graph<T, F> graph) {
+            Graph<T, F> graph) throws IllegalArgumentException{
         // Карта для хранения цветов вершин (по умолчанию все белые)
         Map<Vertex<T>, String> colors = new HashMap<>();
         for (Vertex<T> vertex : graph.getVertices()) {

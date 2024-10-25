@@ -144,8 +144,8 @@ public class MatrixInc<T, F extends Number> implements Graph<T, F> {
     }
 
     @Override
-    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("file.txt"));
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer, String file) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(file));
 
         String curr = scanner.nextLine().trim();
         curr = curr.replace("\n", "");

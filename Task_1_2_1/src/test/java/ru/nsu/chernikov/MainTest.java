@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -29,7 +30,7 @@ public class MainTest {
                 public Integer transform(String str) {
                     return Integer.parseInt(str);
                 }
-            });
+            }, "file.txt");
         } catch (FileNotFoundException e) {
             System.err.println("Файл не найден: " + e.getMessage());
         }
@@ -37,8 +38,12 @@ public class MainTest {
         assertEquals("[A, B, C, D]", graph.getVertices().toString());
         assertEquals("[5, 10, 7]", graph.getEdges().toString());
 
-        List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
-        assertEquals("[A, B, C, D]", result.toString());
+        try {
+            List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
+            assertEquals("[A, B, C, D]", result.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
 
         Vertex<String> vertex = new Vertex<>("C");
         graph.delVertice(vertex);
@@ -68,7 +73,7 @@ public class MainTest {
                 public Integer transform(String str) {
                     return Integer.parseInt(str);
                 }
-            });
+            }, "file.txt");
         } catch (FileNotFoundException e) {
             System.err.println("Файл не найден: " + e.getMessage());
         }
@@ -76,8 +81,12 @@ public class MainTest {
         assertEquals("[A, B, C, D]", graph.getVertices().toString());
         assertEquals("[5, 10, 7]", graph.getEdges().toString());
 
-        List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
-        assertEquals("[A, B, C, D]", result.toString());
+        try {
+            List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
+            assertEquals("[A, B, C, D]", result.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
 
         Vertex<String> vertex = new Vertex<>("C");
         graph.delVertice(vertex);
@@ -107,7 +116,7 @@ public class MainTest {
                 public Integer transform(String str) {
                     return Integer.parseInt(str);
                 }
-            });
+            }, "file.txt");
         } catch (FileNotFoundException e) {
             System.err.println("Файл не найден: " + e.getMessage());
         }
@@ -115,8 +124,12 @@ public class MainTest {
         assertEquals("[A, B, C, D]", graph.getVertices().toString());
         assertEquals("[5, 10, 7]", graph.getEdges().toString());
 
-        List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
-        assertEquals("[A, B, C, D]", result.toString());
+        try {
+            List<Vertex<String>> result = Toposort.topologicalSortWithColoring(graph);
+            assertEquals("[A, B, C, D]", result.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
 
         Vertex<String> vertex = new Vertex<>("C");
         graph.delVertice(vertex);

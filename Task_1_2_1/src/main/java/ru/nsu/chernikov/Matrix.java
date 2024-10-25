@@ -49,6 +49,9 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
 
     @Override
     public void delVertice(Vertex<T> vertice) throws IllegalArgumentException {
+        if (vertice == null){
+            throw new IllegalArgumentException();
+        }
         int index = vertices.indexOf(vertice);
         vertices.remove(vertice);
 
@@ -128,10 +131,10 @@ public class Matrix<T, F extends Number> implements Graph<T, F> {
     }
 
     @Override
-    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer)
+    public void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer, String file)
             throws FileNotFoundException {
 
-        Scanner scanner = new Scanner(new File("file.txt"));
+        Scanner scanner = new Scanner(new File(file));
 
         String curr = scanner.nextLine().trim();
         curr = curr.replace("\n", "");

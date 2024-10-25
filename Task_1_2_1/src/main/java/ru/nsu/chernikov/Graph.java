@@ -22,7 +22,7 @@ public interface Graph<T, F extends Number> {
 
     void delVertice(Vertex<T> vertice) throws IllegalArgumentException;
 
-    void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer)
+    void read(Transformer<T> vertexTransformer, Transformer<F> edgeTransformer, String file)
             throws FileNotFoundException;
 
     ArrayList<Vertex<T>> getVertices();
