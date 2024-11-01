@@ -3,9 +3,9 @@ package ru.nsu.chernikov;
 
 import java.util.*;
 
-public class HashTable<K, V> {
+public class HashTable<K, V> implements Iterable<Entry<K, V>> {
 
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; //16))
+    static final int DEFAULT_INITIAL_CAPACITY = 16; //16))
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     private LinkedList<Entry<K, V>>[] hashtable;
@@ -106,15 +106,56 @@ public class HashTable<K, V> {
 
     public Iterator<Entry<K, V>> iterator() {
         return new Iterator<>() {
-            
+            private int expectedModCount = modCount;
+            private int indexBucket;
+            private Iterator<Entry<K, V>> bucketIterator = hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
+
+            public boolean hasNext() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+                while ((bucketIterator == null || !bucketIterator.hasNext()) && indexBucket < hashtable.length - 1) {
+                    indexBucket++;
+                    bucketIterator = hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
+                }
+                return bucketIterator != null && bucketIterator.hasNext();
+            }
+
+            public Entry<K, V> next() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return bucketIterator.next();
+            }
+
+
         };
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HashTable<?, ?> hashTable)) return false;
-        return size == hashTable.size && modCount == hashTable.modCount && Objects.deepEquals(hashtable, hashTable.hashtable);
+        HashTable<K, V> table = (HashTable<K, V>) o;
+        if(getClass() != o.getClass() || o == null || size != table.size()) {
+            return false;
+        }
+
+
+
+        for (int i = 0; i < hashtable.length; i++){
+            LinkedList<Entry<K, V>> bucket = hashtable[i];
+            if (bucket != null) {
+                for (Entry<K, V> entry : bucket){
+                    if (!entry.value.equals(table.get(entry.key))) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -140,9 +181,9 @@ public class HashTable<K, V> {
         hashtable = new LinkedList[old.length * 2];
         size = 0;
 
-        for (LinkedList<Entry<K, V>> bucket : old){
-            if (bucket != null){
-                for (Entry<K, V> entry : bucket){
+        for (LinkedList<Entry<K, V>> bucket : old) {
+            if (bucket != null) {
+                for (Entry<K, V> entry : bucket) {
                     put(entry.key, entry.value);
                 }
             }

@@ -1,5 +1,6 @@
 package ru.nsu.chernikov;
 
+
 public class Entry<K, V> {
     K key;
     V value;
@@ -8,5 +9,4 @@ public class Entry<K, V> {
         this.key = key;
         this.value = value;
     }
-
 }
