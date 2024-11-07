@@ -51,5 +51,6 @@ public class HashTest {
         } catch (ConcurrentModificationException e) {
             System.out.println("Concurrent modification");
         }
+        ages.resize();
     }
 }
