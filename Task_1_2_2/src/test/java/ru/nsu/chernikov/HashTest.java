@@ -1,11 +1,14 @@
 package ru.nsu.chernikov;
 
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class HashTest {
     @Test
@@ -46,7 +49,7 @@ public class HashTest {
                 ages.put("Andrew", 26);
             }
         } catch (ConcurrentModificationException e) {
-            System.out.println("Concurrent modification: " + e.getMessage());
+            System.out.println("Concurrent modification");
         }
     }
 }

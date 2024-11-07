@@ -1,7 +1,11 @@
 package ru.nsu.chernikov;
 
 
-import java.util.*;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+
 
 /**
  * Iterable Hashtable.
@@ -103,6 +107,12 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
 
     }
 
+    /**
+     * updating the value of the key.
+     *
+     * @param key   key)
+     * @param value value)
+     */
     public void update(K key, V value) {
         int index = hash(key);
         if (hashtable[index] == null) {
@@ -130,17 +140,26 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         return false;
     }
 
+    /**
+     * Iterator for hashtable, to iterate our hashtable.
+     *
+     * @return iterator of hastable.
+     */
     public Iterator<Entry<K, V>> iterator() {
         return new Iterator<>() {
             private int expectedModCount = modCount;
             private int indexBucket;
-            private Iterator<Entry<K, V>> bucketIterator = hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
+            private Iterator<Entry<K, V>> bucketIterator =
+                    hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
 
             public boolean hasNext() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
-                while ((bucketIterator == null || !bucketIterator.hasNext()) && indexBucket < hashtable.length - 1) {
+                while ((bucketIterator == null || !bucketIterator.hasNext())
+                        &&
+                        indexBucket < hashtable.length - 1) {
+
                     indexBucket++;
                     bucketIterator = hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
                 }
@@ -161,9 +180,17 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         };
     }
 
+    /**
+     * Equals for hashtables.
+     *
+     * @param o object
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         HashTable<K, V> table = (HashTable<K, V>) o;
         if (getClass() != o.getClass() || o == null || size != table.size()) {
             return false;
@@ -214,6 +241,11 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
     }
 
+    /**
+     * size of hashtable.
+     *
+     * @return
+     */
     public int size() {
         return size;
     }

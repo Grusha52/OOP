@@ -1,6 +1,11 @@
 package ru.nsu.chernikov;
 
-
+/**
+ * Node in a Linked List.
+ *
+ * @param <K> key
+ * @param <V> value
+ */
 public class Entry<K, V> {
     K key;
     V value;
