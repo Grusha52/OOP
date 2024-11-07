@@ -2,6 +2,7 @@ package ru.nsu.chernikov;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +22,6 @@ public class HashTest {
         ages.remove("Ildar",19);
         assertEquals("{Kolya=145, Bogdan=15, Kirill=1234567890, Grisha=23}", ages.toString());
 
-        Iterator<Entry<String, Integer>> tableIterator = ages.iterator();
-
-        while(tableIterator.hasNext()){
-            tableIterator.next();
-        }
-
         assertTrue(ages.containsKey("Bogdan"));
         assertFalse(ages.containsKey("Ildar"));
 
@@ -43,8 +38,15 @@ public class HashTest {
 
         assertEquals(ages, ages2);
 
+        try {
 
-
-
+            Iterator<Entry<String, Integer>> tableIterator = ages.iterator();
+            while (tableIterator.hasNext()) {
+                tableIterator.next();
+                ages.put("Andrew", 26);
+            }
+        } catch (ConcurrentModificationException e){
+            System.out.println("Concurrent modification: " + e.getMessage());
+        }
     }
 }

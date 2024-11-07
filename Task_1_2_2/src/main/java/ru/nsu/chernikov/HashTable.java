@@ -73,7 +73,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 return entry.value;
             }
         }
-        return null;
+        throw new NoSuchElementException();
 
     }
 
@@ -142,8 +142,6 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         if(getClass() != o.getClass() || o == null || size != table.size()) {
             return false;
         }
-
-
 
         for (int i = 0; i < hashtable.length; i++){
             LinkedList<Entry<K, V>> bucket = hashtable[i];
