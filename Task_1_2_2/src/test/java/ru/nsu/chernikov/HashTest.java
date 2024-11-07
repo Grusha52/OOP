@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HashTest {
     @Test
-    void mainTest(){
+    void mainTest() {
         HashTable<String, Integer> ages = new HashTable<>();
         ages.put("Grisha", 23);
         ages.put("Ildar", 19);
@@ -19,7 +19,7 @@ public class HashTest {
 
         System.out.println(ages.toString());
         assertEquals("145", ages.get("Kolya").toString());
-        ages.remove("Ildar",19);
+        ages.remove("Ildar");
         assertEquals("{Kolya=145, Bogdan=15, Kirill=1234567890, Grisha=23}", ages.toString());
 
         assertTrue(ages.containsKey("Bogdan"));
@@ -45,7 +45,7 @@ public class HashTest {
                 tableIterator.next();
                 ages.put("Andrew", 26);
             }
-        } catch (ConcurrentModificationException e){
+        } catch (ConcurrentModificationException e) {
             System.out.println("Concurrent modification: " + e.getMessage());
         }
     }

@@ -3,6 +3,12 @@ package ru.nsu.chernikov;
 
 import java.util.*;
 
+/**
+ * Iterable Hashtable.
+ *
+ * @param <K> key
+ * @param <V> value
+ */
 public class HashTable<K, V> implements Iterable<Entry<K, V>> {
 
     static final int DEFAULT_INITIAL_CAPACITY = 16; //16))
@@ -12,6 +18,9 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     private int size;
     int modCount;
 
+    /**
+     * constructor.
+     */
     public HashTable() {
         size = 0;
         modCount = 0;
@@ -22,6 +31,12 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         return Math.abs(key.hashCode() % hashtable.length);
     }
 
+    /**
+     * Put the key and its value.
+     *
+     * @param key
+     * @param value
+     */
     public void put(K key, V value) {
         int index = hash(key);
         if (hashtable[index] == null) {
@@ -44,7 +59,12 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
     }
 
-    public void remove(K key, V value) {
+    /**
+     * Remove key.
+     *
+     * @param key key in hashtable.
+     */
+    public void remove(K key) {
         int index = hash(key);
         if (hashtable[index] == null) {
             return;
@@ -62,6 +82,12 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
     }
 
+    /**
+     * Get the value of the key.
+     *
+     * @param key key)
+     * @return value of the key
+     */
     public V get(K key) {
         int index = hash(key);
         if (hashtable[index] == null) {
@@ -139,14 +165,14 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     public boolean equals(Object o) {
         if (this == o) return true;
         HashTable<K, V> table = (HashTable<K, V>) o;
-        if(getClass() != o.getClass() || o == null || size != table.size()) {
+        if (getClass() != o.getClass() || o == null || size != table.size()) {
             return false;
         }
 
-        for (int i = 0; i < hashtable.length; i++){
+        for (int i = 0; i < hashtable.length; i++) {
             LinkedList<Entry<K, V>> bucket = hashtable[i];
             if (bucket != null) {
-                for (Entry<K, V> entry : bucket){
+                for (Entry<K, V> entry : bucket) {
                     if (!entry.value.equals(table.get(entry.key))) {
                         return false;
                     }
