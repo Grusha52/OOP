@@ -42,7 +42,15 @@ public class HashTest {
         assertEquals(ages, ages2);
 
         try {
+            Iterator<Entry<String, Integer>> tableIterator = ages.iterator();
+            while (tableIterator.hasNext()) {
+                tableIterator.next();
+            }
+        } catch (ConcurrentModificationException e) {
+            System.out.println("Concurrent modification");
+        }
 
+        try {
             Iterator<Entry<String, Integer>> tableIterator = ages.iterator();
             while (tableIterator.hasNext()) {
                 tableIterator.next();
@@ -51,6 +59,7 @@ public class HashTest {
         } catch (ConcurrentModificationException e) {
             System.out.println("Concurrent modification");
         }
+        
         ages.resize();
     }
 }
