@@ -35,9 +35,9 @@ public class HashTest {
         HashTable<String, Integer> ages2 = new HashTable<>();
 
         ages2.put("Bogdan", 15);
-        ages2.put("Kolya", 145);
-        ages2.put("Kirill", 1234567890);
         ages2.put("Grisha", 322);
+        ages2.put("Kirill", 1234567890);
+        ages2.put("Kolya", 145);
 
         assertEquals(ages, ages2);
 
@@ -59,7 +59,6 @@ public class HashTest {
         } catch (ConcurrentModificationException e) {
             System.out.println("Concurrent modification");
         }
-        
         ages.resize();
     }
 }

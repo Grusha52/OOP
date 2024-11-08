@@ -147,7 +147,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
      */
     public Iterator<Entry<K, V>> iterator() {
         return new Iterator<>() {
-            private int expectedModCount = modCount;
+            private final int expectedModCount = modCount;
             private int indexBucket;
             private Iterator<Entry<K, V>> bucketIterator =
                     hashtable[indexBucket] != null ? hashtable[indexBucket].iterator() : null;
@@ -175,8 +175,6 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 }
                 return bucketIterator.next();
             }
-
-
         };
     }
 
@@ -192,7 +190,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
             return true;
         }
         HashTable<K, V> table = (HashTable<K, V>) o;
-        if (getClass() != o.getClass() || o == null || size != table.size()) {
+        if (o == null || getClass() != o.getClass() || size != table.size()) {
             return false;
         }
 
@@ -212,11 +210,11 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
-        for (int i = 0; i < hashtable.length; i++) {
-            if (hashtable[i] == null) {
+        for (LinkedList<Entry<K, V>> entries : hashtable) {
+            if (entries == null) {
                 continue;
             }
-            for (Entry<K, V> entry : hashtable[i]) {
+            for (Entry<K, V> entry : entries) {
                 sb.append(entry.key).append("=").append(entry.value).append(", ");
             }
         }
@@ -244,7 +242,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     /**
      * size of hashtable.
      *
-     * @return
+     * @return size
      */
     public int size() {
         return size;
