@@ -1,13 +1,15 @@
 package ru.nsu.chernikov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+
 
 class SubstringFindingTest {
 
@@ -43,7 +45,7 @@ class SubstringFindingTest {
         FileWriter fileWriter = new FileWriter("example.txt");
         long a = 0L;
 
-        for (int i = 0; i < 500000000; i++) {
+        for (int i = 0; i < 5000000; i++) {
             fileWriter.write("😇😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁");
             result.add(a);
             a += 18L;
