@@ -26,7 +26,7 @@ public class SubstringFinding {
                     System.arraycopy(overlapbuffer, 0, chunk, 0, overlapping);
                     System.arraycopy(buf, 0, chunk, overlapping, buf.length);
                 } else {
-                    Arrays.fill(overlapbuffer, (byte) 0x81);
+                    Arrays.fill(overlapbuffer, (byte) 0b10000001);
                     System.arraycopy(overlapbuffer, 0, chunk, 0, overlapping);
                     System.arraycopy(buf, 0, chunk, overlapping, buf.length);
                     firstIt = false;
@@ -34,7 +34,7 @@ public class SubstringFinding {
 
                 for (int i = 0; i < bytesread; i++) {
 
-                    if ((chunk[i] & 0xC0) != 0x80) {
+                    if ((chunk[i] & 0b11000000) != 0b10000000) {
                         symbolPointer++;
 
                         boolean flag = true;
@@ -56,15 +56,5 @@ public class SubstringFinding {
             }
         }
         return indexes;
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            ArrayList<Long> result = find("file.txt", "аа");
-            System.out.println(result);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
