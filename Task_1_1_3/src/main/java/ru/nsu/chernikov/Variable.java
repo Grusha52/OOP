@@ -67,4 +67,8 @@ class Variable extends Expression {
         throw new IllegalArgumentException();
     }
 
+    @Override
+    public Expression simplification() {
+        return new Variable(this.varname);
+    }
 }

@@ -59,4 +59,25 @@ class Div extends Expression {
         }
         return left.eval(vars) / right.eval(vars);
     }
+
+    @Override
+    public Expression simplification() {
+
+        Div simplificationDiv = new Div(this.left.simplification(), this.right.simplification());
+
+        if (simplificationDiv.left instanceof Number leftNumber
+                && simplificationDiv.right instanceof Number rightNumber) {
+
+            return new Number(leftNumber.value + rightNumber.value);
+
+        } else if (simplificationDiv.right instanceof Number rightNumber && rightNumber.value == 0) {
+            return simplificationDiv.left;
+
+        } else if (simplificationDiv.left instanceof Number leftNumber && leftNumber.value == 0) {
+            return simplificationDiv.right;
+
+        } else {
+            return simplificationDiv;
+        }
+    }
 }

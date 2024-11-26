@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
  */
 class Add extends Expression {
 
-    private Expression left, right;
+    Expression left, right;
 
     /**
      * Add constructor.
@@ -54,5 +54,24 @@ class Add extends Expression {
     @Override
     public double eval(String vars) {
         return left.eval(vars) + right.eval(vars);
+    }
+
+    @Override
+    public Expression simplification() {
+        Add simplificationAdd = new Add(this.left.simplification(), this.right.simplification());
+        if (simplificationAdd.left instanceof Number leftNumber
+        && simplificationAdd.right instanceof Number rightNumber) {
+
+            return new Number(leftNumber.value + rightNumber.value);
+
+        } else if (simplificationAdd.right instanceof Number rightNumber && rightNumber.value == 0) {
+            return simplificationAdd.left;
+
+        } else if (simplificationAdd.left instanceof Number leftNumber && leftNumber.value == 0) {
+            return simplificationAdd.right;
+
+        } else {
+            return simplificationAdd;
+        }
     }
 }

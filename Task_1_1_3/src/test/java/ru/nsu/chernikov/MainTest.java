@@ -1,6 +1,7 @@
 package ru.nsu.chernikov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import java.io.ByteArrayOutputStream;
 
@@ -8,12 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 
 /**
  * testing main and etc.
  */
 public class MainTest {
+
     @Test
     void mainTest() {
         Main.main(null);
@@ -80,7 +83,17 @@ public class MainTest {
         } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument");
         }
+    }
 
+    @Test
+    void parserTest() throws IOException {
+        PrintStream oldOutput = System.out;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out, false, "UTF-8"));
+        Expression e = Parser.parse("3 +5+  4");
+        e.print();
+        assertInstanceOf(Add.class, e);
+        assertEquals("((3+5)+4)", out.toString());
     }
 
 }

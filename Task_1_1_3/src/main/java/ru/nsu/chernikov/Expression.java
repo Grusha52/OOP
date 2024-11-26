@@ -39,4 +39,6 @@ abstract class Expression {
      * @return integer type result
      */
     public abstract double eval(String vars);
+
+    public abstract Expression simplification();
 }

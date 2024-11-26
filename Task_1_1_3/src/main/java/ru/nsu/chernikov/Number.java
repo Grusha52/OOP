@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
  */
 class Number extends Expression {
 
-    private int value;
+    int value;
 
     public Number(int value) {
         this.value = value;
@@ -44,6 +44,11 @@ class Number extends Expression {
     @Override
     public double eval(String vars) {
         return value;
+    }
+
+    @Override
+    public Expression simplification() {
+        return new Number(this.value);
     }
 
 }

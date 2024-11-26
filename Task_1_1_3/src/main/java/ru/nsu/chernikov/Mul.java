@@ -53,4 +53,22 @@ class Mul extends Expression {
         return left.eval(vars) * right.eval(vars);
     }
 
+    @Override
+    public Expression simplification() {
+
+        Mul simplificationMul = new Mul(this.left.simplification(), this.right.simplification());
+
+        if (simplificationMul.left instanceof Number leftNumber && simplificationMul.right instanceof Number rightNumber) {
+            return new Number(leftNumber.value + rightNumber.value);
+
+        } else if (simplificationMul.right instanceof Number rightNumber && rightNumber.value == 0) {
+            return simplificationMul.left;
+
+        } else if (simplificationMul.left instanceof Number leftNumber && leftNumber.value == 0) {
+            return simplificationMul.right;
+
+        } else {
+            return simplificationMul;
+        }
+    }
 }

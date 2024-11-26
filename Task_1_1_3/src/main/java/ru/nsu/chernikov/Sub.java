@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
  * Sub class.
  */
 class Sub extends Expression {
+
     private Expression left;
     private Expression right;
 
@@ -54,5 +55,25 @@ class Sub extends Expression {
     @Override
     public double eval(String vars) {
         return left.eval(vars) - right.eval(vars);
+    }
+
+    @Override
+    public Expression simplification() {
+
+        Sub simplificationSub = new Sub(this.left.simplification(), this.right.simplification());
+
+        if (simplificationSub.left instanceof Number leftNumber && simplificationSub.right instanceof Number rightNumber) {
+
+            return new Number(leftNumber.value + rightNumber.value);
+
+        } else if (simplificationSub.right instanceof Number rightNumber && rightNumber.value == 0) {
+            return simplificationSub.left;
+
+        } else if (simplificationSub.left instanceof Number leftNumber && leftNumber.value == 0) {
+            return simplificationSub.right;
+
+        } else {
+            return simplificationSub;
+        }
     }
 }
