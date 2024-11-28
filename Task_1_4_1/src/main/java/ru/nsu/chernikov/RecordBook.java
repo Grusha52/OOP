@@ -5,7 +5,7 @@ import java.util.*;
 public class RecordBook {
     private String firstname;
     private String lastname;
-    Map<Integer, Map<String, ArrayList<Integer>>> grades;
+    Map<Integer, Map<String, ArrayList<Mark>>> grades;
     private Integer qualificationWork;
     private Boolean paidEducation;
 
@@ -26,33 +26,37 @@ public class RecordBook {
         this.qualificationWork = null;
     }
 
-    public void addGrades(int semester, String type, ArrayList<Integer> listOfGrades) {
+    public void addGrades(int semester, String type, ArrayList<Mark> listOfGrades) {
         grades.putIfAbsent(semester, new HashMap<>());
         grades.get(semester).putIfAbsent(type, new ArrayList<>());
         grades.get(semester).get(type).addAll(listOfGrades);
     }
 
     public double calculateAverage() {
-        ArrayList<Integer> allGrades = new ArrayList<>();
-        for (Map<String, ArrayList<Integer>> semester : grades.values()) {
-            for (ArrayList<Integer> grades : semester.values()) {
+        ArrayList<Mark> allGrades = new ArrayList<>();
+        for (Map<String, ArrayList<Mark>> semester : grades.values()) {
+            for (ArrayList<Mark> grades : semester.values()) {
                 allGrades.addAll(grades);
             }
         }
-        return allGrades.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+        return allGrades.stream().mapToInt(Mark::intValue).average().orElse(0.0);
     }
 
     public Boolean isHonorDegree() {
-        ArrayList<Integer> allGrades = new ArrayList<>();
-        for (Map<String, ArrayList<Integer>> semester : grades.values()) {
-            for (ArrayList<Integer> grades : semester.values()) {
+        ArrayList<Mark> allGrades = new ArrayList<>();
+        for (Map<String, ArrayList<Mark>> semester : grades.values()) {
+            if ((semester.containsKey(EXAM) && semester.get(EXAM).stream().anyMatch(grade -> grade == Mark.SATISFACTORY)) || (semester.containsKey(DIFFERENTIATED_TEST) && semester.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY))) {
+                return false;
+            }
+            for (ArrayList<Mark> grades : semester.values()) {
                 allGrades.addAll(grades);
+
             }
         }
-        if (allGrades.stream().anyMatch(grade -> grade == 3)) {
+        if (allGrades.stream().anyMatch(grade -> grade == Mark.SATISFACTORY)) {
             return false;
         }
-        long excellentCount = allGrades.stream().filter(grade -> grade == 5).count();
+        long excellentCount = allGrades.stream().filter(grade -> grade == Mark.EXCELLENT).count();
         if ((double) excellentCount / allGrades.size() < 0.75) {
             return false;
         }
@@ -65,14 +69,14 @@ public class RecordBook {
             semesters.sort(Collections.reverseOrder());
             List<Integer> lastTwoSemesters = semesters.subList(0, Math.min(2, semesters.size()));
             for (int semester : lastTwoSemesters) {
-                Map<String, ArrayList<Integer>> semesterGrades = grades.get(semester);
+                Map<String, ArrayList<Mark>> semesterGrades = grades.get(semester);
                 if (semesterGrades.containsKey(EXAM)) {
-                    if (semesterGrades.get(EXAM).stream().anyMatch(grade -> grade == 3)) {
+                    if (semesterGrades.get(EXAM).stream().anyMatch(grade -> grade == Mark.SATISFACTORY)) {
                         return false;
                     }
                 }
                 if (semesterGrades.containsKey(DIFFERENTIATED_TEST)) {
-                    if (semesterGrades.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == 3)) {
+                    if (semesterGrades.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY)) {
                         return false;
                     }
                 }
@@ -82,8 +86,16 @@ public class RecordBook {
         return false;
     }
 
-    public boolean higherSchoolarship(int semester) {
-        return false;
+    public boolean higherSchoolarship() {
+        ArrayList<Integer> semesters = new ArrayList<>(grades.keySet());
+        Integer lastSemester = semesters.getLast();
+        if (!grades.containsKey(lastSemester)) {
+            return false;
+        }
+        Map<String, ArrayList<Mark>> semesterGrades = grades.get(lastSemester);
+        return semesterGrades.values().stream()
+                .flatMap(Collection::stream)
+                .allMatch(grade -> grade == Mark.EXCELLENT);
     }
 
     public void setQualificationWork(int grade) {
