@@ -24,7 +24,7 @@ public class RecordBook {
     private static final String EXAM = "exam";
     private static final String DIFFERENTIATED_TEST = "differentiated_test";
     private static final String CREDIT = "credit";
-    private static final String PRACTICE_REPORT = "assignment";
+    private static final String PRACTICE_REPORT = "practice_report";
     private static final String QUALIFICATION_WORK = "qualification_work";
 
     /**
@@ -85,6 +85,7 @@ public class RecordBook {
                     && semester.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY))) {
                 return false;
             }
+
             for (ArrayList<Mark> grades : semester.values()) {
                 allGrades.addAll(grades);
 
