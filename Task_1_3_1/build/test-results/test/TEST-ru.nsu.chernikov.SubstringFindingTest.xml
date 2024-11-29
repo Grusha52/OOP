@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.chernikov.SubstringFindingTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-11-22T06:37:57" hostname="MacBook-Air-Anatolij.local" time="51.226">
+  <properties/>
+  <testcase name="creatfile()" classname="ru.nsu.chernikov.SubstringFindingTest" time="0.011"/>
+  <testcase name="creatfile2()" classname="ru.nsu.chernikov.SubstringFindingTest" time="51.214"/>
+  <system-out><![CDATA[file example.txt created
+file deleted ☺️
+file example.txt created
+file deleted ☺️
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
