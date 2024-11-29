@@ -12,12 +12,12 @@ class RecordBookTest {
 
         RecordBook recordBook = new RecordBook("Grigory", "Chernikov", false);
         recordBook.addGrades(1, "exam", new ArrayList<>((Arrays.asList(Mark.EXCELLENT,Mark.EXCELLENT,Mark.EXCELLENT))));
-        recordBook.addGrades(1, "assignment", new ArrayList<>((Arrays.asList(Mark.GOOD,Mark.GOOD,Mark.GOOD))));
-        recordBook.addGrades(1, "colloquium", new ArrayList<>((Arrays.asList(Mark.SATISFACTORY,Mark.EXCELLENT,Mark.GOOD))));
+        recordBook.addGrades(1, "assignment", new ArrayList<>((Arrays.asList(Mark.EXCELLENT,Mark.EXCELLENT,Mark.EXCELLENT))));
+        recordBook.addGrades(1, "colloquium", new ArrayList<>((Arrays.asList(Mark.EXCELLENT,Mark.EXCELLENT,Mark.GOOD))));
         recordBook.addGrades(1, "test", new ArrayList<>((Arrays.asList(Mark.EXCELLENT,Mark.EXCELLENT,Mark.EXCELLENT))));
-        recordBook.addGrades(2, "assignment", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.UNSATISFACTORY, Mark.EXCELLENT))));
-        recordBook.addGrades(2, "exam", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.UNSATISFACTORY, Mark.EXCELLENT))));
-        recordBook.addGrades(3, "exam", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.EXCELLENT, Mark.SATISFACTORY))));
+        recordBook.addGrades(2, "assignment", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.GOOD, Mark.EXCELLENT))));
+        recordBook.addGrades(2, "exam", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.EXCELLENT, Mark.EXCELLENT))));
+        recordBook.addGrades(3, "exam", new ArrayList<>((Arrays.asList(Mark.EXCELLENT, Mark.EXCELLENT, Mark.GOOD))));
         recordBook.addGrades(4, "exam", new ArrayList<>((Arrays.asList(Mark.GOOD, Mark.EXCELLENT, Mark.EXCELLENT))));
         recordBook.setQualificationWork(5);
         System.out.println(recordBook.calculateAverage());
