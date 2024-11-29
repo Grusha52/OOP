@@ -9,8 +9,8 @@ import java.nio.charset.StandardCharsets;
  */
 class Sub extends Expression {
 
-    private Expression left;
-    private Expression right;
+    Expression left;
+    Expression right;
 
     /**
      * Sub constructor.

@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
  */
 class Variable extends Expression {
 
-    private String varname;
+    String varname;
 
     /**
      * Variable konstructor.

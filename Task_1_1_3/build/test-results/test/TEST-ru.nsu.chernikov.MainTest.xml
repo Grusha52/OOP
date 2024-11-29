@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.nsu.chernikov.MainTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-11-26T06:47:26" hostname="MacBook-Air-Anatolij.local" time="0.02">
+<testsuite name="ru.nsu.chernikov.MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-29T02:33:30" hostname="MacBook-Air-Anatolij.local" time="0.01">
   <properties/>
-  <testcase name="printTest()" classname="ru.nsu.chernikov.MainTest" time="0.012"/>
-  <testcase name="parserTest()" classname="ru.nsu.chernikov.MainTest" time="0.002"/>
-  <testcase name="mainTest()" classname="ru.nsu.chernikov.MainTest" time="0.002"/>
-  <testcase name="evalTest()" classname="ru.nsu.chernikov.MainTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="parserTest()" classname="ru.nsu.chernikov.MainTest" time="0.01"/>
+  <system-out><![CDATA[((3213+123)+43)
+((((0*x)+(y*0))+(2*0))+(123*0))
+0]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

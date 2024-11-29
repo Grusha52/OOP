@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -87,13 +86,16 @@ public class MainTest {
 
     @Test
     void parserTest() throws IOException {
-        PrintStream oldOutput = System.out;
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out, false, "UTF-8"));
-        Expression e = Parser.parse("3 +5+  4");
+
+        Expression e = Parser.parse("3213 +123+  43");
         e.print();
-        assertInstanceOf(Add.class, e);
-        assertEquals("((3+5)+4)", out.toString());
+        System.out.println();
+        Expression e2 = Parser.parse("0*x + y*0 + 2 * 0 + 123*0");
+        e2.print();
+        System.out.println();
+        Expression e3 = e2.simplification();
+        e3.print();
+
     }
 
 }

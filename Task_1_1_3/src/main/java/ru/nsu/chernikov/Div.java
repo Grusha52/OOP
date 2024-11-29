@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
  * Div class.
  */
 class Div extends Expression {
-    private Expression left;
-    private Expression right;
+    Expression left;
+    Expression right;
 
     /**
      * Division.
@@ -67,14 +67,17 @@ class Div extends Expression {
 
         if (simplificationDiv.left instanceof Number leftNumber
                 && simplificationDiv.right instanceof Number rightNumber) {
+            if (rightNumber.value == 0) {
+                throw new ArithmeticException("division by zero");
+            }
 
-            return new Number(leftNumber.value + rightNumber.value);
+            return new Number(leftNumber.value / rightNumber.value);
 
         } else if (simplificationDiv.right instanceof Number rightNumber && rightNumber.value == 0) {
             return simplificationDiv.left;
 
         } else if (simplificationDiv.left instanceof Number leftNumber && leftNumber.value == 0) {
-            return simplificationDiv.right;
+            return new Number(0);
 
         } else {
             return simplificationDiv;
