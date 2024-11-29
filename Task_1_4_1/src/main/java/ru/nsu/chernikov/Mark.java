@@ -1,5 +1,8 @@
 package ru.nsu.chernikov;
 
+/**
+ * Marks.
+ */
 public enum Mark {
 
     EXCELLENT("Отлично", 5),
@@ -9,7 +12,12 @@ public enum Mark {
     GRADED("Зачёт", null),
     FAIL("Незачёт", null);
 
-
+    /**
+     * constructor
+     *
+     * @param string  mark in string format
+     * @param integer mark in int format
+     */
     Mark(String string, Integer integer) {
         this.markint = integer;
         this.markstr = string;

@@ -1,7 +1,16 @@
 package ru.nsu.chernikov;
 
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Recordbook.
+ */
 public class RecordBook {
     private String firstname;
     private String lastname;
@@ -18,6 +27,13 @@ public class RecordBook {
     private static final String PRACTICE_REPORT = "assignment";
     private static final String QUALIFICATION_WORK = "qualification_work";
 
+    /**
+     * Constructor of RecordBook.
+     *
+     * @param firstname     student's firstname
+     * @param lastname      student's lastname
+     * @param paidEducation budget or not
+     */
     public RecordBook(String firstname, String lastname, Boolean paidEducation) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -26,12 +42,24 @@ public class RecordBook {
         this.qualificationWork = null;
     }
 
+    /**
+     * Add grades method.
+     *
+     * @param semester     which semester.
+     * @param type         type of mark.
+     * @param listOfGrades list of marks.
+     */
     public void addGrades(int semester, String type, ArrayList<Mark> listOfGrades) {
         grades.putIfAbsent(semester, new HashMap<>());
         grades.get(semester).putIfAbsent(type, new ArrayList<>());
         grades.get(semester).get(type).addAll(listOfGrades);
     }
 
+    /**
+     * Average calculation.
+     *
+     * @return average.
+     */
     public double calculateAverage() {
         ArrayList<Mark> allGrades = new ArrayList<>();
         for (Map<String, ArrayList<Mark>> semester : grades.values()) {
@@ -42,10 +70,19 @@ public class RecordBook {
         return allGrades.stream().mapToInt(Mark::intValue).average().orElse(0.0);
     }
 
+
+    /**
+     * Honor degree check.
+     *
+     * @return true of false
+     */
     public Boolean isHonorDegree() {
         ArrayList<Mark> allGrades = new ArrayList<>();
         for (Map<String, ArrayList<Mark>> semester : grades.values()) {
-            if ((semester.containsKey(EXAM) && semester.get(EXAM).stream().anyMatch(grade -> grade == Mark.SATISFACTORY)) || (semester.containsKey(DIFFERENTIATED_TEST) && semester.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY))) {
+            if ((semester.containsKey(EXAM)
+                    && semester.get(EXAM).stream().anyMatch(grade -> grade == Mark.SATISFACTORY))
+                    || (semester.containsKey(DIFFERENTIATED_TEST)
+                    && semester.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY))) {
                 return false;
             }
             for (ArrayList<Mark> grades : semester.values()) {
@@ -63,6 +100,11 @@ public class RecordBook {
         return qualificationWork == 5;
     }
 
+    /**
+     * Can it be budget.
+     *
+     * @return true of false
+     */
     public boolean isItBudget() {
         if (paidEducation) {
             ArrayList<Integer> semesters = new ArrayList<>(grades.keySet());
@@ -76,7 +118,8 @@ public class RecordBook {
                     }
                 }
                 if (semesterGrades.containsKey(DIFFERENTIATED_TEST)) {
-                    if (semesterGrades.get(DIFFERENTIATED_TEST).stream().anyMatch(grade -> grade == Mark.UNSATISFACTORY)) {
+                    if (semesterGrades.get(DIFFERENTIATED_TEST).stream().anyMatch(
+                            grade -> grade == Mark.UNSATISFACTORY)) {
                         return false;
                     }
                 }
@@ -86,6 +129,11 @@ public class RecordBook {
         return false;
     }
 
+    /**
+     * Higher scholarship detection.
+     *
+     * @return true or false
+     */
     public boolean higherSchoolarship() {
         ArrayList<Integer> semesters = new ArrayList<>(grades.keySet());
         Integer lastSemester = semesters.getLast();
@@ -98,10 +146,20 @@ public class RecordBook {
                 .allMatch(grade -> grade == Mark.EXCELLENT);
     }
 
+    /**
+     * set grade qualification work.
+     *
+     * @param grade mark of qualification work
+     */
     public void setQualificationWork(int grade) {
         this.qualificationWork = grade;
     }
 
+    /**
+     * get full name of student.
+     *
+     * @return full name
+     */
     public String getFullName() {
         return firstname + " " + lastname;
     }
