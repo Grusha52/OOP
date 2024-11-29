@@ -13,7 +13,9 @@ public enum Mark {
     Mark(String string, Integer integer) {
         this.markint = integer;
         this.markstr = string;
-    };
+    }
+
+    ;
 
 //    Mark(String string) {
 //        this.markstr = string;
