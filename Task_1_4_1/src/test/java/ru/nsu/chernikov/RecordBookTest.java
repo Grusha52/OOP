@@ -1,5 +1,8 @@
 package ru.nsu.chernikov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,7 +12,6 @@ class RecordBookTest {
 
     @Test
     public void recordBookTest() {
-
         RecordBook recordBook = new RecordBook("Grigory", "Chernikov", false);
         recordBook.addGrades(1, "exam", new ArrayList<>((Arrays.asList(
                 Mark.EXCELLENT, Mark.EXCELLENT, Mark.EXCELLENT))));
@@ -28,11 +30,11 @@ class RecordBookTest {
         recordBook.addGrades(4, "exam", new ArrayList<>((Arrays.asList(
                 Mark.GOOD, Mark.EXCELLENT, Mark.EXCELLENT))));
         recordBook.setQualificationWork(5);
-        System.out.println(recordBook.calculateAverage());
-        System.out.println(recordBook.isItBudget());
-        System.out.println(recordBook.isHonorDegree());
-        System.out.println(recordBook.higherSchoolarship());
-        System.out.println(recordBook.getFullName());
+        assertEquals(4.833333333333333, recordBook.calculateAverage());
+        assertFalse(recordBook.isItBudget());
+        assertEquals(true, recordBook.isHonorDegree());
+        assertFalse(recordBook.higherSchoolarship());
+        assertEquals("Grigory Chernikov", recordBook.getFullName());
 
         RecordBook book = new RecordBook("Ildar", "Fitkulin", true);
         book.addGrades(1, "exam", new ArrayList<>((Arrays.asList(
@@ -50,13 +52,12 @@ class RecordBookTest {
         book.addGrades(3, "exam", new ArrayList<>((Arrays.asList(
                 Mark.EXCELLENT, Mark.EXCELLENT, Mark.SATISFACTORY))));
         book.addGrades(4, "exam", new ArrayList<>((Arrays.asList(
-               Mark.GOOD, Mark.EXCELLENT, Mark.EXCELLENT))));
+                Mark.GOOD, Mark.EXCELLENT, Mark.EXCELLENT))));
         book.setQualificationWork(4);
-        System.out.println(book.calculateAverage());
-        System.out.println(book.isItBudget());
-        System.out.println(book.isHonorDegree());
-        System.out.println(book.higherSchoolarship());
-        System.out.println(book.getFullName());
-
+        assertEquals(4.375, book.calculateAverage());
+        assertEquals(false, book.isItBudget());
+        assertEquals(false, book.isHonorDegree());
+        assertEquals(false, book.higherSchoolarship());
+        assertEquals("Ildar Fitkulin", book.getFullName());
     }
 }
