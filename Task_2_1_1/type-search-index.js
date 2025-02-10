@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.chernikov","l":"PrimeNumbers"},{"p":"ru.nsu.chernikov","l":"PrimeNumbersParallels"},{"p":"ru.nsu.chernikov","l":"PrimeNumbersThreads"}];updateSearchResults();
