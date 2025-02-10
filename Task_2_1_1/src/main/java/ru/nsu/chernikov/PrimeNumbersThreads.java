@@ -7,6 +7,11 @@ public class PrimeNumbersThreads {
     private static ConcurrentLinkedQueue<Integer> queue;
     public static volatile boolean hasNonPrime = false;
 
+    /** Is it prime?
+     *
+     * @param n number.
+     * @return true or false.
+     */
     public static boolean isPrime(int n) {
         if (n <= 1) {
             return false;
@@ -26,13 +31,20 @@ public class PrimeNumbersThreads {
         }
     }
 
-    public static boolean thread(ArrayList<Integer> numbers, int countThreads) throws InterruptedException {
+    /** Thread search.
+     *
+     * @param numbers our list of numbers.
+     * @param countThreads count of threads.
+     * @return true of false.
+     */
+    public static boolean thread(ArrayList<Integer> numbers, int countThreads) {
         queue = new ConcurrentLinkedQueue<>(numbers);
 
         Thread[] threads = new Thread[countThreads];
         for (int i = 0; i < countThreads; i++) {
-            threads[i] = new Thread(() -> { while (!queue.isEmpty() && hasNonPrime == false)
-                hasPrime(isPrime(queue.poll()));
+            threads[i] = new Thread(() -> {
+                while (!queue.isEmpty())
+                    hasPrime(isPrime(queue.poll()));
             });
             threads[i].start();
         }

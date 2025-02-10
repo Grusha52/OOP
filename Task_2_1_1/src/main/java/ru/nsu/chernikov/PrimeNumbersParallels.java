@@ -1,13 +1,17 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+/**
+ * PrimeFinding using parallelStream.
+ */
 public class PrimeNumbersParallels {
 
-    public static volatile boolean hasNonPrime = false;
-
+    /** Is it prime?
+     *
+     * @param n number.
+     * @return true or false.
+     */
     public static boolean notPrime(int n) {
         if (n <= 1) {
             return true;
@@ -21,7 +25,12 @@ public class PrimeNumbersParallels {
         return false;
     }
 
-    public static boolean parallel(ArrayList<Integer> numbers) throws InterruptedException {
+    /** parallel search.
+     *
+     * @param numbers our list of numbers.
+     * @return true or false.
+     */
+    public static boolean parallel(ArrayList<Integer> numbers) {
         return numbers.parallelStream().anyMatch(PrimeNumbersParallels::notPrime);
     }
 
