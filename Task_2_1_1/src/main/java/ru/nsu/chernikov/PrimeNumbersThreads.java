@@ -1,19 +1,11 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class PrimeNumbersThreads {
-    private int start, end;
-    private ArrayList<Integer> mas;
+    private static ConcurrentLinkedQueue<Integer> queue;
     public static volatile boolean hasNonPrime = false;
-
-    public PrimeNumbersThreads(int start, int end, ArrayList<Integer> mas){
-        this.mas = mas;
-        this.start = start;
-        this.end = end;
-    }
 
     public static boolean isPrime(int n) {
         if (n <= 1) {
@@ -28,65 +20,30 @@ public class PrimeNumbersThreads {
         return true;
     }
 
-    public void hasPrime() {
-        for (int i = start; i < end; i++) {
-            if (!isPrime(mas.get(i))) {
-                hasNonPrime = true;
-                return;
-            }
+    public static void hasPrime(boolean result) {
+        if (!result) {
+            hasNonPrime = true;
         }
     }
 
     public static boolean thread(ArrayList<Integer> numbers, int countThreads) throws InterruptedException {
-        List<Thread> threads = new ArrayList<>();
-        int length = numbers.size();
-        int interval = length / countThreads;
+        queue = new ConcurrentLinkedQueue<>(numbers);
 
-        for (int i = 0; i < countThreads; i++){
-            int start = i * interval;
-            int end = Math.min(start + interval, length);
-            PrimeNumbersThreads part = new PrimeNumbersThreads(start, end, numbers);
-            Thread thread = new Thread(part::hasPrime);
-            threads.add(thread);
-            thread.start();
+        Thread[] threads = new Thread[countThreads];
+        for (int i = 0; i < countThreads; i++) {
+            threads[i] = new Thread(() -> { while (!queue.isEmpty() && hasNonPrime == false)
+                hasPrime(isPrime(queue.poll()));
+            });
+            threads[i].start();
         }
 
         for (Thread thread : threads) {
-            thread.join();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                System.err.println("Thread was interrupted" + e.getMessage());
+            }
         }
         return hasNonPrime;
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053,20319251, 6997901, 6997927, 6997937, 17858849, 6997967,
-                6998009, 6998029, 6998039, 20165149, 6998051, 6998053));
-        long startTime = System.currentTimeMillis();
-        boolean result = PrimeNumbersThreads.thread(numbers, 4096);
-        long endTime = System.currentTimeMillis();
-        System.out.println(result);
-        System.out.println(endTime - startTime);
     }
 }
