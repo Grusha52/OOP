@@ -8,6 +8,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test.
+ */
 public class PrimeNumbersParallelsTest {
     @Test
     void mainTest() throws InterruptedException {
