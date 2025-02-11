@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PrimeNumbersThreadsTest {
     @Test
     void mainTest() throws InterruptedException {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(20319251, 6997901,
+        final ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(6998053, 6997901,
                 6997927, 6997937, 17858849, 6997967,
                 6998009, 6998029, 6998039, 20165149, 6998051, 6998053, 20319251,
                 6997901, 6997927, 6997937, 17858849, 6997967,
@@ -61,7 +61,7 @@ public class PrimeNumbersThreadsTest {
                 6997901, 6997927, 6997937, 17858849, 6997967,
                 6998009, 6998029, 6998039, 20165149, 6998051, 6998053));
         long startTime = System.currentTimeMillis();
-        boolean result = PrimeNumbersThreads.thread(numbers, 1024);
+        boolean result = PrimeNumbersThreads.thread(numbers, 40);
         long endTime = System.currentTimeMillis();
         System.out.println(result);
         System.out.println(endTime - startTime);
@@ -69,7 +69,7 @@ public class PrimeNumbersThreadsTest {
 
     @Test
     void assertionsTest() throws InterruptedException {
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(20319251, 6997901,
+        final ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(20319251, 6997901,
                 6997927, 6997937, 17858849, 6997967,
                 6998009, 6998029, 6998039, 20165149, 6998051, 6998053, 20319251,
                 6997901, 6997927, 6997937, 17858849, 6997967,
@@ -119,8 +119,8 @@ public class PrimeNumbersThreadsTest {
                 6997901, 6997927, 6997937, 17858849, 6997967,
                 6998009, 6998029, 6998039, 20165149, 6998051, 6998053));
 
-        assertFalse(PrimeNumbersThreads.thread(numbers, 1024));
+        assertFalse(PrimeNumbersThreads.thread(numbers, 30));
         numbers.add(9);
-        assertTrue(PrimeNumbersThreads.thread(numbers, 1024));
+        assertTrue(PrimeNumbersThreads.thread(numbers, 30));
     }
 }

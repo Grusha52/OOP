@@ -1,10 +1,9 @@
 package ru.nsu.chernikov;
 
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class PrimeNumbersThreads {
-    private static ConcurrentLinkedQueue<Integer> queue;
+
     public static volatile boolean hasNonPrime = false;
 
     /** Is it prime?
@@ -25,9 +24,11 @@ public class PrimeNumbersThreads {
         return true;
     }
 
-    public static void hasPrime(boolean result) {
-        if (!result) {
-            hasNonPrime = true;
+    public static void hasPrime(int id, int countThreads, ArrayList<Integer> mas) {
+        for (int count = 0; (id + count * countThreads) < mas.size(); count++) {
+            if (!isPrime(mas.get(id + count * countThreads))) {
+                hasNonPrime = true;
+            }
         }
     }
 
@@ -38,15 +39,16 @@ public class PrimeNumbersThreads {
      * @return true of false.
      */
     public static boolean thread(ArrayList<Integer> numbers, int countThreads) {
-        queue = new ConcurrentLinkedQueue<>(numbers);
-
+        hasNonPrime = false;
         Thread[] threads = new Thread[countThreads];
+
         for (int i = 0; i < countThreads; i++) {
-            threads[i] = new Thread(() -> {
-                while (!queue.isEmpty())
-                    hasPrime(isPrime(queue.poll()));
-            });
-            threads[i].start();
+            int id = i;
+            try {
+                threads[id] = new Thread(() -> hasPrime(id, countThreads, numbers));
+            } finally {
+                threads[id].start();
+            }
         }
 
         for (Thread thread : threads) {
