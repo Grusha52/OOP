@@ -1,13 +1,16 @@
 package ru.nsu.chernikov;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Threads.
+ */
 public class PrimeNumbersThreadsTest {
     @Test
     void mainTest() throws InterruptedException {
@@ -61,7 +64,7 @@ public class PrimeNumbersThreadsTest {
                 6997901, 6997927, 6997937, 17858849, 6997967,
                 6998009, 6998029, 6998039, 20165149, 6998051, 6998053));
         long startTime = System.currentTimeMillis();
-        boolean result = PrimeNumbersThreads.thread(numbers, 40);
+        boolean result = PrimeNumbersThreads.thread(numbers, 500);
         long endTime = System.currentTimeMillis();
         System.out.println(result);
         System.out.println(endTime - startTime);

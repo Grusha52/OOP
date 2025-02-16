@@ -2,11 +2,14 @@ package ru.nsu.chernikov;
 
 import java.util.ArrayList;
 
+/**
+ * Number Threads.
+ */
 public class PrimeNumbersThreads {
 
     public static volatile boolean hasNonPrime = false;
 
-    /** Is it prime?
+    /** Is it prime?.
      *
      * @param n number.
      * @return true or false.
@@ -24,6 +27,12 @@ public class PrimeNumbersThreads {
         return true;
     }
 
+    /** hasPrime?.
+     *
+     * @param id number of thread.
+     * @param countThreads number of threads.
+     * @param mas array of numbers.
+     */
     public static void hasPrime(int id, int countThreads, ArrayList<Integer> mas) {
         for (int count = 0; (id + count * countThreads) < mas.size(); count++) {
             if (!isPrime(mas.get(id + count * countThreads))) {

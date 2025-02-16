@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class PrimeNumbersParallels {
 
-    /** Is it prime?
+    /** Is it prime?.
      *
      * @param n number.
      * @return true or false.
