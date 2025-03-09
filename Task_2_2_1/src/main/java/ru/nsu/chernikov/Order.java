@@ -1,57 +1,87 @@
 package ru.nsu.chernikov;
 
+/**
+ * Represents a pizza order.
+ */
 public class Order {
-    private Integer id;
+    private final Integer id;
     private final Integer countofPizzas;
     private OrderState state;
 
+    /**
+     * Creates an order with a given ID and pizza count.
+     *
+     * @param id            the order ID
+     * @param countofPizzas the number of pizzas in the order
+     */
     public Order(Integer id, Integer countofPizzas) {
         this.id = id;
         this.countofPizzas = countofPizzas;
     }
 
+    /**
+     * @return the number of pizzas in the order
+     */
     public Integer getCountofPizzas() {
         return countofPizzas;
     }
 
+    /**
+     * @return the order ID
+     */
     public Integer getId() {
         return id;
     }
 
     @Override
     public String toString() {
-        return "Заказ " +
-                "номер =" + id +
-                ", Количество пицц в заказе =" + countofPizzas +
-                '}';
+        return "Order #" + id + ", Pizzas: " + countofPizzas;
     }
 
+    /**
+     * @return the current order state
+     */
     public OrderState getState() {
         return state;
     }
 
+    /**
+     * Marks the order as being cooked.
+     */
     public void cooking() {
         this.state = OrderState.COOKING;
-        System.out.println("Заказ номер " + this.id + " " + this.state.toString());
+        System.out.println("Order #" + this.id + " " + this.state);
     }
 
+    /**
+     * Marks the order as being delivered.
+     */
     public void delivering() {
         this.state = OrderState.DELIVERING;
-        System.out.println("Заказ номер " + this.id + " " + this.state.toString());
+        System.out.println("Order #" + this.id + " " + this.state);
     }
 
+    /**
+     * Marks the order as completed.
+     */
     public void done() {
         this.state = OrderState.DONE;
-        System.out.println("Заказ номер " + this.id + " " + this.state.toString());
+        System.out.println("Order #" + this.id + " " + this.state);
     }
 
+    /**
+     * Marks the order as delivered.
+     */
     public void delivered() {
         this.state = OrderState.DELIVERED;
-        System.out.println("Заказ номер " + this.id + " " + this.state.toString());
+        System.out.println("Order #" + this.id + " " + this.state);
     }
 
+    /**
+     * Marks the order as waiting in the order list.
+     */
     public void waiting() {
         this.state = OrderState.IN_ORDERLIST;
-        System.out.println("Заказ номер " + this.id + " " + this.state.toString());
+        System.out.println("Order #" + this.id + " " + this.state);
     }
 }

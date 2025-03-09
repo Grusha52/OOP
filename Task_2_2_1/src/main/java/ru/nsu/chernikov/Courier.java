@@ -3,25 +3,40 @@ package ru.nsu.chernikov;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Courier that delivers pizzas from storage to customers.
+ */
 public class Courier extends Thread {
-    Pizzeria pizzeria;
-    int countOfPizza;
-    int deliveryTime;
+    private final Pizzeria pizzeria;
+    private final int deliveryTime;
 
-    int maxTime = 50;
-    int minTime = 30;
-
+    /**
+     * Creates a courier with a random delivery time.
+     *
+     * @param pizzeria the pizzeria where the courier works
+     */
     public Courier(Pizzeria pizzeria) {
         Random random = new Random();
+        int maxTime = 50;
+        int minTime = 30;
         this.deliveryTime = random.nextInt(maxTime - minTime + 1) + minTime;
         this.pizzeria = pizzeria;
     }
 
+    /**
+     * Simulates order delivery time.
+     *
+     * @param order being delivered
+     * @throws InterruptedException if the thread is interrupted
+     */
     private void delivery(Order order) throws InterruptedException {
         TimeUnit.MILLISECONDS.sleep(deliveryTime * 10L);
-        System.out.println(Thread.currentThread().getName() + " Кароче пиццка доставлена");
+        System.out.println(Thread.currentThread().getName() + " Pizza delivered");
     }
 
+    /**
+     * Runs the courier's process.
+     */
     @Override
     public void run() {
         try {
@@ -32,7 +47,7 @@ public class Courier extends Thread {
                 order.delivered();
             }
         } catch (InterruptedException e) {
-            System.out.println(Thread.currentThread().getName() + " я увольняюсь");
+            System.out.println(Thread.currentThread().getName() + " I'm quitting");
             Thread.currentThread().interrupt();
         }
     }

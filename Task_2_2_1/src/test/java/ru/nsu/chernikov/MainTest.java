@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 public class MainTest {
     @Test
-    void mainTest() {
+    void mainTest() throws InterruptedException {
         Main.main(new String[]{});
+        Thread.sleep(15000);
     }
 }

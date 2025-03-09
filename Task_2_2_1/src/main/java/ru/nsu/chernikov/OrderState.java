@@ -17,6 +17,6 @@ public enum OrderState {
     public String toString() {
         return description;
     }
-};
+}
 
 
