@@ -21,7 +21,7 @@ public class Pizzeria {
         this.workTimeSeconds = config.workTime();
     }
 
-    private void workingtill6() throws InterruptedException {
+    public void workingtill6() throws InterruptedException {
         TimeUnit.SECONDS.sleep(this.workTimeSeconds);
         isOpen = false;
         for(Thread worker : workers) {
@@ -32,7 +32,7 @@ public class Pizzeria {
         }
     }
 
-    private void workingProcess() throws InterruptedException {
+    public void workingProcess() throws InterruptedException {
         Thread working = new Thread(() -> {
             try {
                 workingtill6();
