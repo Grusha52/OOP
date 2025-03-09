@@ -19,14 +19,14 @@ public class Order {
         this.countofPizzas = countofPizzas;
     }
 
-    /**
+    /** GET COUNT OF PIZZA IN ORDER.
      * @return the number of pizzas in the order
      */
     public Integer getCountofPizzas() {
         return countofPizzas;
     }
 
-    /**
+    /** GET ID.
      * @return the order ID
      */
     public Integer getId() {
@@ -38,14 +38,14 @@ public class Order {
         return "Order #" + id + ", Pizzas: " + countofPizzas;
     }
 
-    /**
+    /** GET STATE.
      * @return the current order state
      */
     public OrderState getState() {
         return state;
     }
 
-    /**
+    /** GET STATE.
      * Marks the order as being cooked.
      */
     public void cooking() {
@@ -53,7 +53,7 @@ public class Order {
         System.out.println("Order #" + this.id + " " + this.state);
     }
 
-    /**
+    /** GET STATE.
      * Marks the order as being delivered.
      */
     public void delivering() {

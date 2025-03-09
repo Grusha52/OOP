@@ -1,12 +1,19 @@
 package ru.nsu.chernikov;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 
-
+/**
+ * Class responsible for creating and writing the PizzeriaConfig to a JSON file.
+ */
 public class JsonCreator {
+
+    /**
+     * Main method to create a PizzeriaConfig object and write it to a JSON file.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         PizzeriaConfig config = new PizzeriaConfig(100, 100, 15, 1000);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -16,6 +23,5 @@ public class JsonCreator {
         } catch (IOException e) {
             System.out.println("ай яй ошибка" + e.getMessage());
         }
-
     }
 }
