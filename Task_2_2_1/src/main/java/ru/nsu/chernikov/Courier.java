@@ -17,8 +17,8 @@ public class Courier extends Thread {
         this.pizzeria = pizzeria;
     }
 
-    private void delivery() throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(deliveryTime * 10L * countOfPizza);
+    private void delivery(Order order) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(deliveryTime * 10L);
         System.out.println(Thread.currentThread().getName() + " Кароче пиццка доставлена");
     }
 
@@ -26,12 +26,14 @@ public class Courier extends Thread {
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                countOfPizza = pizzeria.storage.fromStorage();
-                this.delivery();
+                Order order = pizzeria.storage.fromStorage();
+                order.delivering();
+                this.delivery(order);
+                order.delivered();
             }
         } catch (InterruptedException e) {
             System.out.println(Thread.currentThread().getName() + " я увольняюсь");
-            Thread.currentThread().interrupt(); // Восстанавливаем флаг прерывания
+            Thread.currentThread().interrupt();
         }
     }
 }

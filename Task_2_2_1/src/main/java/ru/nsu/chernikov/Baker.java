@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 public class Baker extends Thread {
     Pizzeria pizzeria;
     int cooktime;
-    int countOfOrders;
 
     int maxTime = 50;
     int minTime = 30;
@@ -17,8 +16,8 @@ public class Baker extends Thread {
         this.pizzeria = pizzeria;
     }
 
-    private void cooking() throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(cooktime * 10L * countOfOrders);
+    private void cooking(Order order) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(cooktime * 10L * order.getCountofPizzas());
         System.out.println(Thread.currentThread().getName() + " Кароче пиццка сделана");
     }
 
@@ -26,9 +25,11 @@ public class Baker extends Thread {
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                countOfOrders = pizzeria.orders.fromOrders();
-                this.cooking();
-                pizzeria.storage.toStorage(countOfOrders);
+                Order order = pizzeria.orders.fromOrders();
+                order.cooking();
+                this.cooking(order);
+                pizzeria.storage.toStorage(order);
+                order.done();
             }
         } catch (InterruptedException e) {
             System.out.println(Thread.currentThread().getName() + " я увольняюсь");

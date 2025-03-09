@@ -9,57 +9,20 @@ public class Pizzeria {
     public final Orders orders = new Orders();
     private final Integer numberOfBakers;
     private final Integer numberOfCouriers;
+    private final Integer workTimeSeconds;
+    private final Integer maxOrders;
     private volatile boolean isOpen = true;
     Thread[] workers;
 
-    Pizzeria(Integer numberOfBakers, Integer numberOfCouriers) {
-        this.numberOfBakers = numberOfBakers;
-        this.numberOfCouriers = numberOfCouriers;
+    Pizzeria(PizzeriaConfig config) {
+        this.numberOfBakers = config.countOfBakers();
+        this.numberOfCouriers = config.countOfCouriers();
+        this.maxOrders = config.maxOrders();
+        this.workTimeSeconds = config.workTime();
     }
 
-//    public boolean isOpen() {
-//        return isOpen;
-//    }
-
-//    public boolean getOrder() {
-//        synchronized (orderlock) {
-//            if (!isOpen || pizzas == 0) {
-//                return false;
-//            } else {
-//                pizzas -= 1;
-//                return true;
-//            }
-//        }
-//    }
-
-//    public void addOrder() {
-//        synchronized (orderlock) {
-//            pizzas += 1;
-//            orderlock.notify();
-//        }
-//    }
-
-
-//    synchronized boolean fromStorage(){
-//        synchronized (storagelock) {
-//            if (!isOpen || storage == 0) {
-//                return false;
-//            } else {
-//                storage -= 1;
-//                return true;
-//            }
-//        }
-//    }
-
-//    public void toStorage() {
-//        synchronized (storagelock) {
-//            storage += 1;
-//            storagelock.notify();
-//        }
-//    }
-
     private void workingtill6() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(10);
+        TimeUnit.SECONDS.sleep(this.workTimeSeconds);
         isOpen = false;
         for(Thread worker : workers) {
             worker.interrupt();
@@ -80,7 +43,7 @@ public class Pizzeria {
         working.start();
         Thread thread = new Thread(() -> {
             int i = 0;
-            while(i < 100) {
+            while(i < this.maxOrders && this.isOpen) {
                 i++;
                 try {
                     TimeUnit.MILLISECONDS.sleep(10);
@@ -109,7 +72,7 @@ public class Pizzeria {
     }
 
     public static void main(String[] args) {
-        Pizzeria pizzeria = new Pizzeria(10, 10);
+        Pizzeria pizzeria = new Pizzeria(PizzeriaConfig.loadConfig("config.json"));
         try {
             pizzeria.workingProcess();
         } catch (InterruptedException e) {

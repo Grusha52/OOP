@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private final ArrayList<Integer> queue;
+    private final ArrayList<Order> queue;
 
     public Storage () {
         this.queue = new ArrayList<>();
     }
 
-    synchronized void toStorage(int count) throws InterruptedException {
-        queue.addFirst(count);
+    synchronized void toStorage(Order order) throws InterruptedException {
+        queue.addFirst(order);
         this.notify();
     }
 
-    synchronized Integer fromStorage() throws InterruptedException {
+    synchronized Order fromStorage() throws InterruptedException {
         while(queue.isEmpty()) {
             this.wait();
         }
-        return this.queue.getLast();
+        return this.queue.removeLast();
     }
 }
