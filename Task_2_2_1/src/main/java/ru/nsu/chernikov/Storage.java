@@ -1,13 +1,13 @@
 package ru.nsu.chernikov;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Storage {
 
-    private final ArrayList<Order> queue;
+    private final LinkedList<Order> queue;
 
     public Storage () {
-        this.queue = new ArrayList<>();
+        this.queue = new LinkedList<>();
     }
 
     synchronized void toStorage(Order order) throws InterruptedException {

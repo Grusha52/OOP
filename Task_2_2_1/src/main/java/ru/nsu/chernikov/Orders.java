@@ -1,13 +1,13 @@
 package ru.nsu.chernikov;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Orders {
-    private final ArrayList<Order> queue;
+    private final LinkedList<Order> queue;
     private Integer idCount = 0;
 
     public Orders () {
-        this.queue = new ArrayList<>();
+        this.queue = new LinkedList<>();
         idCount = 0;
     }
 
