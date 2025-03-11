@@ -13,6 +13,7 @@ public class Pizzeria {
     private final Integer numberOfCouriers;
     private final Integer workTimeSeconds;
     private final Integer maxOrders;
+    private Integer idCount = 0;
     Thread[] workers;
     private volatile boolean isOpen = true;
 
@@ -50,9 +51,8 @@ public class Pizzeria {
     public void workingtill6() throws InterruptedException {
         TimeUnit.SECONDS.sleep(this.workTimeSeconds);
         isOpen = false;
-        for (Thread worker : workers) {
-            worker.interrupt();
-        }
+        orders.close();
+        storage.close();
         for (Thread worker : workers) {
             worker.join();
         }
@@ -76,11 +76,13 @@ public class Pizzeria {
 
         Thread thread = new Thread(() -> {
             int i = 0;
+            Random rand = new Random();
             while (i < this.maxOrders && this.isOpen) {
                 i++;
                 try {
                     TimeUnit.MILLISECONDS.sleep(10);
-                    orders.toOrders(new Random().nextInt(5));
+                    Order order = new Order(idCount++, rand.nextInt(5));
+                    orders.to(order);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -92,11 +94,11 @@ public class Pizzeria {
         Courier[] couriers = new Courier[numberOfCouriers];
 
         for (int i = 0; i < numberOfBakers; i++) {
-            bakers[i] = new Baker(this);
+            bakers[i] = new Baker(orders, storage);
             bakers[i].start();
         }
         for (int i = 0; i < numberOfCouriers; i++) {
-            couriers[i] = new Courier(this);
+            couriers[i] = new Courier(storage);
             couriers[i].start();
         }
         workers = new Thread[numberOfCouriers + numberOfBakers];

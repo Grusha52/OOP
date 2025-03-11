@@ -5,27 +5,23 @@ import java.util.LinkedList;
 /**
  * Manages the queue of pizza orders.
  */
-public class Orders {
+public class Orders implements IQueue {
     private final LinkedList<Order> queue;
-    private Integer idCount = 0;
+    private volatile boolean isClosed = false;
 
     /**
      * Creates an empty order queue.
      */
     public Orders() {
         this.queue = new LinkedList<>();
-        idCount = 0;
     }
-
     /**
      * Adds a new order to the queue.
      *
-     * @param count the number of pizzas in the order
      * @throws InterruptedException if the thread is interrupted
      */
-    public synchronized void toOrders(int count) throws InterruptedException {
-        idCount++;
-        Order order = new Order(idCount, count);
+    @Override
+    public synchronized void to(Order order) throws InterruptedException {;
         queue.addFirst(order);
         order.waiting();
         this.notify();
@@ -37,10 +33,25 @@ public class Orders {
      * @return the next order
      * @throws InterruptedException if the thread is interrupted
      */
-    public synchronized Order fromOrders() throws InterruptedException {
+    @Override
+    public synchronized Order from() throws InterruptedException {
         while (queue.isEmpty()) {
             this.wait();
+            if (isClosed) {
+                return null;
+            }
         }
         return this.queue.removeLast();
+    }
+
+    @Override
+    public synchronized void close() throws InterruptedException {
+        isClosed = true;
+        this.notifyAll();
+
+    }
+    @Override
+    public synchronized boolean isClosed() {
+        return isClosed;
     }
 }

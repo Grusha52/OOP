@@ -11,7 +11,7 @@ public class Order {
     /**
      * Creates an order with a given ID and pizza count.
      *
-     * @param id            the order ID
+     * @param id the order ID
      * @param countofPizzas the number of pizzas in the order
      */
     public Order(Integer id, Integer countofPizzas) {

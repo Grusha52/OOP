@@ -15,7 +15,7 @@ public class JsonCreator {
      * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
-        PizzeriaConfig config = new PizzeriaConfig(100, 100, 15, 1000);
+        PizzeriaConfig config = new PizzeriaConfig(100, 100, 5, 1000);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             objectMapper.writeValue(new File("config.json"), config);

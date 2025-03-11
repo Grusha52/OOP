@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
  * Courier that delivers pizzas from storage to customers.
  */
 public class Courier extends Thread {
-    private final Pizzeria pizzeria;
+    private final Storage storage;
     private final int deliveryTime;
 
     /**
@@ -15,12 +15,12 @@ public class Courier extends Thread {
      *
      * @param pizzeria the pizzeria where the courier works
      */
-    public Courier(Pizzeria pizzeria) {
+    public Courier(Storage storage) {
         Random random = new Random();
         int maxTime = 50;
         int minTime = 30;
         this.deliveryTime = random.nextInt(maxTime - minTime + 1) + minTime;
-        this.pizzeria = pizzeria;
+        this.storage = storage;
     }
 
     /**
@@ -40,8 +40,12 @@ public class Courier extends Thread {
     @Override
     public void run() {
         try {
-            while (!Thread.currentThread().isInterrupted()) {
-                Order order = pizzeria.storage.fromStorage();
+            while (!Thread.currentThread().isInterrupted() && !storage.isClosed()) {
+                Order order = storage.from();
+                if (order == null) {
+                    return;
+                }
+                System.out.println(Thread.currentThread().getName() + " Pizza delivered");
                 order.delivering();
                 this.delivery(order);
                 order.delivered();
@@ -50,5 +54,6 @@ public class Courier extends Thread {
             System.out.println(Thread.currentThread().getName() + " I'm quitting");
             Thread.currentThread().interrupt();
         }
+        System.out.println(Thread.currentThread().getName() + " I'm done");
     }
 }

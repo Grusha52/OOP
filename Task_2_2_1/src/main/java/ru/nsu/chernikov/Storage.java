@@ -5,9 +5,9 @@ import java.util.LinkedList;
 /**
  * Storage for finished pizza orders.
  */
-public class Storage {
+public class Storage implements IQueue {
     private final LinkedList<Order> queue;
-
+    private volatile boolean isClosed = false;
     /**
      * Creates an empty storage.
      */
@@ -21,7 +21,8 @@ public class Storage {
      * @param order the completed order
      * @throws InterruptedException if the thread is interrupted
      */
-    synchronized void toStorage(Order order) throws InterruptedException {
+    @Override
+    public synchronized void to(Order order) throws InterruptedException {
         queue.addFirst(order);
         this.notify();
     }
@@ -32,10 +33,25 @@ public class Storage {
      * @return the next order
      * @throws InterruptedException if the thread is interrupted
      */
-    synchronized Order fromStorage() throws InterruptedException {
+    @Override
+    public synchronized Order from() throws InterruptedException {
         while (queue.isEmpty()) {
             this.wait();
+            if (isClosed) {
+                return null;
+            }
         }
         return this.queue.removeLast();
+    }
+
+    @Override
+    public synchronized void close() throws InterruptedException {
+        isClosed = true;
+        this.notifyAll();
+    }
+
+    @Override
+    public synchronized boolean isClosed() {
+        return isClosed;
     }
 }

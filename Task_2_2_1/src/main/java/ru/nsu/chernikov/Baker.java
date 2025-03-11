@@ -7,20 +7,22 @@ import java.util.concurrent.TimeUnit;
  * Baker that prepares pizzas and moves orders to storage.
  */
 public class Baker extends Thread {
-    private final Pizzeria pizzeria;
+    private final IQueue orders;
+    private final IQueue storage;
     private final int cooktime;
 
     /**
      * Creates a baker with a random cooking time.
      *
-     * @param pizzeria the pizzeria where the baker works
+     * @param orderList list of orders
      */
-    public Baker(Pizzeria pizzeria) {
+    public Baker(IQueue orderList, IQueue storage) {
         Random random = new Random();
         int maxTime = 50;
         int minTime = 30;
         this.cooktime = random.nextInt(maxTime - minTime + 1) + minTime;
-        this.pizzeria = pizzeria;
+        this.orders = orderList;
+        this.storage = storage;
     }
 
     /**
@@ -40,16 +42,20 @@ public class Baker extends Thread {
     @Override
     public void run() {
         try {
-            while (!Thread.currentThread().isInterrupted()) {
-                Order order = pizzeria.orders.fromOrders();
+            while (!Thread.currentThread().isInterrupted() && !orders.isClosed()) {
+                Order order = orders.from();
+                if (order == null) {
+                    return;
+                }
                 order.cooking();
                 this.cooking(order);
-                pizzeria.storage.toStorage(order);
+                storage.to(order);
                 order.done();
             }
         } catch (InterruptedException e) {
             System.out.println(Thread.currentThread().getName() + " I'm quitting");
             Thread.currentThread().interrupt();
         }
+        System.out.println(Thread.currentThread().getName() + " I'm done");
     }
 }
