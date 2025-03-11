@@ -55,13 +55,19 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Baker that prepares pizzas and moves orders to storage.</div>
 </dd>
-<dt><a href="ru/nsu/chernikov/Baker.html#%3Cinit%3E(ru.nsu.chernikov.Pizzeria)" class="member-name-link">Baker(Pizzeria)</a> - Constructor for class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Baker.html" title="class in ru.nsu.chernikov">Baker</a></dt>
+<dt><a href="ru/nsu/chernikov/Baker.html#%3Cinit%3E(ru.nsu.chernikov.IQueue,ru.nsu.chernikov.IQueue)" class="member-name-link">Baker(IQueue, IQueue)</a> - Constructor for class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Baker.html" title="class in ru.nsu.chernikov">Baker</a></dt>
 <dd>
 <div class="block">Creates a baker with a random cooking time.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
+<dt><a href="ru/nsu/chernikov/IQueue.html#close()" class="member-name-link">close()</a> - Method in interface ru.nsu.chernikov.<a href="ru/nsu/chernikov/IQueue.html" title="interface in ru.nsu.chernikov">IQueue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Orders.html#close()" class="member-name-link">close()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Storage.html#close()" class="member-name-link">close()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Storage.html" title="class in ru.nsu.chernikov">Storage</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/chernikov/Order.html#cooking()" class="member-name-link">cooking()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Order.html" title="class in ru.nsu.chernikov">Order</a></dt>
 <dd>
 <div class="block">GET STATE.</div>
@@ -80,7 +86,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Courier that delivers pizzas from storage to customers.</div>
 </dd>
-<dt><a href="ru/nsu/chernikov/Courier.html#%3Cinit%3E(ru.nsu.chernikov.Pizzeria)" class="member-name-link">Courier(Pizzeria)</a> - Constructor for class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Courier.html" title="class in ru.nsu.chernikov">Courier</a></dt>
+<dt><a href="ru/nsu/chernikov/Courier.html#%3Cinit%3E(ru.nsu.chernikov.Storage)" class="member-name-link">Courier(Storage)</a> - Constructor for class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Courier.html" title="class in ru.nsu.chernikov">Courier</a></dt>
 <dd>
 <div class="block">Creates a courier with a random delivery time.</div>
 </dd>
@@ -115,9 +121,15 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
-<dt><a href="ru/nsu/chernikov/Orders.html#fromOrders()" class="member-name-link">fromOrders()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
+<dt><a href="ru/nsu/chernikov/IQueue.html#from()" class="member-name-link">from()</a> - Method in interface ru.nsu.chernikov.<a href="ru/nsu/chernikov/IQueue.html" title="interface in ru.nsu.chernikov">IQueue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Orders.html#from()" class="member-name-link">from()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
 <dd>
 <div class="block">Gets an order from the queue.</div>
+</dd>
+<dt><a href="ru/nsu/chernikov/Storage.html#from()" class="member-name-link">from()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Storage.html" title="class in ru.nsu.chernikov">Storage</a></dt>
+<dd>
+<div class="block">Gets an order from storage.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
@@ -145,6 +157,14 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
 <dt><a href="ru/nsu/chernikov/OrderState.html#IN_ORDERLIST" class="member-name-link">IN_ORDERLIST</a> - Enum constant in enum class ru.nsu.chernikov.<a href="ru/nsu/chernikov/OrderState.html" title="enum class in ru.nsu.chernikov">OrderState</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/IQueue.html" class="type-name-link" title="interface in ru.nsu.chernikov">IQueue</a> - Interface in <a href="ru/nsu/chernikov/package-summary.html">ru.nsu.chernikov</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/IQueue.html#isClosed()" class="member-name-link">isClosed()</a> - Method in interface ru.nsu.chernikov.<a href="ru/nsu/chernikov/IQueue.html" title="interface in ru.nsu.chernikov">IQueue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Orders.html#isClosed()" class="member-name-link">isClosed()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Storage.html#isClosed()" class="member-name-link">isClosed()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Storage.html" title="class in ru.nsu.chernikov">Storage</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:J">J</h2>
@@ -254,9 +274,15 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="ru/nsu/chernikov/Orders.html#toOrders(int)" class="member-name-link">toOrders(int)</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
+<dt><a href="ru/nsu/chernikov/IQueue.html#to(ru.nsu.chernikov.Order)" class="member-name-link">to(Order)</a> - Method in interface ru.nsu.chernikov.<a href="ru/nsu/chernikov/IQueue.html" title="interface in ru.nsu.chernikov">IQueue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/chernikov/Orders.html#to(ru.nsu.chernikov.Order)" class="member-name-link">to(Order)</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Orders.html" title="class in ru.nsu.chernikov">Orders</a></dt>
 <dd>
 <div class="block">Adds a new order to the queue.</div>
+</dd>
+<dt><a href="ru/nsu/chernikov/Storage.html#to(ru.nsu.chernikov.Order)" class="member-name-link">to(Order)</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Storage.html" title="class in ru.nsu.chernikov">Storage</a></dt>
+<dd>
+<div class="block">Adds an order to storage.</div>
 </dd>
 <dt><a href="ru/nsu/chernikov/Order.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.chernikov.<a href="ru/nsu/chernikov/Order.html" title="class in ru.nsu.chernikov">Order</a></dt>
 <dd>&nbsp;</dd>
