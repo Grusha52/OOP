@@ -1,7 +1,7 @@
 package ru.nsu.chernikov;
 
-/** MAIN.
- *
+/**
+ * MAIN.
  */
 public class Main {
     public static void main(String[] args) {

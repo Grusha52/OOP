@@ -15,13 +15,16 @@ public class Orders implements IQueue {
     public Orders() {
         this.queue = new LinkedList<>();
     }
+
     /**
      * Adds a new order to the queue.
      *
      * @throws InterruptedException if the thread is interrupted
      */
+
     @Override
-    public synchronized void to(Order order) throws InterruptedException {;
+    public synchronized void to(Order order) throws InterruptedException {
+        ;
         queue.addFirst(order);
         order.waiting();
         this.notify();
@@ -33,6 +36,7 @@ public class Orders implements IQueue {
      * @return the next order
      * @throws InterruptedException if the thread is interrupted
      */
+
     @Override
     public synchronized Order from() throws InterruptedException {
         while (queue.isEmpty()) {
@@ -48,8 +52,8 @@ public class Orders implements IQueue {
     public synchronized void close() throws InterruptedException {
         isClosed = true;
         this.notifyAll();
-
     }
+
     @Override
     public synchronized boolean isClosed() {
         return isClosed;

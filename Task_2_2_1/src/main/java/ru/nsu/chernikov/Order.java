@@ -11,7 +11,7 @@ public class Order {
     /**
      * Creates an order with a given ID and pizza count.
      *
-     * @param id the order ID
+     * @param id            the order ID
      * @param countofPizzas the number of pizzas in the order
      */
     public Order(Integer id, Integer countofPizzas) {
@@ -19,14 +19,18 @@ public class Order {
         this.countofPizzas = countofPizzas;
     }
 
-    /** GET COUNT OF PIZZA IN ORDER.
+    /**
+     * GET COUNT OF PIZZA IN ORDER.
+     *
      * @return the number of pizzas in the order
      */
     public Integer getCountofPizzas() {
         return countofPizzas;
     }
 
-    /** GET ID.
+    /**
+     * GET ID.
+     *
      * @return the order ID
      */
     public Integer getId() {
@@ -38,14 +42,17 @@ public class Order {
         return "Order #" + id + ", Pizzas: " + countofPizzas;
     }
 
-    /** GET STATE.
+    /**
+     * GET STATE.
+     *
      * @return the current order state
      */
     public OrderState getState() {
         return state;
     }
 
-    /** GET STATE.
+    /**
+     * GET STATE.
      * Marks the order as being cooked.
      */
     public void cooking() {
@@ -53,7 +60,8 @@ public class Order {
         System.out.println("Order #" + this.id + " " + this.state);
     }
 
-    /** GET STATE.
+    /**
+     * GET STATE.
      * Marks the order as being delivered.
      */
     public void delivering() {

@@ -13,7 +13,7 @@ public class Courier extends Thread {
     /**
      * Creates a courier with a random delivery time.
      *
-     * @param pizzeria the pizzeria where the courier works
+     * @param storage the storage where orders go
      */
     public Courier(Storage storage) {
         Random random = new Random();
