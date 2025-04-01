@@ -6,7 +6,6 @@ import java.util.Random;
 import javafx.scene.media.AudioClip;
 
 
-
 /**
  * MODEL.
  */
@@ -14,16 +13,16 @@ public class SnakeModel {
     public static final int TILE_SIZE = 50;
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
+    private final LinkedList<int[]> snake = new LinkedList<>();
+    private final int[] food = new int[2];
+    private final int winScore;
     AudioClip snakeEatSound = new AudioClip(
             Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString()
     );
-    private final LinkedList<int[]> snake = new LinkedList<>();
-    private final int[] food = new int[2];
     private Direction direction = Direction.RIGHT;
     private Direction nextDirection = Direction.RIGHT;
     private GameStatus running = GameStatus.Playing;
     private int score;
-    private final int winScore;
 
     public SnakeModel(int winScore) {
         this.winScore = winScore;
@@ -68,7 +67,7 @@ public class SnakeModel {
             attempts--;
         } while (snakeCollision(food[0], food[1]) && attempts > 0);
 
-        if (attempts == 0)  {
+        if (attempts == 0) {
             running = GameStatus.GameOver;
         }
     }
@@ -124,13 +123,15 @@ public class SnakeModel {
 
     /**
      * food getter.
+     *
      * @return food
      */
     public int[] getFood() {
         return food;
     }
 
-    /** nextDirection setter.
+    /**
+     * nextDirection setter.
      *
      * @param nextDirection set
      */

@@ -1,5 +1,8 @@
 package ru.nsu.chernikov.task_2_3_1;
 
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -14,17 +17,13 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Random;
-
 /**
  * snake controller.
  */
 public class SnakeController extends Application {
+    private final int winScore;
     AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/mario.wav")).toString());
     AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/invincible_theme.wav")).toString());
-    private final int winScore;
     private SnakeModel model;
     private SnakeView view;
     private Timeline timeline;
@@ -36,13 +35,15 @@ public class SnakeController extends Application {
 
     /**
      * constructor.
+     *
      * @param winScore - score to win
      */
     public SnakeController(int winScore) {
         this.winScore = winScore;
     }
 
-    /** main.
+    /**
+     * main.
      *
      * @param args args.
      */
@@ -50,7 +51,8 @@ public class SnakeController extends Application {
         launch(args);
     }
 
-    /** starting game stage.
+    /**
+     * starting game stage.
      *
      * @param primaryStage game stage.
      */
@@ -61,7 +63,8 @@ public class SnakeController extends Application {
         view = new SnakeView();
 
         Pane gameRoot = new Pane();
-        Canvas canvas = new Canvas(SnakeModel.WIDTH * SnakeModel.TILE_SIZE, SnakeModel.HEIGHT * SnakeModel.TILE_SIZE);
+        Canvas canvas = new Canvas(SnakeModel.WIDTH * SnakeModel.TILE_SIZE,
+                SnakeModel.HEIGHT * SnakeModel.TILE_SIZE);
         gameRoot.getChildren().add(canvas);
         gameScene = new Scene(gameRoot);
         gc = canvas.getGraphicsContext2D();
@@ -152,7 +155,8 @@ public class SnakeController extends Application {
      */
     private void loadGameOverScene() {
         try {
-            Parent gameOverRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/game_over.fxml")));
+            Parent gameOverRoot = FXMLLoader.load(
+                    Objects.requireNonNull(getClass().getResource("fxml/game_over.fxml")));
             gameOverScene = new Scene(gameOverRoot);
             gameOverSound.setVolume(100);
             gameOverScene.setOnKeyPressed(event -> {
@@ -172,7 +176,8 @@ public class SnakeController extends Application {
      */
     private void loadWinScreen() {
         try {
-            Parent gameWinRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/win_screen.fxml")));
+            Parent gameWinRoot = FXMLLoader.load(
+                    Objects.requireNonNull(getClass().getResource("fxml/win_screen.fxml")));
             gameWinScreen = new Scene(gameWinRoot);
 
             gameWinScreen.setOnKeyPressed(event -> {
