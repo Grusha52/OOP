@@ -4,6 +4,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * VIEW CLASS.
+ */
 public class SnakeView {
     public void draw(GraphicsContext gc, SnakeModel model) {
         drawBoard(gc);
@@ -11,12 +14,16 @@ public class SnakeView {
         gc.setFill(Color.ORANGE);
 
         for (int[] part : model.getSnake()) {
-            gc.fillRect(part[0] * SnakeModel.TILE_SIZE, part[1] * SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
+            gc.fillRect(part[0] * SnakeModel.TILE_SIZE,
+                    part[1] * SnakeModel.TILE_SIZE,
+                    SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
         }
 
         gc.setFill(Color.GOLD);
         int[] food = model.getFood();
-        gc.fillOval(food[0] * SnakeModel.TILE_SIZE, food[1] * SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
+        gc.fillOval(food[0] * SnakeModel.TILE_SIZE,
+                food[1] * SnakeModel.TILE_SIZE,
+                SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
     }
 
     private void drawBoard(GraphicsContext gc) {
@@ -26,11 +33,19 @@ public class SnakeView {
         for (int y = 0; y < SnakeModel.HEIGHT; y++) {
             for (int x = 0; x < SnakeModel.WIDTH; x++) {
                 gc.setFill((x + y) % 2 == 0 ? color1 : color2);
-                gc.fillRect(x * SnakeModel.TILE_SIZE, y * SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
+                gc.fillRect(x * SnakeModel.TILE_SIZE,
+                        y * SnakeModel.TILE_SIZE,
+                        SnakeModel.TILE_SIZE,
+                        SnakeModel.TILE_SIZE);
             }
         }
     }
 
+    /**
+     * Drawing game over.
+     *
+     * @param gc game context.
+     */
     public void drawGameOver(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, SnakeModel.WIDTH * SnakeModel.TILE_SIZE, SnakeModel.HEIGHT * SnakeModel.TILE_SIZE);
@@ -46,7 +61,7 @@ public class SnakeView {
         gc.setFill(Color.WHITE);
         String restartText = "Press 'R' to Restart";
         double restartTextX = (double) (SnakeModel.WIDTH * SnakeModel.TILE_SIZE) / 2 - 100;
-        double restartTextY = textY + 50; // Смещаем немного вниз
+        double restartTextY = textY + 50;
         gc.fillText(restartText, restartTextX, restartTextY);
     }
 }

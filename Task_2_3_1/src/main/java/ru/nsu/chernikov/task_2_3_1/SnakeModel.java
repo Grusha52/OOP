@@ -6,31 +6,35 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * MODEL.
+ */
 public class SnakeModel {
     public static final int TILE_SIZE = 50;
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
-
-    private LinkedList<int[]> snake = new LinkedList<>();
-    private int[] food = new int[2];
+    AudioClip snakeEatSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString());
+    private final LinkedList<int[]> snake = new LinkedList<>();
+    private final int[] food = new int[2];
     private Direction direction = Direction.RIGHT;
     private Direction nextDirection = Direction.RIGHT;
     private GameStatus running = GameStatus.Playing;
     private int score;
-    private int winScore;
-    AudioClip snakeEatSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString());
-
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public enum Direction { UP, DOWN, LEFT, RIGHT }
+    private final int winScore;
 
     public SnakeModel(int winScore) {
         this.winScore = winScore;
         initializeGame();
         spawnFood();
+    }
+
+    /**
+     * Direction getter.
+     *
+     * @return DIRECTION.
+     */
+    public Direction getDirection() {
+        return direction;
     }
 
     private void initializeGame() {
@@ -48,6 +52,9 @@ public class SnakeModel {
         running = GameStatus.Playing;
     }
 
+    /**
+     * food spawner.
+     */
     public void spawnFood() {
         Random rand = new Random();
         int attempts = 100;
@@ -100,6 +107,11 @@ public class SnakeModel {
         return GameStatus.Playing;
     }
 
+    /**
+     * snake getter.
+     *
+     * @return snake list.
+     */
     public LinkedList<int[]> getSnake() {
         return snake;
     }
@@ -117,8 +129,13 @@ public class SnakeModel {
         }
     }
 
+    /**
+     * restarting game.
+     */
     public void restart() {
         initializeGame();
         spawnFood();
     }
+
+    public enum Direction {UP, DOWN, LEFT, RIGHT}
 }

@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.Random;
 
 public class SnakeController extends Application {
-    private int winScore;
+    AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/mario.wav")).toString());
+    AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/invincible_theme.wav")).toString());
+    private final int winScore;
     private SnakeModel model;
     private SnakeView view;
     private Timeline timeline;
@@ -28,11 +30,13 @@ public class SnakeController extends Application {
     private Scene gameOverScene;
     private Scene gameWinScreen;
     private GraphicsContext gc;
-    AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/mario.wav")).toString());
-    AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/invincible_theme.wav")).toString());
 
     public SnakeController(int winScore) {
         this.winScore = winScore;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -145,9 +149,5 @@ public class SnakeController extends Application {
             System.err.println("Ошибка при загрузке win_screen.fxml: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

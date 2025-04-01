@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Start screen.
+ */
 public class StartScreenController {
     @FXML
     private TextField scoreInput;
@@ -14,6 +17,9 @@ public class StartScreenController {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * startGameMethod.
+     */
     @FXML
     private void startGame() {
         try {
@@ -24,7 +30,6 @@ public class StartScreenController {
                 return;
             }
 
-            // Создаем новое окно для игры
             Stage gameStage = new Stage();
             SnakeController game = new SnakeController(winScore);
             game.start(gameStage);
