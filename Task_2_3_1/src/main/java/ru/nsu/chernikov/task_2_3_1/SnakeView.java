@@ -48,7 +48,12 @@ public class SnakeView {
      */
     public void drawGameOver(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, SnakeModel.WIDTH * SnakeModel.TILE_SIZE, SnakeModel.HEIGHT * SnakeModel.TILE_SIZE);
+        gc.fillRect(
+                0,
+                0,
+                SnakeModel.WIDTH * SnakeModel.TILE_SIZE,
+                SnakeModel.HEIGHT * SnakeModel.TILE_SIZE
+        );
 
         gc.setFill(Color.RED);
         gc.setFont(new Font("Arial", 50));

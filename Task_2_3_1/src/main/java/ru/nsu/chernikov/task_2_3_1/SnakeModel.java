@@ -1,10 +1,11 @@
 package ru.nsu.chernikov.task_2_3_1;
 
-import javafx.scene.media.AudioClip;
-
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Random;
+import javafx.scene.media.AudioClip;
+
+
 
 /**
  * MODEL.
@@ -13,7 +14,9 @@ public class SnakeModel {
     public static final int TILE_SIZE = 50;
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
-    AudioClip snakeEatSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString());
+    AudioClip snakeEatSound = new AudioClip(
+            Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString()
+    );
     private final LinkedList<int[]> snake = new LinkedList<>();
     private final int[] food = new int[2];
     private Direction direction = Direction.RIGHT;
@@ -57,7 +60,7 @@ public class SnakeModel {
      */
     public void spawnFood() {
         Random rand = new Random();
-        int attempts = 100;
+        int attempts = 1000;
 
         do {
             food[0] = rand.nextInt(WIDTH);
@@ -65,7 +68,9 @@ public class SnakeModel {
             attempts--;
         } while (snakeCollision(food[0], food[1]) && attempts > 0);
 
-        if (attempts == 0) running = GameStatus.GameOver;
+        if (attempts == 0)  {
+            running = GameStatus.GameOver;
+        }
     }
 
     private boolean snakeCollision(int x, int y) {
@@ -83,7 +88,8 @@ public class SnakeModel {
             case RIGHT -> head[0]++;
         }
 
-        if (head[0] < 0 || head[0] >= WIDTH || head[1] < 0 || head[1] >= HEIGHT || snakeCollision(head[0], head[1])) {
+        if (head[0] < 0 || head[0] >= WIDTH || head[1] < 0 || head[1] >= HEIGHT
+                || snakeCollision(head[0], head[1])) {
             running = GameStatus.GameOver;
             return GameStatus.GameOver;
         }
@@ -116,15 +122,23 @@ public class SnakeModel {
         return snake;
     }
 
+    /**
+     * food getter.
+     * @return food
+     */
     public int[] getFood() {
         return food;
     }
 
+    /** nextDirection setter.
+     *
+     * @param nextDirection set
+     */
     public void setNextDirection(Direction nextDirection) {
-        if ((this.direction == Direction.UP && nextDirection != Direction.DOWN) ||
-                (this.direction == Direction.DOWN && nextDirection != Direction.UP) ||
-                (this.direction == Direction.LEFT && nextDirection != Direction.RIGHT) ||
-                (this.direction == Direction.RIGHT && nextDirection != Direction.LEFT)) {
+        if ((this.direction == Direction.UP && nextDirection != Direction.DOWN)
+                || (this.direction == Direction.DOWN && nextDirection != Direction.UP)
+                || (this.direction == Direction.LEFT && nextDirection != Direction.RIGHT)
+                || (this.direction == Direction.RIGHT && nextDirection != Direction.LEFT)) {
             this.nextDirection = nextDirection;
         }
     }
@@ -137,5 +151,13 @@ public class SnakeModel {
         spawnFood();
     }
 
-    public enum Direction {UP, DOWN, LEFT, RIGHT}
+    /**
+     * enumchik.
+     */
+    public enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
 }

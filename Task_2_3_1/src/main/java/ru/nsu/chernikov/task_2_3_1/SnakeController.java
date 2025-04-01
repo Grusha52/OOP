@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * snake controller.
+ */
 public class SnakeController extends Application {
     AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/mario.wav")).toString());
     AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/invincible_theme.wav")).toString());
@@ -31,14 +34,26 @@ public class SnakeController extends Application {
     private Scene gameWinScreen;
     private GraphicsContext gc;
 
+    /**
+     * constructor.
+     * @param winScore - score to win
+     */
     public SnakeController(int winScore) {
         this.winScore = winScore;
     }
 
+    /** main.
+     *
+     * @param args args.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /** starting game stage.
+     *
+     * @param primaryStage game stage.
+     */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -62,12 +77,18 @@ public class SnakeController extends Application {
         primaryStage.show();
     }
 
+    /**
+     * game loop.
+     */
     private void startGameLoop() {
         timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> update()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
+    /**
+     * updating game.
+     */
     private void update() {
         if (model.update() == GameStatus.Playing) {
             view.draw(gc, model);
@@ -80,6 +101,9 @@ public class SnakeController extends Application {
         }
     }
 
+    /**
+     * restart of game.
+     */
     void restartGame() {
         model.restart();
         gameOverSound.stop();
@@ -97,11 +121,17 @@ public class SnakeController extends Application {
         primaryStage.setScene(gameScene);
     }
 
+    /**
+     * game over scene show.
+     */
     private void showGameOver() {
         gameOverSound.play();
         primaryStage.setScene(gameOverScene);
     }
 
+    /**
+     * win scene show.
+     */
     private void showWinScreen() {
         gameWinSound.play();
         primaryStage.setScene(gameWinScreen);
@@ -117,6 +147,9 @@ public class SnakeController extends Application {
         });
     }
 
+    /**
+     * game over scene loader.
+     */
     private void loadGameOverScene() {
         try {
             Parent gameOverRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/game_over.fxml")));
@@ -134,6 +167,9 @@ public class SnakeController extends Application {
         }
     }
 
+    /**
+     * win scene loader.
+     */
     private void loadWinScreen() {
         try {
             Parent gameWinRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/win_screen.fxml")));
