@@ -85,6 +85,7 @@ public class SnakeModel {
             case DOWN -> head[1]++;
             case LEFT -> head[0]--;
             case RIGHT -> head[0]++;
+            default -> throw new IllegalStateException("Unexpected value: " + direction);
         }
 
         if (head[0] < 0 || head[0] >= WIDTH || head[1] < 0 || head[1] >= HEIGHT

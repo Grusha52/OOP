@@ -8,6 +8,11 @@ import javafx.scene.text.Font;
  * VIEW CLASS.
  */
 public class SnakeView {
+    /**
+     *  drawing.
+     * @param gc graphic context.
+     * @param model model.
+     */
     public void draw(GraphicsContext gc, SnakeModel model) {
         drawBoard(gc);
 
@@ -26,6 +31,10 @@ public class SnakeView {
                 SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
     }
 
+    /**
+     *  draw field.
+     * @param gc graphic context.
+     */
     private void drawBoard(GraphicsContext gc) {
         Color color1 = Color.web("#1E3A5F");
         Color color2 = Color.web("#305F8F");

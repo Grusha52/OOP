@@ -22,8 +22,10 @@ import javafx.util.Duration;
  */
 public class SnakeController extends Application {
     private final int winScore;
-    AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/mario.wav")).toString());
-    AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(getClass().getResource("wav/invincible_theme.wav")).toString());
+    AudioClip gameOverSound = new AudioClip(Objects.requireNonNull(
+            getClass().getResource("wav/mario.wav")).toString());
+    AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(
+            getClass().getResource("wav/invincible_theme.wav")).toString());
     private SnakeModel model;
     private SnakeView view;
     private Timeline timeline;
@@ -143,10 +145,18 @@ public class SnakeController extends Application {
     private void setupGameKeyHandlers() {
         gameScene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
-            if (code == KeyCode.UP) model.setNextDirection(SnakeModel.Direction.UP);
-            else if (code == KeyCode.DOWN) model.setNextDirection(SnakeModel.Direction.DOWN);
-            else if (code == KeyCode.LEFT) model.setNextDirection(SnakeModel.Direction.LEFT);
-            else if (code == KeyCode.RIGHT) model.setNextDirection(SnakeModel.Direction.RIGHT);
+            if (code == KeyCode.UP) {
+                model.setNextDirection(SnakeModel.Direction.UP);
+            }
+            else if (code == KeyCode.DOWN) {
+                model.setNextDirection(SnakeModel.Direction.DOWN);
+            }
+            else if (code == KeyCode.LEFT) {
+                model.setNextDirection(SnakeModel.Direction.LEFT);
+            }
+            else if (code == KeyCode.RIGHT) {
+                model.setNextDirection(SnakeModel.Direction.RIGHT);
+            }
         });
     }
 
