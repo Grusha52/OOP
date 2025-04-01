@@ -4,7 +4,7 @@ plugins {
   id 'org.javamodularity.moduleplugin' version '1.8.12'
   id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'org.beryx.jlink' version '2.25.0'
-//  id 'jacoco'
+  id 'jacoco'
 }
 
 group 'ru.nsu.chernikov'
@@ -63,8 +63,8 @@ jlinkZip {
   group = 'distribution'
 }
 
-//jacocoTestReport {
-//  reports {
-//    xml.required = true
-//  }
-//}
+jacocoTestReport {
+  reports {
+    xml.required = true
+  }
+}
