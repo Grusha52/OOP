@@ -3,36 +3,49 @@ package ru.nsu.chernikov.task_2_3_1;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import java.util.List;
 
 /**
  * VIEW CLASS.
  */
 public class SnakeView {
     /**
-     *  drawing.
+     * drawing.
      * @param gc graphic context.
-     * @param model model.
+     * @param snakes list of snakes.
      */
-    public void draw(GraphicsContext gc, SnakeModel model) {
+    public void draw(GraphicsContext gc, List<SnakeModel> snakes) {
         drawBoard(gc);
 
-        gc.setFill(Color.ORANGE);
+        // Отрисовка каждой змеи с уникальным цветом
+        int index = 0;
+        for (SnakeModel model : snakes) {
+            Color snakeColor = switch (index % 3) {
+                case 0 -> Color.ORANGE; // Игрок
+                case 1 -> Color.GREEN;  // Бот 1
+                case 2 -> Color.PURPLE; // Бот 2
+                default -> Color.BLUE;
+            };
+            gc.setFill(snakeColor);
 
-        for (int[] part : model.getSnake()) {
-            gc.fillRect(part[0] * SnakeModel.TILE_SIZE,
-                    part[1] * SnakeModel.TILE_SIZE,
-                    SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
+            for (int[] part : model.getSnake()) {
+                gc.fillRect(part[0] * SnakeModel.TILE_SIZE,
+                        part[1] * SnakeModel.TILE_SIZE,
+                        SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
+            }
+            index++;
         }
 
+        // Отрисовка еды (берем еду от первой змеи, предполагая общую еду)
         gc.setFill(Color.GOLD);
-        int[] food = model.getFood();
+        int[] food = snakes.get(0).getFood();
         gc.fillOval(food[0] * SnakeModel.TILE_SIZE,
                 food[1] * SnakeModel.TILE_SIZE,
                 SnakeModel.TILE_SIZE, SnakeModel.TILE_SIZE);
     }
 
     /**
-     *  draw field.
+     * draw field.
      * @param gc graphic context.
      */
     private void drawBoard(GraphicsContext gc) {
