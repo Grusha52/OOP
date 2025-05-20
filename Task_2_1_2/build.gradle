@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'ru.nsu.chernikov'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'ru.nsu.chernikov.Master' // это главный класс по умолчанию
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// 🔥 ДОБАВЬ вот это для запуска Worker отдельно:
+task runWorker(type: JavaExec) {
+    mainClass = 'ru.nsu.chernikov.Worker'
+    classpath = sourceSets.main.runtimeClasspath
+}
