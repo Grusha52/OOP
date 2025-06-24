@@ -1,6 +1,8 @@
 package ru.nsu.chernikov.task_2_3_1;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import javafx.animation.KeyFrame;
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * snake controller.
+ * Snake controller.
  */
 public class SnakeController extends Application {
     private final int winScore;
@@ -26,7 +28,8 @@ public class SnakeController extends Application {
             getClass().getResource("wav/mario.wav")).toString());
     AudioClip gameWinSound = new AudioClip(Objects.requireNonNull(
             getClass().getResource("wav/invincible_theme.wav")).toString());
-    private SnakeModel model;
+    private List<SnakeModel> snakes; // List to hold player and bot snakes
+    private SnakeModel playerSnake; // Reference to player's snake
     private SnakeView view;
     private Timeline timeline;
     private Stage primaryStage;
@@ -61,7 +64,15 @@ public class SnakeController extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        model = new SnakeModel(winScore);
+        snakes = new ArrayList<>();
+
+        // Initialize player snake
+        playerSnake = new SnakeModel(winScore);
+        snakes.add(playerSnake);
+
+        // Initialize bot snakes
+        initializeBots();
+
         view = new SnakeView();
 
         Pane gameRoot = new Pane();
@@ -83,6 +94,16 @@ public class SnakeController extends Application {
     }
 
     /**
+     * Initialize bot snakes with different strategies.
+     */
+    private void initializeBots() {
+        SnakeModel bot1 = new SnakeModel(winScore, new FoodSeekerStrategy());
+        SnakeModel bot2 = new SnakeModel(winScore, new RandomWandererStrategy());
+        snakes.add(bot1);
+        snakes.add(bot2);
+    }
+
+    /**
      * game loop.
      */
     private void startGameLoop() {
@@ -95,22 +116,65 @@ public class SnakeController extends Application {
      * updating game.
      */
     private void update() {
-        if (model.update() == GameStatus.Playing) {
-            view.draw(gc, model);
-        } else if (model.update() == GameStatus.GameOver) {
-            timeline.stop();
-            showGameOver();
-        } else {
-            timeline.stop();
-            showWinScreen();
+        // Update bots' directions
+        for (SnakeModel snake : snakes) {
+            if (snake != playerSnake && snake.getRunning() == GameStatus.Playing) {
+                snake.updateBot(snakes);
+            }
         }
+
+        // Update all snakes and check collisions
+        for (SnakeModel snake : snakes) {
+            if (snake.getRunning() == GameStatus.Playing) {
+                if (snake.update() == GameStatus.Playing) {
+                    // Check collisions with other snakes
+                    int[] head = snake.getSnake().getFirst();
+                    for (SnakeModel otherSnake : snakes) {
+                        if (otherSnake != snake && otherSnake.getRunning() == GameStatus.Playing) {
+                            for (int[] part : otherSnake.getSnake()) {
+                                if (head[0] == part[0] && head[1] == part[1]) {
+                                    snake.setRunning(GameStatus.GameOver);
+                                    if (snake == playerSnake) {
+                                        // Если игрок столкнулся, завершаем игру
+                                        timeline.stop();
+                                        showGameOver();
+                                        return;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } else if (snake == playerSnake && snake.getRunning() == GameStatus.GameOver) {
+                    // Игрок врезался в стену или сам себя
+                    timeline.stop();
+                    showGameOver();
+                    return;
+                } else if (snake == playerSnake && snake.getRunning() == GameStatus.WIN) {
+                    // Игрок победил
+                    timeline.stop();
+                    showWinScreen();
+                    return;
+                } else if (snake != playerSnake && snake.getRunning() != GameStatus.Playing) {
+                    // Бот проиграл или выиграл, просто помечаем его
+                    snake.setRunning(GameStatus.GameOver);
+                }
+            }
+        }
+
+        // Отрисовка всех змей
+        view.draw(gc, snakes);
     }
 
     /**
      * restart of game.
      */
     void restartGame() {
-        model.restart();
+        snakes.clear();
+        playerSnake = new SnakeModel(winScore);
+        snakes.add(playerSnake);
+        initializeBots();
+
         gameOverSound.stop();
         gameWinSound.stop();
         timeline.stop();
@@ -122,7 +186,7 @@ public class SnakeController extends Application {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        view.draw(gc, model);
+        view.draw(gc, snakes);
         primaryStage.setScene(gameScene);
     }
 
@@ -146,16 +210,13 @@ public class SnakeController extends Application {
         gameScene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
             if (code == KeyCode.UP) {
-                model.setNextDirection(SnakeModel.Direction.UP);
-            }
-            else if (code == KeyCode.DOWN) {
-                model.setNextDirection(SnakeModel.Direction.DOWN);
-            }
-            else if (code == KeyCode.LEFT) {
-                model.setNextDirection(SnakeModel.Direction.LEFT);
-            }
-            else if (code == KeyCode.RIGHT) {
-                model.setNextDirection(SnakeModel.Direction.RIGHT);
+                playerSnake.setNextDirection(SnakeModel.Direction.UP);
+            } else if (code == KeyCode.DOWN) {
+                playerSnake.setNextDirection(SnakeModel.Direction.DOWN);
+            } else if (code == KeyCode.LEFT) {
+                playerSnake.setNextDirection(SnakeModel.Direction.LEFT);
+            } else if (code == KeyCode.RIGHT) {
+                playerSnake.setNextDirection(SnakeModel.Direction.RIGHT);
             }
         });
     }

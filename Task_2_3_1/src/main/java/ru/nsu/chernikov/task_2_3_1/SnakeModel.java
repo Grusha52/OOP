@@ -1,10 +1,10 @@
 package ru.nsu.chernikov.task_2_3_1;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import javafx.scene.media.AudioClip;
-
 
 /**
  * MODEL.
@@ -14,7 +14,7 @@ public class SnakeModel {
     public static final int WIDTH = 15;
     public static final int HEIGHT = 15;
     private final LinkedList<int[]> snake = new LinkedList<>();
-    private final int[] food = new int[2];
+    private static final int[] food = new int[2];
     private final int winScore;
     AudioClip snakeEatSound = new AudioClip(
             Objects.requireNonNull(getClass().getResource("wav/collect.wav")).toString()
@@ -23,11 +23,30 @@ public class SnakeModel {
     private Direction nextDirection = Direction.RIGHT;
     private GameStatus running = GameStatus.Playing;
     private int score;
+    private BotStrategy botStrategy;
+
+    /**
+     * constructor.
+     * @param winScore score
+     */
+    public SnakeModel(int winScore, BotStrategy botStrategy) {
+        this.winScore = winScore;
+        this.botStrategy = botStrategy;
+        initializeGame(); // теперь он узнает, что это бот
+        spawnFood();
+    }
 
     public SnakeModel(int winScore) {
         this.winScore = winScore;
         initializeGame();
         spawnFood();
+    }
+
+    /**
+     * Set bot strategy.
+     */
+    public void setBotStrategy(BotStrategy strategy) {
+        this.botStrategy = strategy;
     }
 
     /**
@@ -39,12 +58,33 @@ public class SnakeModel {
         return direction;
     }
 
+    /**
+     * Game status getter.
+     */
+    public GameStatus getRunning() {
+        return running;
+    }
+
+    /**
+     * Set game status.
+     */
+    public void setRunning(GameStatus status) {
+        this.running = status;
+    }
+
     private void initializeGame() {
         snake.clear();
         score = 2;
 
         int startX = WIDTH / 2;
         int startY = HEIGHT / 2;
+
+        // Размещаем змей в разных местах, чтобы избежать немедленных столкновений
+        if (botStrategy != null) {
+            Random rand = new Random();
+            startX = rand.nextInt(WIDTH - 4) + 2;
+            startY = rand.nextInt(HEIGHT - 4) + 2;
+        }
 
         snake.add(new int[]{startX, startY});
         snake.add(new int[]{startX - 1, startY});
@@ -72,12 +112,17 @@ public class SnakeModel {
         }
     }
 
+    /** collision of snake.
+     *
+     * @param x x parameter.
+     * @param y parameter.
+     * @return true or false.
+     */
     private boolean snakeCollision(int x, int y) {
         return snake.stream().anyMatch(part -> part[0] == x && part[1] == y);
     }
 
     public GameStatus update() {
-
         direction = nextDirection;
         int[] head = snake.getFirst().clone();
         switch (direction) {
@@ -111,6 +156,15 @@ public class SnakeModel {
         }
 
         return GameStatus.Playing;
+    }
+
+    /**
+     * Update bot's direction.
+     */
+    public void updateBot(List<SnakeModel> allSnakes) {
+        if (botStrategy != null && running == GameStatus.Playing) {
+            setNextDirection(botStrategy.chooseDirection(this, allSnakes));
+        }
     }
 
     /**
